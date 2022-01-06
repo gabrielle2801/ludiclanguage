@@ -23,4 +23,4 @@ class Address(models.Model):
     zip_code = models.CharField(max_length=5, blank=True)
     city = models.CharField(max_length=200)
     active = models.BooleanField(default=False)
-    profile = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile = models.OneToOneField('profiles.User', on_delete=models.CASCADE)

@@ -164,6 +164,7 @@ node_modules
 .DS_Store
 
 ludic_language/driver
+config
 
 ### Python ###
 # Byte-compiled / optimized / DLL files
