@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from ludic_language.base.views import BaseView
+from ludic_language.profiles.views import LoginViewPatient, LoginViewSpeech
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', BaseView.as_view(), name='index')
+    path('', BaseView.as_view(), name='index'),
+    path('login_patient/', LoginViewPatient.as_view(), name='login_patient'),
+    path('login_speech/', LoginViewSpeech.as_view(), name='login_speech'),
+
 ]

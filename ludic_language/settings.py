@@ -58,7 +58,7 @@ ROOT_URLCONF = 'ludic_language.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR.joinpath('template')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
