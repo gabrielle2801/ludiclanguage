@@ -1,10 +1,17 @@
-from django.contrib.auth import authenticate, login
-from django.shortcuts import render, redirect
-from django.views import View
+from django.views.generic import TemplateView
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.views import LoginView as BaseLoginView
+from django.contrib import messages
+from django.views.generic import ListView
+from django.shortcuts import render, redirect, reverse
+from django.views.generic import View
+from ludic_language.profiles.models import STATES
 from . import forms
 
+from ludic_language.profiles.models import User
 
-class LoginViewPatient(View):
+
+class LoginView(BaseLoginView):
 
     """Class Based View for patient user's login
 
@@ -12,49 +19,41 @@ class LoginViewPatient(View):
         template_name (str): template location
     """
 
-    template_name = "authentication/login_patient.html"
-    form_class = forms.LoginForm
+    template_name = "authentication/login.html"
 
-    def get(self, request):
-        form = self.form_class()
-        message = ''
-        return render(request, self.template_name, context={'form': form, 'message': message})
-
-    def post(self, request):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            user = authenticate(
-                username=form.cleaned_data['username'],
-                password=form.cleaned_data['password'],)
-            if user is not None:
-                login(request, user)
-                return redirect('index')
-        message = 'Login Failed'
-        return render(request, self.template_name, context={'form': form, 'message': message})
+    def get_success_url(self):
+        user = self.request.user
+        if user.state == STATES.PATIENT:
+            return reverse()
+        else:
+            return reverse('index_speech')
 
 
-class LoginViewSpeech(View):
-    """Class Based View for patient user's login
+def logout_request(request):
+    """ function to logout
 
-    Attributes:
-        template_name (str): template location
+    Args:
+        request (TYPE): HTTpRequest request to generate a answer
+
+    Returns:
+        TYPE: redirect to base.html
     """
-    template_name = "authentication/login_speech.html"
-    form_class = forms.LoginForm
+    logout(request)
+    messages.info(request, "You have successfully logged out.")
+    return redirect('index')
 
-    def get(self, request):
-        form = self.form_class()
-        message = ''
-        return render(request, self.template_name, context={'form': form, 'message': message})
 
-    def post(self, request):
-        form = self.form_class(request.POST)
-        if form.is_valid():
-            user = authenticate(
-                username=form.cleaned_data['username'],
-                password=form.cleaned_data['password'],)
-            if user is not None:
-                login(request, user)
-                return redirect('index_speech.html')
-        message = 'Login Failed'
-        return render(request, self.template_name, context={'form': form, 'message': message})
+class IndexSpeechView(TemplateView):
+    template_name = "index_speech.html"
+
+
+class PatientListView(ListView):
+    template_name = 'patient_list.html'
+    model = User
+
+
+'''
+class SpeechTherapistListView(ListView):
+    template_name = ''
+    model = User
+'''

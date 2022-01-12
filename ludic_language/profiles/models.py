@@ -5,13 +5,13 @@ from extended_choices import Choices
 
 STATES = Choices(
     ('PATIENT', 1, 'Patient'),
-    ('SPEECH_PATHOLOGY', 2, 'Speech_Pathology'),
+    ('SPEECH_THERAPIST', 2, 'Speech_Therapist'),
 )
 
 
 class User(AbstractUser):
     state = models.PositiveSmallIntegerField(
-        choices=STATES, default=STATES.SPEECH_PATHOLOGY)
+        choices=STATES, default=STATES.SPEECH_THERAPIST)
     bio = models.CharField(max_length=500, blank=True)
     review = models.CharField(max_length=500, blank=True, null=True)
     picture = models.ImageField(upload_to='pictures')
