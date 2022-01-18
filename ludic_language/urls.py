@@ -14,11 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView
 from django.urls import path
 from ludic_language.profiles import views
 from ludic_language.base.views import BaseView
-from ludic_language.profiles.views import LoginView, IndexSpeechView
+from ludic_language.profiles.views import LoginView, IndexSpeechView, IndexPatientView
 
 
 urlpatterns = [
@@ -26,5 +28,6 @@ urlpatterns = [
     path('', BaseView.as_view(), name='index'),
     path('login/', LoginView.as_view(), name='login'),
     path('speech_homepage/', IndexSpeechView.as_view(), name='index_speech'),
+    path('patient_homepage/', IndexPatientView.as_view(), name='index_patient'),
     path('logout/', views.logout_request, name='logout'),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

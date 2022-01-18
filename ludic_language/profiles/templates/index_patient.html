@@ -21,7 +21,7 @@
 <!-- Navigation-->
 {% block nav %}
     <nav class="header">
-      <a class="logo" href="{% url 'index' %}">Ludic<strong>Language PRO</strong> </a>
+      <a class="logo" href="{% url 'index' %}">Ludic<strong>Language</strong> </a>
       <img src="../static/assets/img/logo.png" width="80" height="70">
     </nav>
 {% endblock nav %}
@@ -41,29 +41,23 @@
 {% endblock header %}
     <!-- About-->
     {% block content %}
-    <section class="main-section-speech">
+    <section class="main-section-patient">
         <div class="row">
             <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
                 <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="#"
                                      data-toggle="tooltip" data-placement="bottom">
-                <span>Afficher les prochaines sessions</span>
-                <i class="bi bi-calendar-date"> workshop</i>
+                <span>Visualiser les comptes rendus</span>
+                <i class="fas fa-book-open"> Compte rendus</i>
                 </a>
             </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                <a  class="d-flex justify-content-center align-items-center btn btn-patient" name="workshop"  type="button" href="#"
-                                     data-toggle="tooltip" data-placement="bottom">
-                <span>Liste des patients</span>
-                <i class="bi bi-people"> patient</i>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
+           <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
                 <a  class="d-flex justify-content-center align-items-center btn btn-ludicjourney" name="workshop"  type="button" href="#"
                                      data-toggle="tooltip" data-placement="bottom">
                 <span>Créer un parcours ludique</span>
                 <i class="fas fa-puzzle-piece"> Parcours linguistique</i>
                 </a>
             </div>
+
         </div>
     </section>
     {% endblock content %}

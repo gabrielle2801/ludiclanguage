@@ -14,7 +14,7 @@ class User(AbstractUser):
         choices=STATES, default=STATES.SPEECH_THERAPIST)
     bio = models.CharField(max_length=500, blank=True)
     review = models.CharField(max_length=500, blank=True, null=True)
-    picture = models.ImageField(upload_to='pictures')
+    picture = models.ImageField(upload_to='pictures/')
 
 
 class Address(models.Model):

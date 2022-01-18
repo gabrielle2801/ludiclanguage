@@ -15,6 +15,8 @@ class Exercise(models.Model):
     description = models.CharField(max_length=500, blank=True)
     picture1 = models.ImageField('picture1')
     picture2 = models.ImageField('picture2')
+    therapist = models.ForeignKey(
+        'profiles.User', on_delete=models.CASCADE, related_name='therapist_exercice', null=True)
     pathology = models.ForeignKey('Pathology', on_delete=models.CASCADE)
 
 
@@ -22,5 +24,6 @@ class LudicJourney(models.Model):
     journey_date = models.DateTimeField()
     description = models.CharField(max_length=500)
     assessement = models.CharField(max_length=200)
-    profile = models.ForeignKey('profiles.User', on_delete=models.CASCADE)
+    patient = models.ForeignKey(
+        'profiles.User', on_delete=models.CASCADE, related_name='patient_ludicjourney', null=True)
     exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE)

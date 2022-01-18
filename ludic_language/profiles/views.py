@@ -24,7 +24,7 @@ class LoginView(BaseLoginView):
     def get_success_url(self):
         user = self.request.user
         if user.state == STATES.PATIENT:
-            return reverse()
+            return reverse('index_patient')
         else:
             return reverse('index_speech')
 
@@ -45,6 +45,10 @@ def logout_request(request):
 
 class IndexSpeechView(TemplateView):
     template_name = "index_speech.html"
+
+
+class IndexPatientView(TemplateView):
+    template_name = "index_patient.html"
 
 
 class PatientListView(ListView):
