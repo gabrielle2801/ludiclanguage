@@ -9,6 +9,7 @@ from ludic_language.profiles.models import STATES
 from . import forms
 
 from ludic_language.profiles.models import User
+from ludic_language.profiles.forms import PatientForm, AddressForm
 
 
 class LoginView(BaseLoginView):
@@ -56,8 +57,62 @@ class PatientListView(ListView):
     model = User
 
 
-'''
-class SpeechTherapistListView(ListView):
-    template_name = ''
-    model = User
-'''
+class PatientView(View):
+    form_class = PatientForm
+    form_ad = AddressForm
+    template_name = "form_patient.html"
+
+    def get(self, request, *args, **kwargs):
+        """Summary
+
+        Args:
+            request (TYPE): HTTpRequest request to generate a answer
+            *args: Description
+            **kwargs: Description
+
+        Returns:
+            TYPE: HttpResponse object with template name and form information
+        """
+        form = self.form_class()
+        form2 = self.form_ad()
+        context = {
+            'form': form,
+            'form2': form2
+        }
+        return render(request, self.template_name, context=context)
+
+    def post(self, request, *args, **kwargs):
+        """Form to login for user's account
+        save users's information on database if form is valid
+        on Class Based View
+        class SignUpView(CreateView):
+            form_class = UserCreationForm
+            success_url = reverse_lazy('base')
+            template_name = 'registration/sign_up.html'
+
+        Args:
+            request (TYPE): HTTpRequest request to generate a answer
+            *args: Description
+            **kwargs: Description
+
+        Returns:
+            TYPE: HttpResponse object with template name and form information
+        """
+        form = self.form_class(data=request.POST)
+        form2 = self.form_ad(data=request.POST)
+        if form.is_valid():
+            form.save()
+            username = request.POST['username']
+            password = request.POST['password1']
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                login(request, user)
+                return redirect('index_speech')
+        if form2.is_valid():
+            form2.save()
+
+        context = {
+            'form': form,
+            'form2': form2
+        }
+        return render(request, self.template_name, context=context)
