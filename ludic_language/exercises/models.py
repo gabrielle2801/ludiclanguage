@@ -1,5 +1,5 @@
 from django.db import models
-from ludic_language.profiles.models import User
+# from ludic_language.profiles.models import User
 
 
 # Create your models here.
@@ -16,7 +16,7 @@ class Exercise(models.Model):
     picture1 = models.ImageField('picture1')
     picture2 = models.ImageField('picture2')
     therapist = models.ForeignKey(
-        'profiles.User', on_delete=models.CASCADE, related_name='therapist_exercice', null=True)
+        'profiles.UserProfile', on_delete=models.CASCADE, related_name='therapist_exercice', null=True)
     pathology = models.ForeignKey('Pathology', on_delete=models.CASCADE)
 
 
@@ -25,5 +25,5 @@ class LudicJourney(models.Model):
     description = models.CharField(max_length=500)
     assessement = models.CharField(max_length=200)
     patient = models.ForeignKey(
-        'profiles.User', on_delete=models.CASCADE, related_name='patient_ludicjourney', null=True)
+        'profiles.UserProfile', on_delete=models.CASCADE, related_name='patient_ludicjourney', null=True)
     exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE)
