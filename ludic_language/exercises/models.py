@@ -7,7 +7,10 @@ from django.db import models
 
 class Pathology(models.Model):
     name = models.CharField(max_length=100, blank=True)
-    description = models.CharField(max_length=500, blank=True)
+    description = models.TextField(max_length=500, blank=True)
+
+    def __str__(self):
+        return self.name
 
 
 class Exercise(models.Model):
@@ -16,8 +19,9 @@ class Exercise(models.Model):
     picture1 = models.ImageField('picture1')
     picture2 = models.ImageField('picture2')
     therapist = models.ForeignKey(
-        'profiles.UserProfile', on_delete=models.CASCADE, related_name='therapist_exercice', null=True)
-    pathology = models.ForeignKey('Pathology', on_delete=models.CASCADE)
+        'profiles.Profile', on_delete=models.CASCADE, related_name='therapist_exercice', null=True)
+    pathology = models.ForeignKey(
+        'Pathology', on_delete=models.CASCADE, null=True)
 
 
 class LudicJourney(models.Model):
@@ -25,5 +29,5 @@ class LudicJourney(models.Model):
     description = models.CharField(max_length=500)
     assessement = models.CharField(max_length=200)
     patient = models.ForeignKey(
-        'profiles.UserProfile', on_delete=models.CASCADE, related_name='patient_ludicjourney', null=True)
+        'profiles.Profile', on_delete=models.CASCADE, related_name='patient_ludicjourney', null=True)
     exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE)

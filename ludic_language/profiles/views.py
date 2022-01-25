@@ -3,13 +3,14 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.views import LoginView as BaseLoginView
 from django.contrib import messages
 from django.views.generic import ListView
-from django.shortcuts import render, redirect, reverse
+from django.shortcuts import redirect, reverse, render
+from django.urls import reverse_lazy
 from django.views.generic import View
 from ludic_language.profiles.models import STATES
-from . import forms
+from django.views.generic.edit import CreateView, UpdateView
 
-from ludic_language.profiles.models import User
-from ludic_language.profiles.forms import PatientForm, AddressForm
+from ludic_language.profiles.models import User, Profile
+from ludic_language.profiles.forms import UserForm, ProfileForm
 
 
 class LoginView(BaseLoginView):
@@ -23,7 +24,7 @@ class LoginView(BaseLoginView):
     template_name = "authentication/login.html"
 
     def get_success_url(self):
-        user = self.request.user
+        user = self.request.user.profile
         if user.state == STATES.PATIENT:
             return reverse('index_patient')
         else:
@@ -57,32 +58,52 @@ class PatientListView(ListView):
     model = User
 
 
-class PatientView(View):
-    form_class = PatientForm
-    form_ad = AddressForm
-    template_name = "form_patient.html"
+class PatientCreateView(CreateView):
+    form_class = UserForm
+    second_form_class = ProfileForm
+    template_name = 'form_patient.html'
+    success_url = reverse_lazy('index_speech')
 
     def get(self, request, *args, **kwargs):
         """Summary
-
         Args:
             request (TYPE): HTTpRequest request to generate a answer
             *args: Description
             **kwargs: Description
-
         Returns:
             TYPE: HttpResponse object with template name and form information
         """
         form = self.form_class()
-        form2 = self.form_ad()
-        context = {
-            'form': form,
-            'form2': form2
-        }
-        return render(request, self.template_name, context=context)
+        second_form = self.second_form_class()
+        return render(request, self.template_name, {'form': form, 'second_form': second_form})
 
     def post(self, request, *args, **kwargs):
         """Form to login for user's account
+        save users's information on database if form is valid
+        on Class Based View
+        class SignUpView(CreateView):
+            form_class = UserCreationForm
+            success_url = reverse_lazy('base')
+            template_name = 'registration/sign_up.html'
+        Args:
+            request (TYPE): HTTpRequest request to generate a answer
+            *args: Description
+            **kwargs: Description
+        Returns:
+            TYPE: HttpResponse object with template name and form information
+        """
+        form = self.form_class(data=request.POST)
+        second_form = self.second_form_class(data=request.POST)
+        if form.is_valid() and second_form.is_valid():
+            form.save()
+            second_form.save()
+            return redirect('index_speech')
+        return render(request, self.template_name, {'form': form, 'second_form': second_form})
+
+
+'''
+class PatientUpdateView(UpdateView):
+    """Form to login for user's account
         save users's information on database if form is valid
         on Class Based View
         class SignUpView(CreateView):
@@ -98,21 +119,43 @@ class PatientView(View):
         Returns:
             TYPE: HttpResponse object with template name and form information
         """
-        form = self.form_class(data=request.POST)
-        form2 = self.form_ad(data=request.POST)
-        if form.is_valid():
-            form.save()
-            username = request.POST['username']
-            password = request.POST['password1']
-            user = authenticate(request, username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('index_speech')
-        if form2.is_valid():
-            form2.save()
+    model = User
+    template_name = 'form_patient.html'
+    form_class = UserForm
+    second_form_class = ProfileForm
 
+    def get_context_data(self, **kwargs):
+        user = self.request.user
+        profile = Profile.objects.get(user=user)
+        user_form = UserForm(self.request.POST, instance=user)
+        profile_form = ProfileForm(self.request.POST, instance=profile)
+        context = super(PatientCreateView, self).get_context_data(**kwargs)
+        context['forms'] = [user_form, profile_form]
+        return context
+
+    def get(self, request, *args, **kwargs):
+        # super(PatientCreateView).get(request, *args, **kwargs)
+        # user = self.request.user
+        # profile = Profile.objects.get(user=user)
+        user_form = self.form_class()
+        profile_form = self.second_form_class()
         context = {
-            'form': form,
-            'form2': form2
+            'user_form': user_form,
+            'profile_form': profile_form,
         }
-        return render(request, self.template_name, context=context)
+        return render(request, self.template_name, context)
+
+    def form_valid(self, form):
+        user = self.request.user
+        profile = Profile.objects.get(user=user)
+        user_form = UserForm(self.request.POST, instance=user)
+        profile_form = ProfileForm(self.request.POST, instance=profile)
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            messages.success(self.request, "Your profile was updated.")
+            return reverse('index_speech')
+
+    def get_success_url(self):
+        return reverse('index_speech')
+'''

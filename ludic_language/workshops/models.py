@@ -7,6 +7,6 @@ class Workshop(models.Model):
     shedule_online = models.URLField(max_length=200)
     report = models.CharField(max_length=500)
     patient = models.ForeignKey(
-        'profiles.UserProfile', on_delete=models.CASCADE, related_name='patient_workshop', null=True)
+        'profiles.Profile', on_delete=models.CASCADE, related_name='patient_workshop', null=True)
     therapist = models.ForeignKey(
-        'profiles.UserProfile', on_delete=models.CASCADE, related_name='therapist_workshop', null=True)
+        'profiles.Profile', on_delete=models.CASCADE, related_name='therapist_workshop', null=True)

@@ -127,6 +127,7 @@ STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
+AUTH_PROFILE_MODULE = 'profiles.Profile'
 # AUTH_USER_MODEL = 'profiles.User'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Directory where uploaded media is saved.

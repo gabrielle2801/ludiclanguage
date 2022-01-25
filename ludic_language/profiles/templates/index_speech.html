@@ -31,7 +31,7 @@
     <div class="sidebar">
             {% if user.is_authenticated %}
                 <p>Bienvenue  {{ user }} !</p>
-                     <img src={{user.picture}} class="img-raised rounded-circle avatar">
+                     <img src={{user.profile.profile_pic.url}} class="img-raised rounded-circle avatar">
                 <li><a href="{% url 'index' %}" class="link link-theme link-arrow">HOME</a></li>
                 <li><a href="#" class="link link-theme link-arrow">CONTACT</a></li>
                 <li><a href="{% url 'logout' %}" class="link link-theme link-arrow">LOG OUT</a></li>

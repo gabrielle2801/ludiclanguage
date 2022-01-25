@@ -8,6 +8,10 @@ django = "*"
 django-extended-choices = "*"
 psycopg2-binary = "*"
 pillow = "*"
+django-multi-form-view = "*"
+django-betterforms = "*"
+six = "*"
+django-utils-six = "*"
 
 [dev-packages]
 
