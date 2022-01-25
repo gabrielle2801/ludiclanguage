@@ -16,32 +16,33 @@ class LoginForm(forms.Form):
 
 
 class UserForm(UserCreationForm):
-    class Meta:
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+    email = forms.EmailField(required=True)
+
+    class meta:
         model = User
-        fields = ('username', 'first_name', 'last_name',
-                  'email', 'password1', 'password2',)
+        fields = ['first_name', 'last_name', 'email',
+                  'username', 'password1', 'password2']
 
 
 class ProfileForm(forms.ModelForm):
 
-    first_name = forms.CharField(max_length=256)
-    last_name = forms.CharField(max_length=256)
+    therapist = forms.ModelChoiceField(
+        queryset=Profile.objects.all())
 
-    def __init__(self, *args, **kwargs):
-        super(ProfileForm, self).__init__(*args, **kwargs)
-        try:
-            self.fields['first_name'].initial = self.instance.user.first_name
-            self.fields['last_name'].initial = self.instance.user.last_name
-        except User.DoesNotExist:
-            pass
+    def __init__(self, *args, user=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        if user:
+            therapist = self.fields['therapist']
+            therapist.queryset = therapist.queryset.filter(user=user)
 
     class Meta:
         model = Profile
-        fields = ('birth_date', 'bio', 'profile_pic', 'pathology')
+        fields = ('birth_date', 'bio', 'profile_pic', 'pathology', 'therapist')
 
 
 '''
-
 class AddressForm(forms.ModelForm):
     num = forms.IntegerField()
     street = forms.CharField()
