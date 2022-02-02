@@ -1,0 +1,56 @@
+{% extends 'patient_list.html' %}
+{% block nav %}
+ <nav class="header">
+      <a class="logo" href="{% url 'index_speech' %}">Ludic<strong>Language PRO</strong> </a>
+      <img src="../static/assets/img/logo.png" width="80" height="70">
+    </nav>
+    <div class="sidebar-container">
+        <ul class="sidebar-navigation">
+            <li class="header">Profile Speech-therapist</li>
+            {% if user.is_authenticated %}
+                <p>Bienvenue  {{ user }} !</p>
+                <img src={{user.profile.profile_pic.url}} class="img-raised rounded-circle avatar">
+            <li class="nav-link link link-theme link-arrow">
+              <a href="{% url 'index_speech' %}">
+                <i class="fa fa-home" aria-hidden="true"></i> Homepage
+              </a>
+            </li>
+            <li class="nav-link link link-theme link-arrow">
+              <a href="#">
+                <i class="fa fa-tachometer" aria-hidden="true"></i> About
+              </a>
+            </li>
+            <li class="nav-link link link-theme link-arrow">
+              <a href="{% url 'logout' %}">
+                <i class="fa fa-tachometer" aria-hidden="true"></i> LOG OUT
+              </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+{% endblock nav %}
+<!-- Masthead-->
+
+{% block content%}
+<section class="main-section-detail">
+    <div class="col-lg-4 col-md-6 col-sm-12 d-flex col-card justify-content-center">
+         <div class="row patient-detail justify-content-center text-muted">
+             <div class="col-lg-4 col-md-6 col-sm-12 ">
+                        <img src="{{patient.user.profile.profile_pic.url}}" class="patient-detail-img img-fluid d-block align-middle">
+            </div>
+            <div class="col-lg-7 col-sm-12 product-detail-data">
+                <div class="row">
+                <h2 class="d-inline-flex align-middle font-weight-bold header-title text-capitalize">{{ patient.user.username }}</h2>
+                <h3>{{ patient.user.profile.age }} ans</h3>
+                <p>Prénom : {{ patient.user.first_name }}</p>
+                <p>Nom : {{ patient.user.last_name }}</p>
+                <p>Date de naissance : {{ patient.user.profile.birth_date }}</p>
+                <p>Pathologie : {{ patient.user.profile.pathology }}</p>
+                <a href="mailto:{{ patient.user.email }}">Email : {{ patient.user.email }}</a>
+                <p>Biographie : {{ patient.user.profile.bio }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

@@ -64,7 +64,7 @@ h1,h2,h3,h4,h5,h6 {
   position: relative;
 }
 
-.img-fluid{
+.img-homepage{
     position: absolute;
     text-align: right;
     top: 150px;
@@ -191,6 +191,14 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 @media only screen and (min-width:250px) {
+  .col-sm {
+    flex: 1 0 0%;
+  }
+    .col-sm-12 {
+        flex: 0 0 auto;
+        width: 100%;
+  }
+
   .main {
     padding-top: 150px;
   }
@@ -203,11 +211,18 @@ h1,h2,h3,h4,h5,h6 {
   h2 {
     font-size: 20px;
   }
-  .img-fluid{
+  .img-homepage{
     width: 100%;
   }
 }
 @media only screen and (min-width:768px) {
+  .col-md {
+      flex: 1 0 0%;
+    }
+  .col-md-6 {
+      flex: 0 0 auto;
+      width: 50%;
+    }
   .main {
     padding-top: 150px;
   }
@@ -220,11 +235,18 @@ h1,h2,h3,h4,h5,h6 {
   h2 {
     font-size: 28px;
   }
-  .img-fluid{
+.img-homepage{
     width: 100%;
   }
 }
 @media only screen and (min-width:992px) {
+  .col-lg {
+    flex: 1 0 0%;
+  }
+    .col-lg-4 {
+      flex: 0 0 auto;
+      width: 33.3333333333%;
+}
   .container {
     width: 80%;
   }
@@ -234,12 +256,19 @@ h1,h2,h3,h4,h5,h6 {
   h2 {
     font-size: 28px;
   }
-  .img-fluid{
+  .img-homepage{
     width: 100%;
   }
 }
 
 @media only screen and (min-width:1200px) {
+  .col-lg {
+    flex: 1 0 0%;
+  }
+    .col-lg-4 {
+      flex: 0 0 auto;
+      width: 33.3333333333%;
+}
   .container {
     width: 1160px;
     width: 80%;
@@ -250,7 +279,7 @@ h1,h2,h3,h4,h5,h6 {
   h2 {
     font-size: 30px;
   }
-  .img-fluid{
+.img-homepage{
     width: 100%;
   }
 }
@@ -286,7 +315,7 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 .header .logo {
-  color: #ffd300;
+  color: #f3c155;
   display: block;
   float: left;
   font-size: 2em;

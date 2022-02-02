@@ -2,32 +2,38 @@
 {% block content%}
 <section class="main-section">
     <div class="row">
-        {% if patient_list %}
-            {% for patient in patient_list %}
-                <div class="col-lg-4 col-md-6 col-sm-12 d-flex col-card justify-content-center">
-                    <div class="card product-card d-flex flex-column ">
-                        <img src="{{patient.picture}}" class="card-img-top product-img img-fluid rounded d-block align-m">
-                        <p class="card-title">{{patient.name}}</p>
-                        <div class="card-footer d-flex product align-content-around mt-auto">
-                            <a  class="d-flex justify-content-center align-items-center btn btn-detail" name="detail_product"  type="button" href="#"
-                                     data-toggle="tooltip" data-placement="bottom">
-                            <span>fiche patient</span>
-                            <i class="bi bi-info-circle"></i>
-                            </a>
-                            <a class="d-flex justify-content-center align-items-center btn btn-detail" name="search_substitute" type="button" href="{% url 'substitute_list' product_id=product.id %}" value='{{request.GET.search_substitute}}' data-toggle="tooltip" data-placement="bottom">
-                                <span>workshop</span>
-                                <i class="bi bi-search"></i>
-                            </a>
+         {% if patient_list %}
+         {% for patient in patient_list  %}
+                 <div class="col-lg-4 col-md-6 col-sm-12 d-flex col-card justify-content-center">
+                    <div class="card patient-card d-flex flex-column ">
+                        <img src="{{patient.profile_pic.url}}" class="card-img-top patient-img  rounded d-block align-m">
+                        <p class="card-title">{{patient.user.username}}</p>
+                        <div class="card-footer d-flex patient align-content-around mt-auto">
+                                <a  class="d-flex justify-content-center align-items-center btn btn-detail"   type="button" href="{% url 'detail_patient' patient.user.id %}"
+                                         data-toggle="tooltip" data-placement="bottom">
+                                <span>Afficher les détails du patient </span>
+                                <i class="bi bi-info-circle"></i>
+                                </a>
+                                <a class="d-flex justify-content-center align-items-center btn btn-detail" name="search_substitute" type="button" href="#"  data-toggle="tooltip" data-placement="bottom">
+                                    <span>Trouver des produits plus sains</span>
+                                    <i class="bi bi-search"></i>
+                                </a>
                         </div>
-
                     </div>
                 </div>
-            {% endfor %}
+        {% endfor %}
+            <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
+                <a  class="d-flex justify-content-center align-items-center btn btn-patient" name="patient"  type="button" href="{% url 'form_patient' %}"
+                                     data-toggle="tooltip" data-placement="bottom">
+                <span>Formumaire de création de profil patient</span>
+                <i class="bi bi-people"> Créer un profil patient</i>
+                </a>
+            </div>
         {% else %}
         <div class="container h-100">
             <div class="row justify-content-center h-100">
                <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                    <h2 class="text-center no-favoris">Vous n'avez pas encore de patient !</h2>
+                    <h2 class="text-center no-patient">Vous n'avez pas encore de patient !</h2>
                 </div>
             </div>
             <div class="row justify-content-center h-100">

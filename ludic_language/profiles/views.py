@@ -5,11 +5,11 @@ from django.contrib.auth.views import LoginView as BaseLoginView
 from django.contrib import messages
 from django.views.generic import ListView
 from django.shortcuts import redirect, reverse, render
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 from ludic_language.profiles.models import STATES
 from django.http import HttpResponseRedirect
 from ludic_language.profiles.models import User, Profile
-from ludic_language.profiles.forms import ProfileForm, UserForm
+from ludic_language.profiles.forms import UserProfileForm
 
 
 class LoginView(BaseLoginView):
@@ -54,9 +54,37 @@ class IndexPatientView(TemplateView):
 
 class PatientListView(ListView):
     template_name = 'patient_list.html'
+    model = Profile
+    context_object_name = 'patient_list'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = Profile.objects.filter(
+            therapist_id=self.request.user.profile)
+        return queryset
+
+
+class PatientAddView(LoginRequiredMixin, CreateView):
+    form_class = UserProfileForm
     model = User
+    template_name = 'form_patient.html'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['therapist'] = self.request.user.profile
+        return kwargs
+
+    def get_success_url(self):
+        return reverse('index_speech')
 
 
+class PatientDetailView(DetailView):
+    template_name = 'detail_patient.html'
+    model = Profile
+    context_object_name = 'patient'
+
+
+'''
 class PatientAddView(LoginRequiredMixin, CreateView):
     form_class = UserForm
     second_form_class = ProfileForm
@@ -85,7 +113,7 @@ class PatientAddView(LoginRequiredMixin, CreateView):
         return reverse('index_speech')
 
 
-'''
+
 
 class PatientUpdateView(UpdateView):
     """Form to login for user's account

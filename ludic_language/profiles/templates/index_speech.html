@@ -20,52 +20,71 @@
 
 <!-- Navigation-->
 {% block nav %}
-    <nav class="header">
+ <nav class="header">
       <a class="logo" href="{% url 'index' %}">Ludic<strong>Language PRO</strong> </a>
       <img src="../static/assets/img/logo.png" width="80" height="70">
     </nav>
+    <div class="sidebar-container">
+        <ul class="sidebar-navigation">
+            <li class="header">Profile Speech-therapist</li>
+            {% if user.is_authenticated %}
+                <p>Bienvenue  {{ user }} !</p>
+                <img src={{user.profile.profile_pic.url}} class="img-raised rounded-circle avatar">
+            <li class="nav-link link link-theme link-arrow">
+              <a href="{% url 'index_speech' %}">
+                <i class="fa fa-home" aria-hidden="true"></i> Homepage
+              </a>
+            </li>
+            <li class="nav-link link link-theme link-arrow">
+              <a href="#">
+                <i class="fa fa-tachometer" aria-hidden="true"></i> About
+              </a>
+            </li>
+            <li class="nav-link link link-theme link-arrow">
+              <a href="{% url 'logout' %}">
+                <i class="fa fa-tachometer" aria-hidden="true"></i> LOG OUT
+              </a>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
 {% endblock nav %}
 <!-- Masthead-->
 {% block header %}
-<div class="wrapper">
-    <div class="sidebar">
-            {% if user.is_authenticated %}
-                <p>Bienvenue  {{ user }} !</p>
-                     <img src={{user.profile.profile_pic.url}} class="img-raised rounded-circle avatar">
-                <li><a href="{% url 'index' %}" class="link link-theme link-arrow">HOME</a></li>
-                <li><a href="#" class="link link-theme link-arrow">CONTACT</a></li>
-                <li><a href="{% url 'logout' %}" class="link link-theme link-arrow">LOG OUT</a></li>
-            {% endif %}
-    </div>
-</div>
+
 {% endblock header %}
     <!-- About-->
     {% block content %}
-    <section class="main-section-speech">
-        <div class="row">
-            <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="#"
-                                     data-toggle="tooltip" data-placement="bottom">
-                <span>Afficher les prochaines sessions</span>
-                <i class="bi bi-calendar-date"> workshop</i>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                <a  class="d-flex justify-content-center align-items-center btn btn-patient" name="patient"  type="button" href="{% url 'patient_list' %}"
-                                     data-toggle="tooltip" data-placement="bottom">
-                <span>Liste des patients</span>
-                <i class="bi bi-people"> patient</i>
-                </a>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                <a  class="d-flex justify-content-center align-items-center btn btn-ludicjourney" name="ludic_journey"  type="button" href="#"
-                                     data-toggle="tooltip" data-placement="bottom">
-                <span>Créer un parcours ludique</span>
-                <i class="fas fa-puzzle-piece"> Parcours linguistique</i>
-                </a>
-            </div>
+    <div class="content-container">
+        <div class="container-fluid">
+                <section class="jumbotron main-section-speech">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
+                            <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="#"
+                                                 data-toggle="tooltip" data-placement="bottom">
+                            <span>Afficher les prochaines sessions</span>
+                            <i class="bi bi-calendar-date"> workshop</i>
+                            </a>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
+                            <a  class="d-flex justify-content-center align-items-center btn btn-patient" name="patient"  type="button" href="{% url 'patient_list' %}"
+                                                 data-toggle="tooltip" data-placement="bottom">
+                            <span>Liste des patients</span>
+                            <i class="bi bi-people"> patient</i>
+                            </a>
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
+                            <a  class="d-flex justify-content-center align-items-center btn btn-ludicjourney" name="ludic_journey"  type="button" href="#"
+                                                 data-toggle="tooltip" data-placement="bottom">
+                            <span>Créer un parcours ludique</span>
+                            <i class="fas fa-puzzle-piece"> Parcours linguistique</i>
+                            </a>
+                        </div>
+                    </div>
+                </section>
         </div>
-    </section>
+    </div>
+
     {% endblock content %}
     <!-- Footer-->
     {% block footer %}
@@ -75,6 +94,6 @@
     <!-- SimpleLightbox plugin JS-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.js"></script>
     <!-- Core theme JS-->
-    <script src="{% static 'js/scripts.js'%}"></script>
+    <script src="{% static 'profiles/js/scripts.js'%}"></script>
 </body>
 </html>

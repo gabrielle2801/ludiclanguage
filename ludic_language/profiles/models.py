@@ -17,7 +17,7 @@ STATES = Choices(
 class Profile(models.Model):
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True)
-    birth_date = models.DateField(null=True, blank=True)
+    birth_date = models.DateField(max_length=5, null=True, blank=True)
     state = models.PositiveSmallIntegerField(
         choices=STATES, default=STATES.PATIENT, null=True, blank=True)
     bio = models.TextField(max_length=500, blank=True)
@@ -31,6 +31,14 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+    def age(self):
+        import datetime
+        birth_date = self.birth_date
+        today = datetime.date.today()
+        my_age = (today.year - birth_date.year) - \
+            int((today.month, today.day) < (birth_date.month, birth_date.day))
+        return my_age
+
 
 class Address(models.Model):
     num = models.IntegerField(null=True)
@@ -41,8 +49,11 @@ class Address(models.Model):
     profile = models.OneToOneField(
         'Profile', on_delete=models.CASCADE)
 
+    def __str__(self):
+        return str(self.profile.user)
 
-@receiver(post_save, sender=User)
+
+@ receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.get_or_create(user=instance)

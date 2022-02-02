@@ -1,9 +1,9 @@
 from django import forms
 # from .models import Address
-from ludic_language.profiles.models import User, Profile
+from ludic_language.profiles.models import User, Address
+from ludic_language.exercises.models import Pathology
 from django.contrib.auth.forms import UserCreationForm
-# from betterforms.multiform import MultiModelForm
-# from ludic_language.exercises.models import Pathology
+import datetime
 
 
 class LoginForm(forms.Form):
@@ -15,17 +15,45 @@ class LoginForm(forms.Form):
         fields = ['username', 'password']
 
 
-class UserForm(UserCreationForm):
+class UserProfileForm(UserCreationForm):
     first_name = forms.CharField()
     last_name = forms.CharField()
     email = forms.EmailField(required=True)
+    birth_date = forms.DateField()
+    bio = forms.CharField(widget=forms.Textarea)
+    profile_pic = forms.ImageField()
+    pathology = forms.ModelChoiceField(queryset=Pathology.objects.all())
+    num = forms.IntegerField()
+    street = forms.CharField()
+    zip_code = forms.CharField()
+    city = forms.CharField()
 
-    class meta:
+    class Meta:
         model = User
         fields = ['first_name', 'last_name', 'email',
                   'username', 'password1', 'password2']
 
+    def __init__(self, *args, therapist=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.therapist = therapist
 
+    def save(self, *args, **kwargs):
+        user = super().save(*args, **kwargs)
+        address = Address.objects.create(
+            profile=user.profile, num=self.cleaned_data['num'], street=self.cleaned_data['street'],
+            zip_code=self.cleaned_data['zip_code'], city=self.cleaned_data['city'])
+        user.profile.birth_date = self.cleaned_data['birth_date']
+        user.profile.age = self.get_age()
+        user.profile.therapist = self.therapist
+        user.profile.bio = self.cleaned_data['bio']
+        user.profile.profile_pic = self.cleaned_data['profile_pic']
+        user.profile.pathology = self.cleaned_data['pathology']
+        user.profile.save()
+        user.profile.address.save()
+        return user
+
+
+'''
 class ProfileForm(forms.ModelForm):
 
     therapist = forms.ModelChoiceField(
@@ -42,16 +70,11 @@ class ProfileForm(forms.ModelForm):
         fields = ('birth_date', 'bio', 'profile_pic', 'pathology', 'therapist')
 
 
-'''
 class AddressForm(forms.ModelForm):
     num = forms.IntegerField()
     street = forms.CharField()
     zip_code = forms.CharField()
     city = forms.CharField()
-
-    def __init__(self, *args, user=None, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['address'].queryset = Address.objects.filter(user=user)
 
     class Meta:
         model = Address
