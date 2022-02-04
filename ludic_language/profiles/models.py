@@ -3,6 +3,7 @@ from extended_choices import Choices
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import datetime
 
 
 STATES = Choices(
@@ -22,7 +23,8 @@ class Profile(models.Model):
         choices=STATES, default=STATES.PATIENT, null=True, blank=True)
     bio = models.TextField(max_length=500, blank=True)
     review = models.CharField(max_length=500, blank=True, null=True)
-    profile_pic = models.ImageField(upload_to='pictures/', blank=True)
+    profile_pic = models.ImageField(
+        upload_to='pictures/', blank=True, null=True, default='par_defaut.png')
     therapist = models.ForeignKey(
         'Profile', on_delete=models.CASCADE, null=True, blank=True)
     pathology = models.ForeignKey(
@@ -31,8 +33,8 @@ class Profile(models.Model):
     def __str__(self):
         return self.user.username
 
+    @property
     def age(self):
-        import datetime
         birth_date = self.birth_date
         today = datetime.date.today()
         my_age = (today.year - birth_date.year) - \

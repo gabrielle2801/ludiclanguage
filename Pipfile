@@ -14,6 +14,8 @@ six = "*"
 django-utils-six = "*"
 ipdb = "*"
 coverage = "*"
+freezegun = "*"
+faker = "*"
 
 [dev-packages]
 

@@ -21,7 +21,7 @@ class UserProfileForm(UserCreationForm):
     email = forms.EmailField(required=True)
     birth_date = forms.DateField()
     bio = forms.CharField(widget=forms.Textarea)
-    profile_pic = forms.ImageField()
+    profile_pic = forms.ImageField(required=False)
     pathology = forms.ModelChoiceField(queryset=Pathology.objects.all())
     num = forms.IntegerField()
     street = forms.CharField()
@@ -79,4 +79,16 @@ class AddressForm(forms.ModelForm):
     class Meta:
         model = Address
         fields = ['num', 'street', 'zip_code', 'city']
+
+
+
+         self.image = Image.new(mode='RGB', size=(250, 250))
+        # a BytesIO object for saving image
+        self.image_io = BytesIO()
+        # save the image to image_io
+        self.image.save(self.image_io, 'PNG')
+        self.image_io.seek(0)
+        self.avatar = SimpleUploadedFile(
+            "gabrielleazadian.png", self.image_io.read(), content_type="image/png"
+        )
 '''
