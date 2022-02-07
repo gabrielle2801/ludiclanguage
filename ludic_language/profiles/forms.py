@@ -43,7 +43,6 @@ class UserProfileForm(UserCreationForm):
             profile=user.profile, num=self.cleaned_data['num'], street=self.cleaned_data['street'],
             zip_code=self.cleaned_data['zip_code'], city=self.cleaned_data['city'])
         user.profile.birth_date = self.cleaned_data['birth_date']
-        user.profile.age = self.get_age()
         user.profile.therapist = self.therapist
         user.profile.bio = self.cleaned_data['bio']
         user.profile.profile_pic = self.cleaned_data['profile_pic']

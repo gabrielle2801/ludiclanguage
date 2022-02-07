@@ -191,20 +191,10 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 @media only screen and (min-width:250px) {
-  .col-sm {
-    flex: 1 0 0%;
-  }
-    .col-sm-12 {
-        flex: 0 0 auto;
-        width: 100%;
-  }
-
   .main {
     padding-top: 150px;
   }
-  .container {
-    width: 80%;
-  }
+
   h1 {
     font-size: 30px;
   }
@@ -216,19 +206,11 @@ h1,h2,h3,h4,h5,h6 {
   }
 }
 @media only screen and (min-width:768px) {
-  .col-md {
-      flex: 1 0 0%;
-    }
-  .col-md-6 {
-      flex: 0 0 auto;
-      width: 50%;
-    }
+
   .main {
     padding-top: 150px;
   }
-  .container {
-    width: 80%;
-  }
+
   h1 {
     font-size: 48px;
   }
@@ -240,16 +222,6 @@ h1,h2,h3,h4,h5,h6 {
   }
 }
 @media only screen and (min-width:992px) {
-  .col-lg {
-    flex: 1 0 0%;
-  }
-    .col-lg-4 {
-      flex: 0 0 auto;
-      width: 33.3333333333%;
-}
-  .container {
-    width: 80%;
-  }
   h1 {
     font-size: 60px;
   }
@@ -262,17 +234,6 @@ h1,h2,h3,h4,h5,h6 {
 }
 
 @media only screen and (min-width:1200px) {
-  .col-lg {
-    flex: 1 0 0%;
-  }
-    .col-lg-4 {
-      flex: 0 0 auto;
-      width: 33.3333333333%;
-}
-  .container {
-    width: 1160px;
-    width: 80%;
-  }
   h1 {
     font-size: 70px;
   }

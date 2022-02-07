@@ -322,11 +322,13 @@ a:hover span, a:focus span{
   align-items: center;
 }
 .justify-content-center{
-  justify-content: center;
+  justify-content: center !important;
 }
+
 .d-flex{
-  display: flex;
+  display: flex !important;
 }
+
 .flex-column{
   flex-direction: column;
 }
@@ -346,59 +348,7 @@ a:hover span, a:focus span{
     margin-top: 80px;
     text-align: center;
 }
-@media screen and (max-width: 700px) {
-    .jumbotron {
-    padding-top: 48px;
-    padding-bottom: 48px;
-  }
-  .container .jumbotron,
-  .container-fluid .jumbotron {
-    padding-left: 60px;
-    padding-right: 60px;
-  }
 
-
-  .avatar {
-    width: 40%;
-  }
-
-}
-@media screen and (max-width: 992px){
-    .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-  .sidebar a {float: left;}
-  div.content {margin-left: 0;}
-}
-
-    .avatar {
-    width: 40%;
-  }
-}
-@media (min-width: 992px){
-    .sidebar {
-    width: 100%;
-    height: auto;
-    position: relative;
-  }
-  .sidebar a {float: left;}
-  div.content {margin-left: 0;}
-    .avatar {
-    width: 40%;
-  }
-}
-@media (min-width: 576px) {
-    .sidebar a {
-    text-align: center;
-    float: none;
-  }
-    .avatar {
-        width: 100%;
-      }
-
-}
 /* List of patient card */
 
 
@@ -692,3 +642,126 @@ button:hover span, button:focus span{
     text-align: center;
     vertical-align: baseline;
 }
+@media (min-width: 576px) {
+  .container-sm, .container {
+    max-width: 540px;
+  }
+}
+@media (min-width: 768px) {
+  .container-md, .container-sm, .container {
+    max-width: 720px;
+  }
+}
+@media (min-width: 992px) {
+  .container-lg, .container-md, .container-sm, .container {
+    max-width: 960px;
+  }
+}
+@media (min-width: 1200px) {
+  .container-xl, .container-lg, .container-md, .container-sm, .container {
+    max-width: 1140px;
+  }
+}
+@media (min-width: 1400px) {
+  .container-xxl, .container-xl, .container-lg, .container-md, .container-sm, .container {
+    max-width: 1320px;
+  }
+}
+@media (min-width: 768px) {
+  .col-md {
+      flex: 1 0 0%;
+    }
+  .col-md-6 {
+      flex: 0 0 auto;
+      width: 50%;
+    }
+  .main {
+    padding-top: 150px;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+.img-homepage{
+    width: 100%;
+  }
+  .jumbotron {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+  .container .jumbotron,
+  .container-fluid .jumbotron {
+    padding-left: 60px;
+    padding-right: 60px;
+  }
+
+
+  .avatar {
+    width: 40%;
+  }
+}
+@media (min-width: 992px)  {
+
+  .col-lg {
+    flex: 1 0 0%;
+  }
+  .col-lg-4 {
+    flex: 0 0 auto;
+    width: 33.3333333333%;
+  }
+  .container {
+    width: 1160px;
+    width: 80%;
+    }
+  h2 {
+    font-size: 28px;
+  }
+  .img-homepage{
+    width: 100%;
+  }
+  .sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+  }
+  .sidebar a {float: left;}
+  div.content {margin-left: 0;}
+}
+
+    .avatar {
+    width: 40%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .col-lg {
+    flex: 1 0 0%;
+  }
+    .col-lg-4 {
+      flex: 0 0 auto;
+      width: 33.3333333333%;
+        }
+    .container {
+    width: 1160px;
+    width: 80%;
+    }
+    h2 {
+    font-size: 30px;
+  }
+  .img-homepage{
+    width: 100%;
+  }
+}
+
+
+@media (min-width: 576px) {
+    .sidebar a {
+    text-align: center;
+    float: none;
+  }
+    .avatar {
+        width: 100%;
+      }
+
+}
+/*

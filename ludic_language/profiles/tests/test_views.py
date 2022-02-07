@@ -71,9 +71,34 @@ class PatientDetailTest(TestCase):
             return super().setUp()
 
         def test_detail(self):
-
             detail_url = reverse('detail_patient', kwargs={
                 'pk': self.profile})
             response = self.client.get(detail_url)
             assert response.status_code == 200
             self.assertTemplateUsed(response, 'detail_patient.html')
+
+
+class PatientDeleteTest(TestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(
+            username='LucasD', first_name='Lucas', password='12test12', email='test@email.com')
+        self.user_id = self.user.pk
+        self.user.save()
+        self.therapist = User.objects.create_user(
+            username='test', password='12test12').pk
+
+        self.pathology_id = Pathology.objects.create(name='Dyslexie').pk
+        Profile(user=self.user, birth_date='2013-05-12', state=1,
+                bio='Lucas est atteint de ......', profile_pic='lucasdesmarais.png',
+                pathology_id=self.pathology_id, therapist_id=self.therapist).save()
+
+    def test_delete_valid(self):
+        login = self.client.login(
+            username='test', password='12test12')
+        self.assertTrue(login)
+        delete_url = reverse('delete_patient', kwargs={
+            'pk': self.user_id})
+
+        response = self.client.get(delete_url)
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'patient_confirm_delete.html')

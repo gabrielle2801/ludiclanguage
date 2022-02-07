@@ -1,55 +1,64 @@
 {% extends 'index_speech.html' %}
 {% block content%}
-<section class="main-section">
-    <div class="row">
-         {% if patient_list %}
-         {% for patient in patient_list  %}
-                 <div class="col-lg-4 col-md-6 col-sm-12 d-flex col-card justify-content-center">
-                    <div class="card patient-card d-flex flex-column ">
-                        <img src="{{patient.profile_pic.url}}" class="card-img-top patient-img  rounded d-block align-m">
-                        <p class="card-title">{{patient.user.username}}</p>
-                        <div class="card-footer d-flex patient align-content-around mt-auto">
-                                <a  class="d-flex justify-content-center align-items-center btn btn-detail"   type="button" href="{% url 'detail_patient' patient.user.id %}"
+<div class="content-container">
+        <div class="container-fluid">
+                <section class="jumbotron main-section-speech">
+                    <div class="row">
+                        {% if patient_list %}
+                        {% for patient in patient_list  %}
+                        <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
+                            <div class="card patient-card d-flex flex-column">
+                                <img src="{{patient.profile_pic.url}}" class="card-img-top patient-img  rounded d-block align-m">
+                                <p class="card-title">{{patient.user.username}}</p>
+                                <div class="card-footer d-flex patient align-content-around mt-auto">
+                                     <a  class="d-flex justify-content-center align-items-center btn btn-detail"   type="button" href="{% url 'detail_patient' patient.user.id %}"
+                                             data-toggle="tooltip" data-placement="bottom">
+                                    <span>Afficher les détails du patient </span>
+                                    <i class="bi bi-info-circle"></i>
+                                    </a>
+                                    <div class="d-flex me-auto">
+                                        <form method="post", action="{% url 'delete_patient' patient.user.id %}">
+                                             {% csrf_token %}
+                                            <input type="hidden" name="patient_id" value="{{ patient.id }}">
+                                            <a  class="d-flex justify-content-center align-items-center btn btn-delete" name="delete_patient" type="button"
+                                                 data-toggle="tooltip" data-placement="bottom" href="{% url 'delete_patient' patient.user.id %}">
+                                            <span>supprimer le favoris</span>
+                                            <i class="fas fa-trash"></i>
+                                           </a>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
+                            <a class="d-flex justify-content-center align-items-center btn btn-patient" name="patient"  type="button" href="{% url 'form_patient' %}"
                                          data-toggle="tooltip" data-placement="bottom">
-                                <span>Afficher les détails du patient </span>
-                                <i class="bi bi-info-circle"></i>
-                                </a>
-                                <a class="d-flex justify-content-center align-items-center btn btn-detail" name="search_substitute" type="button" href="#"  data-toggle="tooltip" data-placement="bottom">
-                                    <span>Trouver des produits plus sains</span>
-                                    <i class="bi bi-search"></i>
-                                </a>
+                            <span>Formumaire de création de profil patient</span>
+                            <i class="bi bi-people"> Créer un profil patient</i>
+                            </a>
                         </div>
                     </div>
+
+                {% else %}
+                <div class="container h-100">
+                    <div class="row justify-content-center h-100">
+                        <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
+                            <h2 class="text-center no-patient">Vous n'avez pas encore de patient !</h2>
+                            <i class="bi bi-people"></i>
+                        </div>
+
+                    </div>
+                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
+                    <a  class="d-flex justify-content-center align-items-center btn btn-patient" name="patient"  type="button" href="{% url 'form_patient' %}"
+                                         data-toggle="tooltip" data-placement="bottom">
+                    <span>Formumaire de création de profil patient</span>
+                    <i class="bi bi-people"> Créer un profil patient</i>
+                    </a>
+                    </div>
                 </div>
-        {% endfor %}
-            <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                <a  class="d-flex justify-content-center align-items-center btn btn-patient" name="patient"  type="button" href="{% url 'form_patient' %}"
-                                     data-toggle="tooltip" data-placement="bottom">
-                <span>Formumaire de création de profil patient</span>
-                <i class="bi bi-people"> Créer un profil patient</i>
-                </a>
-            </div>
-        {% else %}
-        <div class="container h-100">
-            <div class="row justify-content-center h-100">
-               <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                    <h2 class="text-center no-patient">Vous n'avez pas encore de patient !</h2>
-                </div>
-            </div>
-            <div class="row justify-content-center h-100">
-                <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center">
-                        <i class="bi bi-people"></i>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                <a  class="d-flex justify-content-center align-items-center btn btn-patient" name="patient"  type="button" href="{% url 'form_patient' %}"
-                                     data-toggle="tooltip" data-placement="bottom">
-                <span>Formumaire de création de profil patient</span>
-                <i class="bi bi-people"> Créer un profil patient</i>
-                </a>
-            </div>
+                {% endif %}
+                </section>
         </div>
-        {% endif %}
-    </div>
-</section>
+</div>
 {% endblock content %}

@@ -1,0 +1,25 @@
+{% extends 'authentication/login.html' %}
+
+{% block header %}
+    <header class="simple-header d-flex align-items-center">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5  justify-content-center align-items-between text-center">
+            <div class="col">
+                <h1 class="fs-1 text-center">Suppression de profil patient !</h1>
+            </div>
+        </div>
+    </div>
+    </header>
+    {% endblock header %}
+{% block content%}
+<div class="container h-100">
+    {% if patient_list %}
+    <form action="{% url 'delete_patient' patient_list.id %}" method="post">
+        {% csrf_token %}
+        <p>Êtes-vous sûr de vouloir supprimer "{{ patient_list.username  }}"?</p>
+        <input type="submit" name="Confirm_btn"  value="Confirm" />
+    </form>
+
+    {% endif %}
+</div>
+{% endblock%}
