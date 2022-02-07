@@ -82,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'ludiclanguage_db',
         'USER': 'xavgab',
-        'PASSWORD': 'openfoodfact',
+        'PASSWORD': 'ludiclanguage',
         'HOST': 'localhost',
         'PORT': '5432',
     }

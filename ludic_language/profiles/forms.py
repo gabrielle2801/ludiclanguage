@@ -1,9 +1,7 @@
 from django import forms
-# from .models import Address
 from ludic_language.profiles.models import User, Address
 from ludic_language.exercises.models import Pathology
 from django.contrib.auth.forms import UserCreationForm
-import datetime
 
 
 class LoginForm(forms.Form):
@@ -50,44 +48,3 @@ class UserProfileForm(UserCreationForm):
         user.profile.save()
         user.profile.address.save()
         return user
-
-
-'''
-class ProfileForm(forms.ModelForm):
-
-    therapist = forms.ModelChoiceField(
-        queryset=Profile.objects.all())
-
-    def __init__(self, *args, user=None, **kwargs):
-        super().__init__(*args, **kwargs)
-        if user:
-            therapist = self.fields['therapist']
-            therapist.queryset = therapist.queryset.filter(user=user)
-
-    class Meta:
-        model = Profile
-        fields = ('birth_date', 'bio', 'profile_pic', 'pathology', 'therapist')
-
-
-class AddressForm(forms.ModelForm):
-    num = forms.IntegerField()
-    street = forms.CharField()
-    zip_code = forms.CharField()
-    city = forms.CharField()
-
-    class Meta:
-        model = Address
-        fields = ['num', 'street', 'zip_code', 'city']
-
-
-
-         self.image = Image.new(mode='RGB', size=(250, 250))
-        # a BytesIO object for saving image
-        self.image_io = BytesIO()
-        # save the image to image_io
-        self.image.save(self.image_io, 'PNG')
-        self.image_io.seek(0)
-        self.avatar = SimpleUploadedFile(
-            "gabrielleazadian.png", self.image_io.read(), content_type="image/png"
-        )
-'''
