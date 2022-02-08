@@ -20,8 +20,9 @@ from django.contrib.auth.views import LoginView
 from django.urls import path
 from ludic_language.profiles import views
 from ludic_language.base.views import BaseView
-from ludic_language.profiles.views import LoginView, IndexSpeechView, IndexPatientView, PatientListView, PatientAddView, PatientDetailView, PatientDeleteView
-
+from ludic_language.profiles.views import LoginView, IndexSpeechView, IndexPatientView, PatientListView, \
+    PatientAddView, PatientDetailView, PatientDeleteView
+from ludic_language.workshops.views import WorkshopAddView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,5 +36,8 @@ urlpatterns = [
          PatientDetailView.as_view(), name='detail_patient'),
     path('delete_patient/<int:pk>',
          PatientDeleteView.as_view(), name='delete_patient'),
+    path('forms_workshop/', WorkshopAddView.as_view(), name='form_workshop'),
+    path('forms_workshop/<int:pk>',
+         WorkshopAddView.as_view(), name='form_workshop'),
     path('logout/', views.logout_request, name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

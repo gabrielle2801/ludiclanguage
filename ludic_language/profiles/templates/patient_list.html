@@ -16,6 +16,11 @@
                                     <span>Afficher les détails du patient </span>
                                     <i class="bi bi-info-circle"></i>
                                     </a>
+                                    <a  class="d-flex justify-content-center align-items-center btn btn-workshop"   type="button" href="{% url 'form_workshop' patient.user.id %}"
+                                             data-toggle="tooltip" data-placement="bottom">
+                                    <span>planifier une session</span>
+                                    <i class="bi bi-calendar-date-fill"></i>
+                                    </a>
                                     <div class="d-flex me-auto">
                                         <form method="post", action="{% url 'delete_patient' patient.user.id %}">
                                              {% csrf_token %}
