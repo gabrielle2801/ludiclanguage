@@ -60,11 +60,11 @@ body {
     float: left;
     margin: 50px 10px 50px 0;
     padding-right: 10px;
-    background: url("/static/profiles/assets/img/homepage_patient.png") no-repeat 80%;
+    background: url("/static/profiles/assets/img/homepage_patient.png") no-repeat;
+    background-size: cover;
     background-position: center;
     background-size: 500px;
     box-sizing: border-box;
-    opacity: 0.60;
 }
 .main-section {
     width: 100%;

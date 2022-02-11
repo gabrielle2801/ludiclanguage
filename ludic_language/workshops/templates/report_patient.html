@@ -1,0 +1,26 @@
+{% extends 'index_patient.html' %}
+{% block content%}
+<div class="content-container">
+    <div class="container-fluid">
+        <section class="jumbotron main-section-patient">
+            <div class="col-lg-4 col-md-6 col-sm-12 d-flex col-card justify-content-center">
+                 <div class="row justify-content-center text-center">
+                    <div class="col-lg-4 col-md-6 col-sm-12 calendar d-flex  justify-content-center">
+                        <div class="calendar-body d-flex flex-column">
+                            <span class="month-name">{{report.date|date:"F"}}</span>
+                            <span class="day-name">{{report.date|date:"l"}}</span>
+                            <span class="day-number">{{report.date|date:"j"}}</span>
+                            <span class="year">{{report.date|date:"Y"}}</span>
+                            <span class="hours">{{report.date|date:"H:i"}}</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-7 col-sm-12">
+                        <h3 class="d-inline-flex align-middle font-weight-bold header-title text-capitalize"> Réalisé par le docteur {{report.therapist.user}}</h3>
+                        <p class="report">{{report.report}}</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock content %}

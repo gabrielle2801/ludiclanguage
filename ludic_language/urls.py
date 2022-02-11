@@ -22,7 +22,8 @@ from ludic_language.profiles import views
 from ludic_language.base.views import BaseView
 from ludic_language.profiles.views import LoginView, IndexSpeechView, IndexPatientView, PatientListView, \
     PatientAddView, PatientDetailView, PatientDeleteView
-from ludic_language.workshops.views import WorkshopAddView
+from ludic_language.workshops.views import WorkshopAddView, WorkshopListView, WorkshopUpdateView,\
+    ReportListView, ReportDetailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,13 +32,18 @@ urlpatterns = [
     path('speech_homepage/', IndexSpeechView.as_view(), name='index_speech'),
     path('patient_homepage/', IndexPatientView.as_view(), name='index_patient'),
     path('patient_list/', PatientListView.as_view(), name='patient_list'),
-    path('forms_patient/', PatientAddView.as_view(), name='form_patient'),
+    path('form_patient/', PatientAddView.as_view(), name='form_patient'),
     path('detail_patient/<int:pk>',
          PatientDetailView.as_view(), name='detail_patient'),
     path('delete_patient/<int:pk>',
          PatientDeleteView.as_view(), name='delete_patient'),
-    path('forms_workshop/', WorkshopAddView.as_view(), name='form_workshop'),
-    path('forms_workshop/<int:pk>',
+    path('form_workshop/', WorkshopAddView.as_view(), name='form_workshop'),
+    path('form_workshop/<int:patient_id>',
          WorkshopAddView.as_view(), name='form_workshop'),
+    path('list_workshop/', WorkshopListView.as_view(), name='list_workshop'),
+    path('form_report/<int:pk>',
+         WorkshopUpdateView.as_view(), name='form_report'),
+    path('report_list/', ReportListView.as_view(), name='report_list'),
+    path('report/<int:pk>', ReportDetailView.as_view(), name='report_patient'),
     path('logout/', views.logout_request, name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

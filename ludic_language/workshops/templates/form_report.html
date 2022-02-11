@@ -1,5 +1,4 @@
 {% extends 'index_speech.html' %}
-
 {% block content%}
 <div class="content-container">
   <div class="container-fluid">
@@ -7,7 +6,7 @@
           <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
-            <button class="submit">PLANNIFIER UNE SESSION </button>
+            <button class="submit">AJOUTER UN COMPTE RENDU </button>
           </form>
     </section>
   </div>

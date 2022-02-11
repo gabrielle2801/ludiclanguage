@@ -13,15 +13,17 @@
     <!-- SimpleLightbox plugin CSS-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
-     <link href="{% static 'profiles/css/styles.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'profiles/css/styles.css' %}" type="text/css" rel="stylesheet">
     <link href="{% static '../static/css/styles.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'workshops/css/styles.css' %}" type="text/css" rel="stylesheet">
+
 </head>
 <body class="page-top">
 
 <!-- Navigation-->
 {% block nav %}
  <nav class="header">
-      <a class="logo" href="{% url 'index' %}">Ludic<strong>Language PRO</strong> </a>
+      <a class="logo" href="{% url 'index' %}">Ludic<strong>Language</strong> </a>
       <img src="../static/assets/img/logo.png" width="80" height="70">
     </nav>
     <div class="sidebar-container">
@@ -30,11 +32,11 @@
             {% if user.is_authenticated %}
                 <p>Bienvenue  {{ user.profile }} !</p>
                 <img src={{user.profile.profile_pic.url}} class="img-raised rounded-circle avatar">
-            <li class="nav-link link link-theme link-arrow">
-              <a href="{% url 'index_patient' %}">
-                <i class="fa fa-home" aria-hidden="true"></i> Homepage
-              </a>
-            </li>
+                    <li class="nav-link link link-theme link-arrow">
+                      <a href="{% url 'index_patient' %}">
+                        <i class="fa fa-home" aria-hidden="true"></i> Homepage
+                      </a>
+                    </li>
             <li class="nav-link link link-theme link-arrow">
               <a href="#">
                 <i class="fa fa-tachometer" aria-hidden="true"></i> About
@@ -45,7 +47,22 @@
                 <i class="fa fa-tachometer" aria-hidden="true"></i> LOG OUT
               </a>
             </li>
-            {% endif %}
+                {% if workshop_date %}
+                        {% for workshop in workshop_date %}
+                        <li class="nav-link link link-theme link-arrow">
+                              <a href="{% url 'list_workshop' %}">
+                                <i class="bi bi-calendar-date"></i> Prochaine session : {{workshop.date}}
+                              </a>
+                        </li>
+                        {% endfor %}
+                        {% else %}
+                        <li class="nav-link link link-theme link-arrow">
+                              <a href="{% url 'list_workshop' %}">
+                                <i class="bi bi-calendar-date"></i> Pas de Session aujourd'hui !
+                              </a>
+                        </li>
+                        {% endif %}
+                {% endif %}
         </ul>
     </div>
 {% endblock nav %}
@@ -60,15 +77,14 @@
                 <section class="jumbotron main-section-patient">
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                            <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="#"
+                            <a  class="d-flex justify-content-center align-items-center btn " name="workshop"  type="button" href="{% url 'report_list' %}"
                                                  data-toggle="tooltip" data-placement="bottom">
-                            <span>Afficher les prochaines sessions</span>
-                            <i class="bi bi-calendar-date"> workshop</i>
+                            <span>Afficher les prochaines compte rendu</span>
+                            <i class="bi bi-journal-text"> Compte Rendu</i>
                             </a>
                         </div>
-
                         <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                            <a  class="d-flex justify-content-center align-items-center btn btn-ludicjourney" name="ludic_journey"  type="button" href="#"
+                            <a  class="d-flex justify-content-center align-items-center btn" name="ludic_journey"  type="button" href="#"
                                                  data-toggle="tooltip" data-placement="bottom">
                             <span>Créer un parcours ludique</span>
                             <i class="fas fa-puzzle-piece"> Parcours linguistique</i>

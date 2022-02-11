@@ -1,0 +1,61 @@
+{% extends 'index_speech.html' %}
+{% load static %}
+{% block content%}
+<div class="content-container">
+  <div class="container-fluid">
+    <section class="jumbotron main-section-patient">
+        <div class="row">
+            {% if list_workshop %}
+            {% for workshop in list_workshop %}
+            <div class="col-lg-4 col-md-6 col-sm-12 calendar d-flex  justify-content-center">
+                <div class="calendar-body d-flex flex-column">
+                    <span class="month-name">{{workshop.date|date:"F"}}</span>
+                    <span class="day-name">{{workshop.date|date:"l"}}</span>
+                    <span class="day-number">{{workshop.date|date:"j"}}</span>
+                    <span class="year">{{workshop.date|date:"Y"}}</span>
+                    <span class="hours">{{workshop.date|date:"H:i"}}</span>
+                    <a class="web-link" href="{{workshop.shedule_online}}">lien vers la session </a>
+                    <img src="{{workshop.patient.profile_pic.url}}" class="card-img-top patient-img  rounded d-block align-m">
+                    <p class="card-title">{{workshop.patient.user.username}}</p>
+                    <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="{% url 'form_report' workshop.id%}"
+                                     data-toggle="tooltip" data-placement="bottom">
+                        <span>Créer un compte rendu </span>
+                        <i class="bi bi-journal-text"></i>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+            <div class="col-lg-4 col-md-6 col-sm-12  justify-content-center">
+                <a  class="d-flex justify-content-center align-items-center btn btn-patient" name="workshop"  type="button" href="{% url 'form_workshop' %}"
+                                     data-toggle="tooltip" data-placement="bottom">
+                <span>Plannifier une session </span>
+                <i class="bi bi-calendar-date-fill"> Session</i>
+                </a>
+
+            </div>
+        </div>
+        {% else %}
+             <div class="container h-100">
+                    <div class="row justify-content-center h-100">
+                        <div class="col-lg-4 col-md-6 col-sm-12 d-flex text-center">
+                            <h2 class="text-center no-workshop">Pas de session programmée !</h2>
+                        </div>
+                        <div class="row justify-content-center h-100">
+                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center">
+                                <i class="bi bi-calendar2-x-fill"></i>
+                            </div>
+                        </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center text-center">
+                                 <a  class="d-flex justify-content-center  text-center align-items-center btn btn-workshop" name="workshop"  type="button" href="{% url 'form_workshop' %}"
+                                                 data-toggle="tooltip" data-placement="bottom">
+                                <span>Plannifier une session</span>
+                                <i class="bi bi-calendar-date-fill"> Session</i>
+                                </a>
+                            </div>
+                    </div>
+                </div>
+        {% endif %}
+    </section>
+  </div>
+</div>
+{% endblock content %}

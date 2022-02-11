@@ -1,4 +1,3 @@
-from django.views.generic import TemplateView
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.views import LoginView as BaseLoginView
@@ -6,11 +5,13 @@ from django.contrib import messages
 from django.views.generic import ListView
 from django.shortcuts import redirect, reverse, render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, DetailView
+from django.views.generic import CreateView, DetailView, TemplateView
 from django.views.generic.edit import DeleteView
 from ludic_language.profiles.models import STATES
+import datetime
 
 from ludic_language.profiles.models import User, Profile
+from ludic_language.workshops.models import Workshop
 from ludic_language.profiles.forms import UserProfileForm
 
 
@@ -50,8 +51,16 @@ class IndexSpeechView(TemplateView):
     template_name = "index_speech.html"
 
 
-class IndexPatientView(TemplateView):
+class IndexPatientView(ListView):
     template_name = "index_patient.html"
+    model = Workshop
+    context_object_name = 'workshop_date'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = Workshop.objects.filter(patient_id=self.request.user.profile)\
+            .filter(date=datetime.date.today())
+        return queryset
 
 
 class PatientListView(ListView):

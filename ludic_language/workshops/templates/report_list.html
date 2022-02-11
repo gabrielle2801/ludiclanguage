@@ -1,0 +1,38 @@
+{% extends 'index_patient.html' %}
+{% block content%}
+<div class="content-container">
+    <div class="container-fluid">
+        <section class="jumbotron main-section-patient">
+            <div class="row">
+            {% if report_list %}
+            {% for report in report_list %}
+                <div class="col-lg-4 col-md-6 col-sm-12 calendar d-flex  justify-content-center">
+                    <div class="calendar-body d-flex flex-column ">
+                        <span class="date">{{report.date}}</span>
+                        <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="{% url 'report_patient' report.id%}"
+                                     data-toggle="tooltip" data-placement="bottom">
+                        <span>Visualisez le compte rendu </span>
+                        <i class="bi bi-journal-text"></i>
+                    </a>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+             <div class="container h-100">
+                    <div class="row justify-content-center h-100">
+                        <div class="col-lg-4 col-md-6 col-sm-12 d-flex text-center">
+                            <h2 class="text-center no-workshop">Vous n'avez pas encore de Compte Rendu!</h2>
+                        </div>
+                        <div class="row justify-content-center h-100">
+                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center">
+                                <i class="bi bi-calendar2-x-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        {% endif %}
+        </section>
+    </div>
+</div>
+{% endblock content %}

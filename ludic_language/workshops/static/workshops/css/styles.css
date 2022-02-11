@@ -1,0 +1,89 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.calendar{
+  position: relative;
+  border-radius: 50%;
+}
+
+.calendar .calendar-body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(15px);
+  border-bottom: 6px solid #3a525f;
+  border-right: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 5px 25px rgb(1 1 1 / 15%);
+  width: 500px;
+}
+
+.calendar .calendar-body .month-name{
+  color: #fff;
+  background: #3a525f;
+  width: 100%;
+  font-size: 1.6em;
+  text-align: center;
+  font-weight: 400;
+  padding: 5px 0;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.calendar .calendar-body .day-name{
+  color:  #17202a;
+  font-size: 1.2em;
+  font-weight: 400;
+  margin-top: 20px;
+}
+
+.calendar .calendar-body .date-number{
+  color: #17202a;
+  font-size: 6em;
+  font-weight: 600;
+  line-height: 1.2em;
+}
+
+.calendar .calendar-body .year{
+  color: #17202a;
+  font-size: 1.2em;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+.calendar .calendar-body .hours{
+  color: #17202a;
+  font-size: 1.2em;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+.calendar .calendar-body .web-link{
+  color: #3498db;
+  font-size: 1.2em;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+.bi-calendar2-x-fill{
+    font-size: 2rem !important;
+    color:  #17202a;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: baseline;
+}
+.btn-workshop {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  margin: 0 0.5rem 0 0;
+  color: white;
+  background-color: #17202a !important;
+  border-radius: 0.5rem !important;
+}
+p .report{
+  text-align: justify;
+}

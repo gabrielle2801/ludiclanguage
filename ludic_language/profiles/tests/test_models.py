@@ -1,5 +1,4 @@
 from django.test import TestCase
-# from faker import Faker
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from ludic_language.profiles.models import Profile
@@ -9,7 +8,7 @@ from freezegun import freeze_time
 import datetime
 
 
-class Profiletest(TestCase):
+class ProfileTest(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
             username='LucasD', first_name='Lucas', password='12test12', email='test@email.com')
