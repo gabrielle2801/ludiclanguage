@@ -302,6 +302,11 @@ img.rounded {
    text-align: center;
 
 }
+.fa{
+   font-size: 1.5rem;
+   text-align: center;
+
+}
 a span{
      position:absolute;
      margin-top:150px;
@@ -642,6 +647,11 @@ button:hover span, button:focus span{
     text-align: center;
     vertical-align: baseline;
 }
+p .pathology{
+    text-align: justify;
+    font-family: "Helvetica Neue";
+    font-weight: 300;
+}
 @media (min-width: 576px) {
   .container-sm, .container {
     max-width: 540px;
@@ -681,6 +691,11 @@ button:hover span, button:focus span{
 
   h2 {
     font-size: 28px;
+  }
+   h2 .titre-pathology{
+    font-size: 28px;
+    font-family: 'Helvetica Neue';
+    font-weight: 5;
   }
 .img-homepage{
     width: 100%;

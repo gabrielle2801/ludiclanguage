@@ -22,10 +22,6 @@ class ProfileTest(TestCase):
                 bio='Lucas est atteint de ......', profile_pic='lucasdesmarais.png',
                 pathology_id=self.pathology_id, therapist_id=self.therapist).save()
 
-    @freeze_time("2022-01-14")
-    def test_freeze_time(self):
-        assert datetime.datetime.now() == datetime.datetime(2022, 1, 14)
-
     @freeze_time("2020-01-14")
     def test_age_valid(self):
         my_age = 6
@@ -37,11 +33,3 @@ class ProfileTest(TestCase):
         my_age = 10
         response = self.user.profile.age
         self.assertNotEqual(response, my_age)
-
-    def test_first_name_label(self):
-        patient = User.objects.get(id=self.user_id)
-        field_label = patient._meta.get_field('first_name').verbose_name
-        self.assertEquals(field_label, 'prénom')
-
-    def test_profile_username(self):
-        self.assertEquals(self.user.__str__(), 'LucasD')

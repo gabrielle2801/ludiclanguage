@@ -1,4 +1,5 @@
 from django.shortcuts import reverse
+from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
 from django.views.generic import ListView, DetailView
@@ -44,6 +45,7 @@ class WorkshopUpdateView(LoginRequiredMixin, UpdateView):
     model = Workshop
     form_class = ReportForm
     template_name = 'form_report.html'
+    success_url = reverse_lazy('list_workshop')
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
@@ -54,9 +56,6 @@ class WorkshopUpdateView(LoginRequiredMixin, UpdateView):
         initial = super().get_initial()
         initial['patient'] = self.kwargs.get('patient_id')
         return initial
-
-    def get_success_url(self):
-        return reverse('list_workshop')
 
 
 class ReportListView(ListView):

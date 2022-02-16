@@ -7,7 +7,7 @@ from django.db import models
 
 class Pathology(models.Model):
     name = models.CharField(max_length=100, blank=True)
-    description = models.TextField(max_length=500, blank=True)
+    description = models.TextField(blank=True)
 
     def __str__(self):
         return self.name
@@ -26,7 +26,6 @@ class Exercise(models.Model):
 
 class LudicJourney(models.Model):
     journey_date = models.DateTimeField()
-    description = models.CharField(max_length=500)
     assessement = models.CharField(max_length=200)
     patient = models.ForeignKey(
         'profiles.Profile', on_delete=models.CASCADE, related_name='patient_ludicjourney', null=True)

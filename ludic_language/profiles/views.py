@@ -11,6 +11,7 @@ from ludic_language.profiles.models import STATES
 import datetime
 
 from ludic_language.profiles.models import User, Profile
+from ludic_language.exercises.models import Pathology
 from ludic_language.workshops.models import Workshop
 from ludic_language.profiles.forms import UserProfileForm
 
@@ -93,6 +94,11 @@ class PatientDetailView(DetailView):
     template_name = 'detail_patient.html'
     model = Profile
     context_object_name = 'patient'
+
+
+class PathologyDetailView(ListView):
+    model = Pathology
+    template_name = 'pathology.html'
 
 
 class PatientDeleteView(LoginRequiredMixin, DeleteView):

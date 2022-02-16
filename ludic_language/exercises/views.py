@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.views.generic import DetailView
+from ludic_language.exercises.models import Pathology
 
-# Create your views here.
+
+class PathologyDetailView(DetailView):
+    model = Pathology
+    template_name = 'pathology.html'
+    context_object_name = 'pathology_des'

@@ -21,7 +21,7 @@ class Profile(models.Model):
     birth_date = models.DateField(max_length=5, null=True, blank=True)
     state = models.PositiveSmallIntegerField(
         choices=STATES, default=STATES.PATIENT, null=True, blank=True)
-    bio = models.TextField(max_length=500, blank=True)
+    bio = models.TextField(blank=True)
     review = models.CharField(max_length=500, blank=True, null=True)
     profile_pic = models.ImageField(
         upload_to='pictures/', blank=True, null=True, default='par_defaut.png')
