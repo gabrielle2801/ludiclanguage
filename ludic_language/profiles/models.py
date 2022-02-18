@@ -12,8 +12,6 @@ STATES = Choices(
     ('ADMIN', 3, 'Admin'),
 )
 
-# User = get_user_model()
-
 
 class Profile(models.Model):
     user = models.OneToOneField(
