@@ -2,6 +2,46 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+body{
+    font-family: Helvetica;
+    -webkit-font-smoothing: antialiased;
+}
+.table-wrapper{
+    margin: 10px 70px 70px;
+    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+}
+.wk-table{
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: white;
+}
+.wk-table td, .wk-table th {
+  text-align: center;
+  padding: 8px;
+}
+.wk-table td{
+  border-bottom: 1px solid #f8f8f8;
+  font-size: 12px;
+}
+.wk-table thead th{
+  color:  #ffffff;
+  background: #17202a;
+}
+.wk-table thead th:nth-child(odd){
+  color: #ffffff;
+  background: #324960;
+}
+.wk-todo {
+    background: #abb2b9;
 }
 
 .calendar{

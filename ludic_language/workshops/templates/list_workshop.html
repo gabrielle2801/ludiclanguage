@@ -4,27 +4,44 @@
 <div class="content-container">
   <div class="container-fluid">
     <section class="jumbotron main-section-patient">
-        <div class="row">
-            {% if list_workshop %}
-            {% for workshop in list_workshop %}
-            <div class="col-lg-4 col-md-6 col-sm-12 calendar d-flex  justify-content-center">
-                <div class="calendar-body d-flex flex-column">
-                    <span class="month-name">{{workshop.date|date:"F"}}</span>
-                    <span class="day-name">{{workshop.date|date:"l"}}</span>
-                    <span class="day-number">{{workshop.date|date:"j"}}</span>
-                    <span class="year">{{workshop.date|date:"Y"}}</span>
-                    <span class="hours">{{workshop.date|date:"H:i"}}</span>
-                    <a class="web-link" href="{{workshop.shedule_online}}">lien vers la session </a>
-                    <img src="{{workshop.patient.profile_pic.url}}" class="card-img-top patient-img  rounded d-block align-m">
-                    <p class="card-title">{{workshop.patient.user.username}}</p>
-                    <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="{% url 'form_report' workshop.id%}"
-                                     data-toggle="tooltip" data-placement="bottom">
-                        <span>Créer un compte rendu </span>
-                        <i class="bi bi-journal-text"></i>
-                    </a>
-                </div>
+        <div class="table-responsive">
+        <table class="wk-table">
+                <thead>
+                    {% if list_workshop %}
+                    <tr>
+                        <th scope="col">Patient</th>
+                        <th scope="col"> Date de la session</th>
+                        <th scope="col">Horaire</th>
+                        <th scope="col">Compte Rendu</th>
+                   </tr>
+                </thead>
+                {% for workshop in list_workshop %}
+                <tbody>
+                    {% if workshop.report %}
+                    <tr>
+                      <td>{{workshop.patient.user.username}}</td>
+                      <td>{{workshop.date|date:"l j F Y"}}</td>
+                      <td>{{workshop.date|date:"H:i"}}</td>
+                      <td>Compte rendu réalisé</td>
+                    </tr>
+                    {% else %}
+                    <tr class="wk-todo">
+                      <td>{{workshop.patient.user.username}}</td>
+                      <td>{{workshop.date|date:"l j F Y"}}</td>
+                      <td>{{workshop.date|date:"H:i"}}</td>
+                        <td>A faire
+                            <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="{% url 'form_report' workshop.id%}"
+                                 data-toggle="tooltip" data-placement="bottom">
+                            <span>Créer un compte rendu </span>
+                            <i class="bi bi-journal-text"></i>
+                            </a>
+                        </td>
+                    </tr>
+                     {% endif %}
+                    </tbody>
+                    {% endfor %}
+            </table>
             </div>
-            {% endfor %}
             <div class="col-lg-4 col-md-6 col-sm-12  justify-content-center">
                 <a  class="d-flex justify-content-center align-items-center btn btn-patient" name="workshop"  type="button" href="{% url 'form_workshop' %}"
                                      data-toggle="tooltip" data-placement="bottom">
@@ -46,7 +63,7 @@
                             </div>
                         </div>
                             <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center text-center">
-                                 <a  class="d-flex justify-content-center  text-center align-items-center btn btn-workshop" name="workshop"  type="button" href="{% url 'form_workshop' %}"
+                                 <a  class="d-flex justify-content-center  text-center align-items-center btn " name="workshop"  type="button" href="{% url 'form_workshop' %}"
                                                  data-toggle="tooltip" data-placement="bottom">
                                 <span>Plannifier une session</span>
                                 <i class="bi bi-calendar-date-fill"> Session</i>

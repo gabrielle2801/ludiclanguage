@@ -222,6 +222,19 @@ h1,h2,h3,h4,h5,h6 {
 .img-homepage{
     width: 100%;
   }
+
+}
+
+.table td {
+display: block;
+text-align: right;
+}
+
+.table td:before {
+content: attr(data-label);
+float: left;
+font-weight: bold;
+}
 }
 @media only screen and (min-width:992px) {
   h1 {

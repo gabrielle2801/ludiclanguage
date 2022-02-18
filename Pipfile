@@ -4,7 +4,6 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
 django-extended-choices = "*"
 psycopg2-binary = "*"
 pillow = "*"
@@ -16,6 +15,7 @@ ipdb = "*"
 coverage = "*"
 freezegun = "*"
 faker = "*"
+django = "*"
 
 [dev-packages]
 

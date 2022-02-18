@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
 from django.views.generic import ListView, DetailView
+
 from django.views.generic.edit import UpdateView
 import datetime
 
@@ -36,8 +37,9 @@ class WorkshopListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        queryset = Workshop.objects.filter(therapist_id=self.request.user.profile)\
-            .exclude(date__lt=datetime.date.today())
+        queryset = Workshop.objects.filter(
+            therapist_id=self.request.user.profile)\
+            .order_by('-date')
         return queryset
 
 
@@ -65,7 +67,8 @@ class ReportListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        queryset = Workshop.objects.filter(patient_id=self.request.user.profile)\
+        queryset = Workshop.objects.filter(
+            patient_id=self.request.user.profile)\
             .filter(date__lte=datetime.date.today())
         return queryset
 

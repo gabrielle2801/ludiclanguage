@@ -3,22 +3,42 @@
 <div class="content-container">
     <div class="container-fluid">
         <section class="jumbotron main-section-patient">
-            <div class="row">
-            {% if report_list %}
-            {% for report in report_list %}
-                <div class="col-lg-4 col-md-6 col-sm-12 calendar d-flex  justify-content-center">
-                    <div class="calendar-body d-flex flex-column ">
-                        <span class="date">{{report.date}}</span>
-                        <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="{% url 'report_patient' report.id%}"
-                                     data-toggle="tooltip" data-placement="bottom">
-                        <span>Visualisez le compte rendu </span>
-                        <i class="bi bi-journal-text"></i>
-                    </a>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-            {% else %}
+           <div class="table-responsive">
+            <table class="wk-table">
+                <thead>
+                    {% if report_list %}
+                    <tr>
+                        <th scope="col">Date de la session</th>
+                        <th scope="col"> Horaire</th>
+                        <th scope="col"> Compte Rendu</th>
+                    </tr>
+                </thead>
+                 {% for report in report_list %}
+                 <tbody>
+                    {% if report.report %}
+                    <tr>
+                      <td>{{report.date|date:"l j F Y"}}</td>
+                      <td>{{report.date|date:"H:i"}}</td>
+                       <td>Compte rendu
+                            <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="{% url 'report_patient' report.id%}"
+                                 data-toggle="tooltip" data-placement="bottom">
+                            <span>Créer un compte rendu </span>
+                            <i class="bi bi-journal-text"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr class="wk-todo">
+                      <td>{{report.date|date:"l j F Y"}}</td>
+                      <td>{{report.date|date:"H:i"}}</td>
+                      <td>Compte Rendu en attente</td>
+                    </tr>
+                     {% endif %}
+                    {% endfor%}
+                </tbody>
+            </table>
+           </div>
+           {% else %}
              <div class="container h-100">
                     <div class="row justify-content-center h-100">
                         <div class="col-lg-4 col-md-6 col-sm-12 d-flex text-center">
