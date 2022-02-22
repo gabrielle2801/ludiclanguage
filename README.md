@@ -14,7 +14,7 @@ _______________________________
 
 _______________________________
 **How to install **
-Create an virtual environnement and packages
+**Create an virtual environnement and packages**
 
 ``` shell
 pip install pipenv

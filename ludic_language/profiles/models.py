@@ -12,8 +12,6 @@ STATES = Choices(
     ('ADMIN', 3, 'Admin'),
 )
 
-# User = get_user_model()
-
 
 class Profile(models.Model):
     user = models.OneToOneField(
@@ -29,6 +27,8 @@ class Profile(models.Model):
         'Profile', on_delete=models.CASCADE, null=True, blank=True)
     pathology = models.ForeignKey(
         'exercises.Pathology', on_delete=models.CASCADE, related_name='patient_pathology', null=True, blank=True)
+    therapist_pathology = models.ManyToManyField(
+        'exercises.Pathology', blank=True)
 
     def __str__(self):
         return self.user.username

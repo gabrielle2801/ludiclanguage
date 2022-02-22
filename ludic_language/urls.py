@@ -24,6 +24,7 @@ from ludic_language.profiles.views import LoginView, IndexSpeechView, IndexPatie
     PatientAddView, PatientDetailView, PatientDeleteView, PathologyDetailView
 from ludic_language.workshops.views import WorkshopAddView, WorkshopListView, WorkshopUpdateView,\
     ReportListView, ReportDetailView
+from ludic_language.exercises.views import ExerciseDetailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -46,5 +47,6 @@ urlpatterns = [
     path('report_list/', ReportListView.as_view(), name='report_list'),
     path('report/<int:pk>', ReportDetailView.as_view(), name='report_patient'),
     path('pathology/', PathologyDetailView.as_view(), name='pathology'),
+    path('exercises/<pathology>/', ExerciseDetailView.as_view(), name='exercise_list'),
     path('logout/', views.logout_request, name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
