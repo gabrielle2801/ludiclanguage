@@ -1,7 +1,7 @@
 
 .card {
-  display: flex;
-  flex-direction: column;
+  display: flex !important;
+  flex-direction: column !important;
   min-width: 0;
   word-wrap: break-word;
   background-color: #fff;
@@ -17,16 +17,16 @@
   word-wrap: break-word;
   background-color: #fff;
   background-clip: border-box;
-  border: 2px solid #dc3545;
+  border: 2px solid #abb2b9;
   border-radius: 0.25rem;
 }
-.patient {
-    background-color:#dc3545 !important ;
+.exercise {
+    background-color:#abb2b9 !important ;
     position: relative;
     bottom: 0;
 }
 
-.patient-card {
+.exercise-card {
     position: relative;
     width: 65%;
     margin-bottom: 3.5rem;
@@ -35,12 +35,23 @@
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
-.patient-card:hover {
+
+.exercise-card:hover {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
+
+
 .card-title{
-    text-align: center;
     font-family: "Helvetica Neue";
     color: #1f1e21;
-
+    margin: 0;
+    padding: 24px;
+    line-height: 1;
+    color: rgba(0, 0, 0, 0.87);
+}
+.exercice-img{
+    height: 150px;
+    width: 100%;
+    object-fit: contain;
+    margin-top: 1rem;
 }

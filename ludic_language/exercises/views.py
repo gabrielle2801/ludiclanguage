@@ -1,8 +1,9 @@
 from django.views.generic import DetailView
 from django.views.generic import ListView
-from django.views.generic.detail import SingleObjectMixin
-# from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.contrib.auth.mixins import LoginRequiredMixin
+from itertools import groupby
+from operator import itemgetter, attrgetter
+from collections import defaultdict
 from ludic_language.exercises.models import Pathology, Exercise
 
 
@@ -12,18 +13,50 @@ class PathologyDetailView(DetailView):
     context_object_name = 'pathology_des'
 
 
-class ExerciseDetailView(SingleObjectMixin, ListView):
+class ExerciseListView(LoginRequiredMixin, ListView):
     template_name = 'exercise_list.html'
-    context_object_name = 'exercise'
-
-    def get(self, request, *args, **kwargs):
-        self.object = self.get_object(queryset=Pathology.objects.all())
-        return super().get(request, *args, **kwargs)
+    context_object_name = 'exercise_list'
+    model = Exercise
 
     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['exercises_list'] = self.object
+        context = super().get_context_data()
+        exercises = context['exercise_list']
+        pathologies = defaultdict(list)
+        for exercise in exercises:
+            pathologies[exercise.pathology.name].append(exercise)
+        path = sorted(pathologies.items())
+        # sorted(pathologies.items())
+
+        context['pathologies'] = path
         return context
 
-    def get_queryset(self):
-        return self.exercise_set.all()
+
+'''
+ result = [{'type': k, 'items': [x[0] for x in v]} for k, v in groups]
+        print(result)
+        pathologies[exercise.pathology.name] = [exercise]
+
+def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        pathologies = {}
+        exercises = context['exercise_list']
+        for exercise in exercises:
+            pathologies[exercise] = [exercise.pathology.name]
+            pathology = groupby(
+                pathologies, lambda pathology: [exercise.pathology.name])
+        print(pathologies)
+        context['pathologies'] = pathologies
+        return context
+
+
+ for exercise in exercises:
+            pathologies[exercise.pathology.name].append(exercise)
+            [{'pathology_name': pathology, 'exercises': exercise}
+                for pathology, exercises in pathologies.items()]
+        context['pathologies'] = dict(pathologies)
+        print(pathologies)
+        return context
+
+    pathologies_list = [{'pathology_name': exercise.pathology.name, 'exercises': exercise}
+                                for exercise.pathology.name, exercises in pathologies.items()]
+'''
