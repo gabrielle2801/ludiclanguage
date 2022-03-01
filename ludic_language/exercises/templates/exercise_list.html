@@ -3,15 +3,15 @@
 <div class="content-container">
     <div class="container-fluid">
         <section class="jumbotron">
-            {% for key, path in pathologies %}
+            {% for pathology in pathology_list %}
              <div class="row">
                  <div class=" d-flex  justify-content-center">
-                    <h3>{{key}}</h3>
+                    <h3>{{pathology.name}}</h3>
                 </div>
                 <hr>
-                        {% for exercise in path %}
-                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                              <div class='card exercise-card d-flex flex-column'>
+                    {% for exercise in pathology.exercise_set.all %}
+                        <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
+                            <div class='card exercise-card d-flex flex-column'>
                                     {% if exercise.picture1 %}
                                     <img src="{{exercise.picture1.url}}" class="card-img-top exercise-img  rounded d-block align-m">
                                     {% endif %}
@@ -19,15 +19,15 @@
                                     <div class="card-footer d-flex exercise align-content-around mt-auto">
                                          <a  class="d-flex justify-content-center align-items-center btn btn-detail"   type="button" href=""
                                              data-toggle="tooltip" data-placement="bottom">
-                                    <span>Ajouter l'exercice au parcours ludique </span>
-                                    <i class="fas fa-puzzle-piece"></i>
-                                    </a>
-                                </div>
-                                </div>
+                                        <span>Ajouter l'exercice au parcours ludique </span>
+                                        <i class="fas fa-puzzle-piece"></i>
+                                        </a>
+                                    </div>
+                            </div>
                     </div>
                     {% endfor %}
             </div>
-             {% endfor %}
+            {% endfor %}
         </section>
     </div>
 </div>

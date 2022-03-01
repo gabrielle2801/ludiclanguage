@@ -1,9 +1,7 @@
 from django.views.generic import DetailView
 from django.views.generic import ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from itertools import groupby
-from operator import itemgetter, attrgetter
-from collections import defaultdict
+# from collections import defaultdict
 from ludic_language.exercises.models import Pathology, Exercise
 
 
@@ -15,20 +13,13 @@ class PathologyDetailView(DetailView):
 
 class ExerciseListView(LoginRequiredMixin, ListView):
     template_name = 'exercise_list.html'
-    context_object_name = 'exercise_list'
-    model = Exercise
+    context_object_name = 'pathology_list'
+    model = Pathology
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data()
-        exercises = context['exercise_list']
-        pathologies = defaultdict(list)
-        for exercise in exercises:
-            pathologies[exercise.pathology.name].append(exercise)
-        path = sorted(pathologies.items())
-        # sorted(pathologies.items())
-
-        context['pathologies'] = path
-        return context
+    def get_queryset(self):
+        qs = super().get_queryset()
+        qs.select_related('exercise')
+        return qs
 
 
 '''
