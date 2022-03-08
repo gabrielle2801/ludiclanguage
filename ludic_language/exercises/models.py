@@ -9,7 +9,7 @@ class Pathology(models.Model):
     name = models.CharField(max_length=100, blank=True)
     description = models.TextField(blank=True)
     therapist_pathology = models.ForeignKey(
-        'exercises.Pathology', on_delete=models.CASCADE, related_name='therapist_pathology', null=True, blank=True)
+        'exercises.Pathology', on_delete=models.CASCADE, related_name='therapist_path', null=True, blank=True)
 
     def __str__(self):
         return self.name

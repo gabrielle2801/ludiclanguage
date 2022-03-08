@@ -10,7 +10,7 @@ from django.views.generic.edit import DeleteView
 from ludic_language.profiles.models import STATES
 import datetime
 
-from ludic_language.profiles.models import User, Profile
+from ludic_language.profiles.models import User, Profile, Address
 from ludic_language.exercises.models import Pathology
 from ludic_language.workshops.models import Workshop
 from ludic_language.profiles.forms import UserProfileForm
@@ -60,6 +60,20 @@ class IndexPatientView(TemplateView):
         context['workshop_date'] = Workshop.objects.filter(patient_id=self.request.user.profile)\
             .filter(date=datetime.date.today())
         return context
+
+
+class TherapistListView(ListView):
+    template_name = 'therapist_list.html'
+    model = Address
+    context_object_name = 'therapist_list'
+
+    def get_queryset(self):
+        search = self.request.GET.get('search_therapist', '').strip()
+        queryset = super().get_queryset()
+        if search:
+            return queryset.filter(city__icontains=search)
+        else:
+            queryset
 
 
 class PatientListView(ListView):

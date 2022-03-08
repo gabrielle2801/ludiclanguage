@@ -13,6 +13,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{% static '../static/css/styles.css' %}" type="text/css" rel="stylesheet">
+
 </head>
 <body class="page-top">
 
@@ -44,9 +45,9 @@
               L'art de bien parler... </h1>
               <h1><strong>C'est l'art de bien pratiquer</strong></h1>
           <p class="slogan">Apprendre en s'amusant pour lutter contre les troubles du langage avec l'aide d'un orthophoniste !</p>
-            <form  method="GET" action="">
+            <form  method="GET" action="{% url 'therapist_list' %}">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Rechercher un orthophoniste" name="search_product" value='{{request.GET.search_product}}'>
+                    <input type="text" class="form-control" placeholder="Où ?" name="search_therapist" value='{{request.GET.search_therapist}}'>
                     <input type="submit"  class="btn btn-primary" value="Rechercher">
                 </div>
             </form>
