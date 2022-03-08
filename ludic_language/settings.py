@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'ludic_language.exercises.apps.ExercisesConfig',
     'ludic_language.profiles.apps.ProfilesConfig',
     'ludic_language.workshops.apps.WorkshopsConfig',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

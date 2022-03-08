@@ -52,16 +52,14 @@ class IndexSpeechView(TemplateView):
     template_name = "index_speech.html"
 
 
-class IndexPatientView(ListView):
+class IndexPatientView(TemplateView):
     template_name = "index_patient.html"
-    model = Workshop
-    context_object_name = 'workshop_date'
 
-    def get_queryset(self):
-        queryset = super().get_queryset()
-        queryset = Workshop.objects.filter(patient_id=self.request.user.profile)\
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['workshop_date'] = Workshop.objects.filter(patient_id=self.request.user.profile)\
             .filter(date=datetime.date.today())
-        return queryset
+        return context
 
 
 class PatientListView(ListView):

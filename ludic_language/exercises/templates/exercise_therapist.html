@@ -1,0 +1,57 @@
+{% extends 'index_speech.html' %}
+{% block content%}
+<div class="content-container">
+    <div class="container-fluid">
+        <section class="jumbotron">
+             <div class="table-responsive">
+                    <table class="wk-table">
+                        <thead>
+
+                            <tr>
+                                <th scope="col">Patient</th>
+                                <th scope="col"> Exercice</th>
+                                <th scope="col">Pathologie</th>
+                                <th scope="col">Progression</th>
+                           </tr>
+                        </thead>
+                        {% for journey in exercise_therapist %}
+                        <tbody>
+                            {% if journey.assessement %}
+                            <tr>
+                              <td>{{journey.patient.user.username}}</td>
+                              <td>{{journey.exercise.title_game}}</td>
+                              <td>{{journey.exercise.pathology.name}}</td>
+                              <td>Compte rendu progression réalisé</td>
+                            </tr>
+                            {% else %}
+                            <tr class="wk-todo">
+                              <td>{{journey.exercise.patient.user.username}}</td>
+                              <td>{{journey.exercise.title_game}}</td>
+                              <td>{{journey.exercise.pathology.name}}</td>
+                                <td>A faire
+                                    <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="{% url 'form_assessement' journey.exercise.id%}"
+                                         data-toggle="tooltip" data-placement="bottom">
+                                    <span>Créer un compte rendu de progression</span>
+                                    <i class="bi bi-journal-text"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                             {% endif %}
+                            </tbody>
+                            {% endfor %}
+
+                    </table>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12  justify-content-center">
+                <a  class="d-flex justify-content-center align-items-center btn btn-patient" name="parcours"  type="button" href="{% url 'exercise_list' %}"
+                                     data-toggle="tooltip" data-placement="bottom">
+                <span>Plannifier un parcours ludique</span>
+                <i class="fas fa-puzzle-piece"> Parcours ludique</i>
+                </a>
+
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock content %}
+
