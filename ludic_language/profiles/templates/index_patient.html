@@ -16,6 +16,7 @@
     <link href="{% static 'profiles/css/styles.css' %}" type="text/css" rel="stylesheet">
     <link href="{% static '../static/css/styles.css' %}" type="text/css" rel="stylesheet">
     <link href="{% static 'workshops/css/styles.css' %}" type="text/css" rel="stylesheet">
+    <link href="{% static 'exercises/css/styles.css' %}" type="text/css" rel="stylesheet">
 
 </head>
 <body class="page-top">
@@ -23,7 +24,7 @@
 <!-- Navigation-->
 {% block nav %}
  <nav class="header">
-      <a class="logo" href="{% url 'index' %}">Ludic<strong>Language</strong> </a>
+      <a class="logo" href="{% url 'index' %}">Ludic<strong>Language</strong></a>
       <img src="../static/assets/img/logo.png" width="80" height="70">
     </nav>
     <div class="sidebar-container">
@@ -80,13 +81,13 @@
                         <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
                             <a  class="d-flex justify-content-center align-items-center btn " name="workshop"  type="button" href="{% url 'report_list' %}"
                                                  data-toggle="tooltip" data-placement="bottom">
-                            <span>Afficher les prochaines compte rendu</span>
+                            <span>Visualiser les comptes rendus</span>
                             <i class="bi bi-journal-text"> Compte Rendu</i>
                             </a>
                         </div>
 
                         <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                            <a  class="d-flex justify-content-center align-items-center btn " name="workshop"  type="button" href="{% url 'pathology' %}"
+                            <a  class="d-flex justify-content-center align-items-center btn " name="pathology"  type="button" href="{% url 'pathology' user.profile.pathology.id  %}"
                                                  data-toggle="tooltip" data-placement="bottom">
                             <span>En savoir plus sur la pahologie</span>
                             <i class="bi bi-file-medical"> {{ user.profile.pathology }}</i>
@@ -94,10 +95,10 @@
 
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                            <a  class="d-flex justify-content-center align-items-center btn" name="ludic_journey"  type="button" href="#"
+                            <a  class="d-flex justify-content-center align-items-center btn" name="ludic_journey"  type="button" href="{% url 'ludic_journey' %}"
                                                  data-toggle="tooltip" data-placement="bottom">
-                            <span>Créer un parcours ludique</span>
-                            <i class="fas fa-puzzle-piece"> Parcours linguistique</i>
+                            <span>Visualiser votre parcours ludique</span>
+                            <i class="fas fa-puzzle-piece"> Parcours ludique</i>
                             </a>
                         </div>
 

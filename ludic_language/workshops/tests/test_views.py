@@ -6,7 +6,6 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from ludic_language.workshops.models import Workshop
 from ludic_language.workshops.views import ReportListView, WorkshopListView
-# from ludic_language.workshops.forms import WorkshopForm
 
 
 class WorkshopAddViewTest(TestCase):

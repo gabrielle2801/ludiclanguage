@@ -19,6 +19,7 @@ class UserProfileForm(UserCreationForm):
     email = forms.EmailField(required=True)
     birth_date = forms.DateField()
     bio = forms.CharField(widget=forms.Textarea)
+    review = forms.CharField(widget=forms.Textarea)
     profile_pic = forms.ImageField(required=False)
     pathology = forms.ModelChoiceField(queryset=Pathology.objects.all())
     num = forms.IntegerField()
@@ -43,6 +44,7 @@ class UserProfileForm(UserCreationForm):
         user.profile.birth_date = self.cleaned_data['birth_date']
         user.profile.therapist = self.therapist
         user.profile.bio = self.cleaned_data['bio']
+        user.profile.review = self.cleaned_data['review']
         user.profile.profile_pic = self.cleaned_data['profile_pic']
         user.profile.pathology = self.cleaned_data['pathology']
         user.profile.save()

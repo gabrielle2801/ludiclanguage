@@ -1,14 +1,14 @@
 {% extends 'index_speech.html' %}
-
 {% block content%}
-
-  <section class="main-form">
-        <form method="POST" enctype="multipart/form-data">
-          {% csrf_token %}
-          {{ form.as_p }}
-          <button class="submit">CREER UN PATIENT</button>
-        </form>
-  </section>
-
-
-    {% endblock content %}
+<div class="content-container">
+  <div class="content-container">
+            <section class="jumbotron">
+                  <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="submit">CREER UN PATIENT</button>
+                  </form>
+            </section>
+      </div>
+  </div>
+{% endblock content %}

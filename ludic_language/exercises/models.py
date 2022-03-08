@@ -30,8 +30,8 @@ class Exercise(models.Model):
 
 
 class LudicJourney(models.Model):
-    journey_date = models.DateTimeField()
-    assessement = models.CharField(max_length=200)
+    journey_date = models.DateTimeField(null=True, blank=True)
+    assessement = models.CharField(max_length=200, null=True, blank=True)
     patient = models.ForeignKey(
         'profiles.Profile', on_delete=models.CASCADE, related_name='patient_ludicjourney', null=True)
     exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE)

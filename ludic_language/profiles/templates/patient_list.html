@@ -21,6 +21,7 @@
                                     <span>planifier une session</span>
                                     <i class="bi bi-calendar-date-fill"></i>
                                     </a>
+
                                     <div class="d-flex me-auto">
                                         <form method="post", action="{% url 'delete_patient' patient.user.id %}">
                                              {% csrf_token %}
@@ -45,24 +46,24 @@
                         </div>
                     </div>
 
-                {% else %}
-                <div class="container h-100">
-                    <div class="row justify-content-center h-100">
-                        <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                            <h2 class="text-center no-patient">Vous n'avez pas encore de patient !</h2>
-                            <i class="bi bi-people"></i>
-                        </div>
+                    {% else %}
+                    <div class="container h-100">
+                        <div class="row justify-content-center h-100">
+                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
+                                <h2 class="text-center no-patient">Vous n'avez pas encore de patient !</h2>
+                                <i class="bi bi-people"></i>
+                            </div>
 
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
+                            <a  class="d-flex justify-content-center align-items-center btn btn-patient" name="patient"  type="button" href="{% url 'form_patient' %}"
+                                                 data-toggle="tooltip" data-placement="bottom">
+                            <span>Formumaire de création de profil patient</span>
+                            <i class="bi bi-people"> Créer un profil patient</i>
+                            </a>
+                        </div>
                     </div>
-                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                    <a  class="d-flex justify-content-center align-items-center btn btn-patient" name="patient"  type="button" href="{% url 'form_patient' %}"
-                                         data-toggle="tooltip" data-placement="bottom">
-                    <span>Formumaire de création de profil patient</span>
-                    <i class="bi bi-people"> Créer un profil patient</i>
-                    </a>
-                    </div>
-                </div>
-                {% endif %}
+                    {% endif %}
                 </section>
         </div>
 </div>

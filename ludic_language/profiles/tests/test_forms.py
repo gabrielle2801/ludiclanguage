@@ -22,6 +22,7 @@ class UserProfileFormTest(TestCase):
             'password2': '12test12',
             'birth_date': '2013-05-12',
             'bio': 'Lucas est atteint de ......',
+            'review': 'Bilan du patient .....',
             'profile_pic': 'lucasdesmarais.png',
             'pathology': self.pathology_id,
             'num': 10,
@@ -29,6 +30,7 @@ class UserProfileFormTest(TestCase):
             'zip_code': 75015,
             'city': 'Paris',
         }, therapist=self.therapist)
+        print(form.errors)
         self.assertTrue(form.is_valid())
 
     def test_userprofile_missing_first_name(self):

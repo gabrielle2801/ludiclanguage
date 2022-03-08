@@ -1,0 +1,92 @@
+{% extends 'exercise_list.html' %}
+{% block nav %}
+ <nav class="header">
+      <a class="logo" href="{% url 'index' %}">Ludic<strong>Language</strong></a>
+      <img src="../static/assets/img/logo.png" width="80" height="70">
+    </nav>
+    <div class="sidebar-container">
+        <ul class="sidebar-navigation">
+            <li class="header">Profile Patient</li>
+            {% if user.is_authenticated %}
+                <p>Bienvenue  {{ user.profile }} !</p>
+                <img src={{user.profile.profile_pic.url}} class="img-raised rounded-circle avatar">
+                    <li class="nav-link link link-theme link-arrow">
+                      <a href="{% url 'index_patient' %}">
+                        <i class="fa fa-home" aria-hidden="true"></i> Homepage
+                      </a>
+                    </li>
+            <li class="nav-link link link-theme link-arrow">
+              <a href="#">
+                <i class="fa fa-tachometer" aria-hidden="true"></i> About
+              </a>
+            </li>
+            <li class="nav-link link link-theme link-arrow">
+              <a href="{% url 'logout' %}">
+                <i class="fa fa-tachometer" aria-hidden="true"></i> LOG OUT
+              </a>
+            </li>
+                {% if workshop_date %}
+                        {% for workshop in workshop_date %}
+                        <li class="nav-link link link-theme link-arrow">
+                              <a href="{% url 'list_workshop' %}">
+                                <i class="bi bi-calendar-date"></i> Prochaine session : {{workshop.date}}
+                              </a>
+                        </li>
+                        {% endfor %}
+                        {% else %}
+                        <li class="nav-link link link-theme link-arrow">
+                              <a href="{% url 'list_workshop' %}">
+                                <i class="bi bi-calendar-date"></i> Pas de Session aujourd'hui !
+                              </a>
+                        </li>
+                        {% endif %}
+                {% endif %}
+        </ul>
+    </div>
+{% endblock nav %}
+{% block content%}
+<div class="content-container">
+    <div class="container-fluid">
+        <section class="jumbotron">
+             <div class="row">
+                {% if ludicjourney_list %}
+                {% for journey in ludicjourney_list %}
+                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
+                        <div class="card exercise-card d-flex flex-column">
+                            {% if journey.exercise.picture1 %}
+                                <img src="{{journey.exercise.picture1.url}}" class="card-img-top exercise-img  rounded d-block align-m">
+                            {% endif %}
+                            <p class="card-title">{{journey.exercise.title_game}}</p>
+                            <div class="card-footer d-flex exercise align-content-around mt-auto">
+                                <a  class="d-flex justify-content-center align-items-center btn btn-detail"   type="button" href="{% url 'play_on' journey.exercise.id %}"
+                                             data-toggle="tooltip" data-placement="bottom">
+                                        <span>A toi de jouer ! </span>
+                                        <i class="fas fa-puzzle-piece"></i>
+                                </a>
+                                <a  class="d-flex justify-content-center align-items-center btn btn-detail"   type="button" href="{% url 'assessement' journey.id %}"
+                                             data-toggle="tooltip" data-placement="bottom">
+                                        <span>Progression </span>
+                                        <i class="bi bi-check-lg"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+            {% endfor %}
+            </div>
+            {% else %}
+                    <div class="container h-100">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
+                                <h2 class="text-center no-patient">Vous n'avez pas encore d'exercise dans votre parcours ludique</h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex justify-content-center">
+                                 <i class="fas fa-puzzle-piece"></i>
+                            </div>
+                        </div>
+            {% endif %}
+        </section>
+    </div>
+</div>
+{% endblock content %}
