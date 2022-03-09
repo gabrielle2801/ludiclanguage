@@ -58,7 +58,7 @@ class LudicJouneyListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        queryset = LudicJourney.objects.filter(
+        queryset = queryset.filter(
             patient_id=self.request.user.profile.user_id)
         return queryset
 
@@ -70,18 +70,14 @@ class LudicJouneyListTherapistView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-        queryset = LudicJourney.objects.select_related('exercise')
+        queryset = queryset.select_related('exercise')
         return queryset
 
 
 class LudicJourneyDetailView(LoginRequiredMixin, DetailView):
     template_name = 'play_on.html'
-    model: Exercise
+    model = Exercise
     context_object_name = 'exercise_detail'
-
-    def get_queryset(self, *args, **kwargs):
-        queryset = Exercise.objects.filter(pk=self.kwargs.get('pk'))
-        return queryset
 
 
 class LudicJourneyUpdateView(LoginRequiredMixin, UpdateView):

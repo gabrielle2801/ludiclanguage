@@ -1,0 +1,25 @@
+{% extends 'therapist_list.html' %}
+
+{% block content%}
+<section class="main-section-detail">
+    <div class="col-lg-4 col-md-6 col-sm-12 d-flex col-card justify-content-center">
+         <div class="row patient-detail justify-content-center text-muted">
+             <div class="col-lg-4 col-md-6 col-sm-12 ">
+                        <img src="{{therapist.user.profile.profile_pic.url}}" class="patient-detail-img img-fluid d-block align-middle">
+            </div>
+            <div class="col-lg-7 col-sm-12 product-detail-data">
+                <div class="row">
+                <h2 class="d-inline-flex align-middle font-weight-bold header-title text-capitalize">{{ therapist.user.username }}</h2>
+                <p>Prénom : {{ therapist.user.first_name }}</p>
+                <p>Nom : {{ therapist.user.last_name }}</p>
+                <a href="mailto:{{ patient.user.email }}">Email : {{ therapist.user.email }}</a>
+                <p>Biographie : {{ therapist.user.profile.bio }}</p>
+                <p>Adresse : {{therapist.address.num}}, {{therapist.address.street}} {{therapist.address.zip_code}} {{therapist.address.city}} </p>
+                <p> </p>
+                <p> </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock content %}

@@ -21,7 +21,7 @@
     <!-- Navigation-->
     {% block nav %}
         <nav class="header">
-          <a class="logo" href="#">Ludic<strong>Language</strong> </a>
+          <a class="logo" href="{% url 'index' %}">Ludic<strong>Language</strong> </a>
           <img src="../static/assets/img/logo.png" width="80" height="70">
           <input class="menu-btn" type="checkbox" id="menu-btn" />
           <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
@@ -47,9 +47,9 @@
                                 <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
                                     <div class="card patient-card d-flex flex-column">
                                         <img src="{{therapist.profile_pic.url}}" class="card-img-top patient-img  rounded d-block align-m">
-                                        <p class="card-title">{{therapist.user.username}}</p>
+                                        <p class="card-title">{{therapist.user}}</p>
                                         <div class="card-footer d-flex patient align-content-around mt-auto">
-                                             <a  class="d-flex justify-content-center align-items-center btn btn-detail"   type="button" href=""
+                                             <a  class="d-flex justify-content-center align-items-center btn btn-detail"   type="button" href="{% url 'detail_therapist' therapist.user.id %}"
                                                      data-toggle="tooltip" data-placement="bottom">
                                             <span>Afficher les détails</span>
                                             <i class="bi bi-info-circle"></i>

@@ -21,7 +21,7 @@ from django.urls import path
 from ludic_language.profiles import views
 from ludic_language.base.views import BaseView
 from ludic_language.profiles.views import LoginView, IndexSpeechView, IndexPatientView, PatientListView, \
-    PatientAddView, PatientDetailView, PatientDeleteView, TherapistListView
+    PatientAddView, PatientDetailView, PatientDeleteView, TherapistListView, TherapistDetailView
 from ludic_language.workshops.views import WorkshopAddView, WorkshopListView, WorkshopUpdateView,\
     ReportListView, ReportDetailView
 from ludic_language.exercises.views import ExerciseListView, PathologyDetailView, LudicJourneyAddView, LudicJouneyListView, \
@@ -36,6 +36,8 @@ urlpatterns = [
     path('therapist_list/', TherapistListView.as_view(), name='therapist_list'),
     path('patient_list/', PatientListView.as_view(), name='patient_list'),
     path('form_patient/', PatientAddView.as_view(), name='form_patient'),
+    path('detail_therapist/<int:pk>',
+         TherapistDetailView.as_view(), name='detail_therapist'),
     path('detail_patient/<int:pk>',
          PatientDetailView.as_view(), name='detail_patient'),
     path('delete_patient/<int:pk>',

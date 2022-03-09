@@ -9,8 +9,8 @@ from django.views.generic import CreateView, DetailView, TemplateView
 from django.views.generic.edit import DeleteView
 from ludic_language.profiles.models import STATES
 import datetime
-
-from ludic_language.profiles.models import User, Profile, Address
+from django.db.models import Q
+from ludic_language.profiles.models import User, Profile
 from ludic_language.exercises.models import Pathology
 from ludic_language.workshops.models import Workshop
 from ludic_language.profiles.forms import UserProfileForm
@@ -64,14 +64,14 @@ class IndexPatientView(TemplateView):
 
 class TherapistListView(ListView):
     template_name = 'therapist_list.html'
-    model = Address
+    model = Profile
     context_object_name = 'therapist_list'
 
     def get_queryset(self):
         search = self.request.GET.get('search_therapist', '').strip()
         queryset = super().get_queryset()
         if search:
-            return queryset.filter(city__icontains=search)
+            return queryset.filter(Q(address__city__icontains=search) | Q(address__zip_code__icontains=search))
         else:
             queryset
 
@@ -100,6 +100,12 @@ class PatientAddView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse('index_speech')
+
+
+class TherapistDetailView(DetailView):
+    template_name = 'detail_therapist.html'
+    model = Profile
+    context_object_name = 'therapist'
 
 
 class PatientDetailView(DetailView):
