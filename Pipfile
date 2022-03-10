@@ -17,6 +17,9 @@ freezegun = "*"
 faker = "*"
 django = "*"
 django-extensions = "*"
+ipython = "*"
+tchappui-webdrivers = "*"
+selenium = "*"
 
 [dev-packages]
 

@@ -5,7 +5,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from ludic_language.profiles.models import Profile
 from ludic_language.exercises.models import Pathology, Exercise, LudicJourney
-from ludic_language.exercises.views import ExerciseListView, LudicJouneyListView, LudicJourneyDetailView
+from ludic_language.exercises.views import ExerciseListView, LudicJouneyListView
 # from ludic_language.exercises.views import PathologyDetailView
 
 
