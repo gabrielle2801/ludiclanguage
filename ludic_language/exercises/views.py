@@ -93,7 +93,7 @@ class LudicJourneyUpdateView(LoginRequiredMixin, UpdateView):
 
     def get_initial(self):
         initial = super().get_initial()
-        initial['exercise'] = self.kwargs.get('exercise_id')
+        initial['exercise'] = self.kwargs.get('ludicjourney_id')
         return initial
 
     def get_success_url(self):

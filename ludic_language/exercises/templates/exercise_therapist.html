@@ -25,11 +25,11 @@
                             </tr>
                             {% else %}
                             <tr class="wk-todo">
-                              <td>{{journey.exercise.patient.user.username}}</td>
+                              <td>{{journey.patient.user.username}}</td>
                               <td>{{journey.exercise.title_game}}</td>
                               <td>{{journey.exercise.pathology.name}}</td>
                                 <td>A faire
-                                    <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="{% url 'form_assessement' journey.exercise.id%}"
+                                    <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="{% url 'form_assessement' journey.id%}"
                                          data-toggle="tooltip" data-placement="bottom">
                                     <span>Créer un compte rendu de progression</span>
                                     <i class="bi bi-journal-text"></i>

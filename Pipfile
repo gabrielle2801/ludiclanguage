@@ -20,6 +20,7 @@ django-extensions = "*"
 ipython = "*"
 tchappui-webdrivers = "*"
 selenium = "*"
+geckodriver-autoinstaller = "*"
 
 [dev-packages]
 
