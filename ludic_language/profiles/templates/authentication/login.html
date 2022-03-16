@@ -29,18 +29,11 @@
     {% endblock nav %}
 <!-- Masthead-->
     {% block header %}
-    <header class="simple-header d-flex align-items-center">
-    <div class="container px-4 px-lg-5">
-        <div class="row gx-4 gx-lg-5  justify-content-center align-items-between text-center">
-            <div class="col">
-                <h1 class="fs-1 text-center">Connectez-vous à votre profil !</h1>
-            </div>
-        </div>
-    </div>
-    </header>
+
     {% endblock header %}
     <!-- About-->
     {% block content%}
+    <div id="main" class="main">
     <main class="container main-registration">
       <section class="intro-section">
         <div class="main-instructions">
@@ -55,11 +48,12 @@
             </form>
              <div class="further-instructions">
           <p class="text-body">Vous n'avez pas de compte ?</p>
-          <a class="text-body fw-bold text-decoration-underline" href="#">Contactez-nous !</a>
+          <a class="text-body fw-bold text-decoration-underline" href="mailto:gabrielleazadian@gmail.com">Contactez-nous !</a>
         </div>
             </div>
       </section>
     </main>
+    </div>
 
     {% endblock content %}
     <!-- Footer-->

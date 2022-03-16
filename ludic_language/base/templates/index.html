@@ -21,13 +21,13 @@
     {% block nav %}
         <nav class="header">
           <a class="logo" href="#">Ludic<strong>Language</strong> </a>
-          <img src="../static/assets/img/logo.png" width="80" height="70">
+          <img class="logo" src="../static/assets/img/logo.png" width="80" height="70">
           <input class="menu-btn" type="checkbox" id="menu-btn" />
           <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
           <ul class="menu">
-            <li><a href="#" class="link link-theme link-arrow">HOME</a></li>
-            <li><a href="#" class="link link-theme link-arrow">ABOUT US</a></li>
-            <li><a href="#" class="link link-theme link-arrow">CONTACT</a></li>
+            <li><a href="{% url 'about_us' %}" class="link link-theme link-arrow">ABOUT US</a></li>
+            <li><a href="{% url 'legal_notice' %}" class="link link-theme link-arrow">MENTIONS LEGALES</a></li>
+            <li><a href="mailto:gabrielleazadian@gmail.com" class="link link-theme link-arrow">CONTACT</a></li>
             <li><a href="{% url 'login' %}" class="link link-theme link-arrow" >SIGN IN</a></li>
             <li><a href="{% url 'login' %}" class="link link-theme link-arrow">Vous êtes professionnel de santé</a></li>
           </ul>
@@ -54,7 +54,7 @@
         </article>
       </section>
     </div>
-    </div>
+
 
     {% endblock header %}
     <!-- About-->

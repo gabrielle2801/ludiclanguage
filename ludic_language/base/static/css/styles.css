@@ -21,6 +21,7 @@ a {
   text-decoration: none;
 }
 
+
 .slogan{
   margin: 0 0 45px 0;
   text-align: justify;
@@ -70,6 +71,19 @@ h1,h2,h3,h4,h5,h6 {
     position: absolute;
     text-align: right;
     top: 150px;
+
+}
+.img-exercise {
+  position: relative;
+}
+.bi-arrow-right {
+  font-size: 2rem !important;
+  color: #f3c155;
+  height: 50px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: baseline;
+  padding: 1rem;
 }
 .input-group {
   position: relative;
@@ -219,10 +233,12 @@ h1,h2,h3,h4,h5,h6 {
   h2 {
     font-size: 28px;
   }
-.img-homepage{
+  .img-homepage{
+      width: 100%;
+  }
+  .img-exercise {
     width: 100%;
   }
-
 }
 
 .table td {
@@ -235,6 +251,23 @@ content: attr(data-label);
 float: left;
 font-weight: bold;
 }
+#mainNav {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+  transition: background-color 0.2s ease;
+}
+.py-3 {
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+.navbar {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 @media only screen and (min-width:992px) {
   h1 {
@@ -246,6 +279,13 @@ font-weight: bold;
   .img-homepage{
     width: 100%;
   }
+  .img-exercise {
+    width: 100%;
+  }
+  #mainNav.navbar-shrink {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+}
 }
 
 @media only screen and (min-width:1200px) {
@@ -258,6 +298,17 @@ font-weight: bold;
 .img-homepage{
     width: 100%;
   }
+  .img-exercise {
+    width: 100%;
+  }
+  #mainNav.navbar-shrink {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  background-color: #fff;
+}
+.navbar-expand-lg {
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+}
 }
 
 /* header   box-shadow: 1px 1px 4px 0 rgba(0,0,0,.1); */
@@ -407,6 +458,33 @@ font-weight: bold;
 
 .section-split a:hover span {
   display: block;
+}
+p.mention{
+  text-align: justify;
+  font-weight: 200;
+  margin: 0px 0 5px 0;
+  text-align: justify;
+  position: relative;
+  font-family: "helvetica neue";
+}
+h4.mention-titre{
+  color: #f3c155;
+  font-weight: 500;
+  margin: 0px 0 5px 0;
+  text-align: justify;
+  position: relative;
+  font-family: "helvetica neue";
+}
+h6.mention-titre{
+  color: #f3c155;
+  font-weight: 300;
+  margin: 0px 0 5px 0;
+  text-align: justify;
+  position: relative;
+  font-family: "helvetica neue";
+}
+a.photo {
+  color:#f3c155 ;
 }
 
 /* 48em = 768px */
