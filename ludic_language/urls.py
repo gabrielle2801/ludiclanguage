@@ -19,7 +19,7 @@ from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView
 from django.urls import path
 from ludic_language.profiles import views
-from ludic_language.base.views import BaseView
+from ludic_language.base.views import BaseView, LegalNoticeView, AboutUsView
 from ludic_language.profiles.views import LoginView, IndexSpeechView, IndexPatientView, PatientListView, \
     PatientAddView, PatientDetailView, PatientDeleteView, TherapistListView, TherapistDetailView
 from ludic_language.workshops.views import WorkshopAddView, WorkshopListView, WorkshopUpdateView,\
@@ -30,6 +30,8 @@ from ludic_language.exercises.views import ExerciseListView, PathologyDetailView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', BaseView.as_view(), name='index'),
+    path('legal_notice', LegalNoticeView.as_view(), name='legal_notice'),
+    path('about_us', AboutUsView.as_view(), name='about_us'),
     path('login/', LoginView.as_view(), name='login'),
     path('speech_homepage/', IndexSpeechView.as_view(), name='index_speech'),
     path('patient_homepage/', IndexPatientView.as_view(), name='index_patient'),
