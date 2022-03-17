@@ -21,6 +21,7 @@ ipython = "*"
 tchappui-webdrivers = "*"
 selenium = "*"
 geckodriver-autoinstaller = "*"
+python-dotenv = "*"
 
 [dev-packages]
 
