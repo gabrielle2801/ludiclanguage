@@ -138,3 +138,7 @@ class PatientDeleteView(LoginRequiredMixin, DeleteView):
 
     def page_not_found_view(request):
         return render(request, 'profiles/404.html')
+
+
+def handle_server_error(request):
+    return render(request, '500.html')

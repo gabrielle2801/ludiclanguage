@@ -22,6 +22,9 @@ tchappui-webdrivers = "*"
 selenium = "*"
 geckodriver-autoinstaller = "*"
 python-dotenv = "*"
+sentry-sdk = "*"
+django-heroku = "*"
+gunicorn = "*"
 
 [dev-packages]
 
