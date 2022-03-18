@@ -34,6 +34,8 @@ DATABASES = {
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+WHITENOISE_USE_FINDERS = True
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 # Activate Django-Heroku.
 django_heroku.settings(locals())
