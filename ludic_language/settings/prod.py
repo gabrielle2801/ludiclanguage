@@ -32,7 +32,8 @@ DATABASES = {
     }
 }
 
-
+FORCE_SCRIPT_NAME = "/ludic_language"
+STATIC_URL = FORCE_SCRIPT_NAME + "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 WHITENOISE_USE_FINDERS = True
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
