@@ -1,6 +1,7 @@
 import django_heroku
 from .base import *
 import os
+import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
 SECRET_KEY = os.getenv("SECRET_KEY")
