@@ -5,19 +5,6 @@ import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
 
 SECRET_KEY = os.getenv("SECRET_KEY")
-DEBUG = False
-ALLOWED_HOSTS = ['.herokuapp.com']
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("DB_NAME"),
-        'USER': os.getenv("DB_USER"),
-        'PASSWORD': os.getenv("DB_PASSWORD"),
-        'HOST': os.getenv("DB_HOST"),
-        'PORT': '5432'
-    }
-}
-
 sentry_sdk.init(
     dsn="https://879029efb2504d0591680414d287ccab@o1171139.ingest.sentry.io/6265263",
     integrations=[DjangoIntegration()],
@@ -32,6 +19,21 @@ sentry_sdk.init(
     send_default_pii=True
 )
 
+DEBUG = False
+ALLOWED_HOSTS = ['.herokuapp.com']
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv("DB_NAME"),
+        'USER': os.getenv("DB_USER"),
+        'PASSWORD': os.getenv("DB_PASSWORD"),
+        'HOST': os.getenv("DB_HOST"),
+        'PORT': '5432'
+    }
+}
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Activate Django-Heroku.
