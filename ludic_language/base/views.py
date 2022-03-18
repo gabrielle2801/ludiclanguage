@@ -11,3 +11,7 @@ class LegalNoticeView(TemplateView):
 
 class AboutUsView(TemplateView):
     template_name = "about_us.html"
+
+
+def handle_server_error(request):
+    return render(request, '500.html')

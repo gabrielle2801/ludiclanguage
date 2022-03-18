@@ -70,3 +70,4 @@ urlpatterns = [
     path('logout/', views.logout_request, name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 handler500 = "ludic_language.profiles.views.handle_server_error"
+handler500 = "ludic_language.base.views.handle_server_error"
