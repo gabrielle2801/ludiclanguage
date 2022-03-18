@@ -25,6 +25,7 @@ python-dotenv = "*"
 sentry-sdk = "*"
 django-heroku = "*"
 gunicorn = "*"
+whitenoise = "*"
 
 [dev-packages]
 

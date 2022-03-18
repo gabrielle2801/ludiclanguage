@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "7ee98230adaf762c3a6af62e600220b24f658eccd73bfd2ff2ec650333b9686f"
+            "sha256": "cfb70983018060ffa2e05838740e543766733614138f383ea94fd951f1138235"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -217,7 +217,7 @@
                 "sha256:637996211036b6385ef91435e4fae22989472f9d571faba8927ba8253acbc330",
                 "sha256:b8c3f85900b9dc423225913c5aace94729fe1fa9763b38939a95226f02d37186"
             ],
-            "markers": "python_version >= '3.5'",
+            "markers": "python_version >= '3.7'",
             "version": "==5.1.1"
         },
         "dj-database-url": {
@@ -299,11 +299,11 @@
         },
         "freezegun": {
             "hashes": [
-                "sha256:93e90676da387a241a7c2ae7ae68af7b95bfe80e952d0bbf3e088342de90a38d",
-                "sha256:e19563d0b05dcab6dc8ad21c05269004a96998ce2b6b1b8131f1297ae20dd038"
+                "sha256:15103a67dfa868ad809a8f508146e396be2995172d25f927e48ce51c0bf5cb09",
+                "sha256:b4c64efb275e6bc68dc6e771b17ffe0ff0f90b81a2a5189043550b6519926ba4"
             ],
             "index": "pypi",
-            "version": "==1.2.0"
+            "version": "==1.2.1"
         },
         "geckodriver-autoinstaller": {
             "hashes": [
@@ -697,10 +697,7 @@
             "version": "==0.9.2"
         },
         "urllib3": {
-            "extras": [
-                "secure",
-                "socks"
-            ],
+            "extras": [],
             "hashes": [
                 "sha256:44ece4d53fb1706f667c9bd1c648f5469a2ec925fcf3a776667042d645472c14",
                 "sha256:aabaf16477806a5e1dd19aa41f8c2b7950dd3c746362d7e3223dbe6de6ac448e"
@@ -720,7 +717,7 @@
                 "sha256:08c42bc535f9777eea1a599289d9433f081921f97887eaf6f559446b2a080374",
                 "sha256:5a4aff543ee860fbe40d743e556adf92ccd41b7df45697cae074afdf657056b9"
             ],
-            "markers": "python_version >= '3.7'",
+            "index": "pypi",
             "version": "==6.0.0"
         },
         "wsproto": {
