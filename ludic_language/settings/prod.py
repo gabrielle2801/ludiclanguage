@@ -20,7 +20,7 @@ sentry_sdk.init(
 )
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEBUG = False
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.herokuapp.com']
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
@@ -35,9 +35,9 @@ DATABASES = {
 FORCE_SCRIPT_NAME = "/ludic_language"
 STATIC_URL = FORCE_SCRIPT_NAME + "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-WHITENOISE_USE_FINDERS = True
-WHITENOISE_MANIFEST_STRICT = False
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# WHITENOISE_USE_FINDERS = True
+# WHITENOISE_MANIFEST_STRICT = False
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
