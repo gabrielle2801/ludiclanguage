@@ -32,12 +32,9 @@ DATABASES = {
     }
 }
 
-FORCE_SCRIPT_NAME = "/ludic_language"
-STATIC_URL = FORCE_SCRIPT_NAME + "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# WHITENOISE_USE_FINDERS = True
-# WHITENOISE_MANIFEST_STRICT = False
-# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
+STATICFILES_STORAGE = 'ludic_language.storage.S3Storage'
 # Activate Django-Heroku.
 django_heroku.settings(locals())
