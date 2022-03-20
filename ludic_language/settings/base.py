@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'ludic_language.profiles.apps.ProfilesConfig',
     'ludic_language.workshops.apps.WorkshopsConfig',
     'django_extensions',
+    "storages",
 ]
 
 MIDDLEWARE = [
@@ -145,11 +146,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Directory where uploaded media is saved.
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'  # Public URL at the browser
+STATICFILES_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_REGION_NAME = os.getenv("AWS_S3_REGION_NAME")
-DEFAULT_FILE_STORAGE = "storages.backends.s3boto3.S3Boto3Storage"
+
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
