@@ -35,6 +35,6 @@ DATABASES = {
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-STATICFILES_STORAGE = 'ludic_language.storage.S3Storage'
+# STATICFILES_STORAGE = 'ludic_language.storage.S3Storage'
 # Activate Django-Heroku.
 django_heroku.settings(locals())

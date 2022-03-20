@@ -26,6 +26,8 @@ sentry-sdk = "*"
 django-heroku = "*"
 gunicorn = "*"
 whitenoise = "*"
+django-storages = "*"
+boto3 = "*"
 
 [dev-packages]
 
