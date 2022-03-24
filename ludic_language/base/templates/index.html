@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Ludic Language{% endblock title%}</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="{% static '../static/assets/favicon.ico' %}" />
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
     <!-- Bootstrap Icons-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
     <!-- SimpleLightbox plugin CSS-->
@@ -21,7 +21,7 @@
     {% block nav %}
         <nav class="header">
           <a class="logo" href="#">Ludic<strong>Language</strong> </a>
-          <img class="logo" src="../static/assets/img/logo.png" width="80" height="70">
+          <img class="logo" src="{% static 'assets/img/logo.png' %}" width="80" height="70">
           <input class="menu-btn" type="checkbox" id="menu-btn" />
           <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
           <ul class="menu">
@@ -37,7 +37,7 @@
     {% block header %}
     <div id="main" class="main">
         <div class="img-homepage">
-            <img src="../static/assets/img/homepage_personn.png" width="927" height="828">
+            <img src="{% static 'assets/img/homepage_personn.png' %}" width="927" height="828">
         </div>
       <section class="intro">
         <article class="container">
