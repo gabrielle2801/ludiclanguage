@@ -141,7 +141,7 @@ AUTH_PROFILE_MODULE = 'profiles.Profile'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Directory where uploaded media is saved.
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
-MEDIA_URL = '/media/'  # Public URL at the browser
+# MEDIA_URL = 'media/'  # Public URL at the browser
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
