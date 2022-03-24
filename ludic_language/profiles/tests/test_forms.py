@@ -30,7 +30,6 @@ class UserProfileFormTest(TestCase):
             'zip_code': 75015,
             'city': 'Paris',
         }, therapist=self.therapist)
-        print(form.errors)
         self.assertTrue(form.is_valid())
 
     def test_userprofile_missing_first_name(self):

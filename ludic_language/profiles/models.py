@@ -26,7 +26,8 @@ class Profile(models.Model):
     therapist = models.ForeignKey(
         'Profile', on_delete=models.CASCADE, null=True, blank=True)
     pathology = models.ForeignKey(
-        'exercises.Pathology', on_delete=models.CASCADE, related_name='patient_pathology', null=True, blank=True)
+        'exercises.Pathology', on_delete=models.CASCADE,
+        related_name='patient_pathology', null=True, blank=True)
 
     def __str__(self):
         return self.user.username

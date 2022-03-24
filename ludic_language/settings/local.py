@@ -6,9 +6,9 @@ ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '[::1]']
 SECRET_KEY = os.getenv("SECRET_KEY")
 
 
+INSTALLED_APPS = INSTALLED_APPS + ['django_extensions', ]
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',

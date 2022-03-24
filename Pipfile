@@ -16,7 +16,6 @@ coverage = "*"
 freezegun = "*"
 faker = "*"
 django = "*"
-django-extensions = "*"
 ipython = "*"
 tchappui-webdrivers = "*"
 selenium = "*"
@@ -28,6 +27,7 @@ gunicorn = "*"
 whitenoise = "*"
 django-storages = "*"
 boto3 = "*"
+django-extensions = "*"
 
 [dev-packages]
 

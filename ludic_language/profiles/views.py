@@ -57,7 +57,8 @@ class IndexPatientView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['workshop_date'] = Workshop.objects.filter(patient_id=self.request.user.profile)\
+        context['workshop_date'] = Workshop.objects\
+            .filter(patient_id=self.request.user.profile)\
             .filter(date=datetime.date.today())
         return context
 
@@ -71,7 +72,8 @@ class TherapistListView(ListView):
         search = self.request.GET.get('search_therapist', '').strip()
         queryset = super().get_queryset()
         if search:
-            return queryset.filter(Q(address__city__icontains=search) | Q(address__zip_code__icontains=search))
+            return queryset.filter(Q(address__city__icontains=search)
+                                   | Q(address__zip_code__icontains=search), state=2)
         else:
             queryset
 
@@ -120,7 +122,6 @@ class PathologyDetailView(ListView):
 
 
 class PatientDeleteView(LoginRequiredMixin, DeleteView):
-
     """
     Delete favorite product of the list
     Attributes:

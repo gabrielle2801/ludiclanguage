@@ -1,4 +1,5 @@
 {% extends 'index_speech.html' %}
+{% load static %}
 {% block content%}
 <div class="content-container">
         <div class="container-fluid">
@@ -8,7 +9,11 @@
                         {% for patient in patient_list  %}
                         <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
                             <div class="card patient-card d-flex flex-column">
+                                {% if patient.profile_pic %}
                                 <img src="{{patient.profile_pic.url}}" class="card-img-top patient-img  rounded d-block align-m">
+                                {% else %}
+                                 <img src="{% static 'profiles/assets/img/par_defaut.png' %}" class="card-img-top patient-img  rounded d-block align-m">
+                                {% endif %}
                                 <p class="card-title">{{patient.user.username}}</p>
                                 <div class="card-footer d-flex patient align-content-around mt-auto">
                                      <a  class="d-flex justify-content-center align-items-center btn btn-detail"   type="button" href="{% url 'detail_patient' patient.user.id %}"
