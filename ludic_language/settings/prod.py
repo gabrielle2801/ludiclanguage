@@ -36,7 +36,7 @@ DATABASES = {
 AWS_ACCESS_KEY_ID = os.getenv("AWS_ACCESS_KEY_ID")
 AWS_SECRET_ACCESS_KEY = os.getenv("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = os.getenv("AWS_STORAGE_BUCKET_NAME")
-# AWS_URL = os.getenv("AWS_URL")
+AWS_URL = os.getenv("AWS_URL")
 # STATIC_URL = AWS_URL + '/static/'
 STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 MEDIA_URL = AWS_URL + '/media/'
@@ -46,4 +46,4 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # STATICFILES_STORAGE = 'ludic_language.storage.S3Storage'
 # Activate Django-Heroku.
-django_heroku.settings(locals(), staticfiles=False)
+django_heroku.settings(locals())
