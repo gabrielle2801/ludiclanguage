@@ -5,7 +5,7 @@ from django.db import migrations
 
 def create_pathologies(apps, schema_editor):
     Pathology = apps.get_model('exercises', 'Pathology')
-    Pathology.objects.get_or_create(name='test', description="test ....")
+    Pathology.objects.get_or_create(name='test', description="test")
 
 
 def reverse_pathologies(apps, schema_editor):
