@@ -27,15 +27,15 @@ function flipCard() {
 
 function checkForMatch() {
   let isMatch = firstCard.dataset.framework === secondCard.dataset.framework;
-  textExercise();
+  const mydata = JSON.parse(document.getElementById('data').textContent);
+  let div = document.createElement('div');
+  div.textContent = 'mydata';
+  console.log(mydata)
+
   isMatch ? disableCards() : unflipCards();
-
 }
 
-function textExercise(){
-  const div1=document.getElementById("div1");
-  div1.textContent = "GAGNE !";
-}
+
 function disableCards() {
   firstCard.removeEventListener('click', flipCard);
   secondCard.removeEventListener('click', flipCard);
@@ -67,3 +67,9 @@ function resetBoard() {
 })();
 
 cards.forEach(card => card.addEventListener('click', flipCard));
+
+/*
+const data = JSON.parse('{{data|escapejs}}');
+console.log("rrrr");
+const dataNode = document.getElementById('div1');
+*/

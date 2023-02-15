@@ -1,9 +1,12 @@
-from django.views.generic import DetailView
+from django.views.generic import DetailView, TemplateView
 from django.views.generic import ListView, CreateView
 from django.views.generic.edit import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import reverse
 from django.urls import reverse_lazy
+from django.http import JsonResponse
+from django.http import HttpResponse
+# from django.shortcuts import render
 # from collections import defaultdict
 
 from ludic_language.exercises.models import Pathology, LudicJourney, Exercise
@@ -78,6 +81,18 @@ class LudicJourneyDetailView(LoginRequiredMixin, DetailView):
     template_name = 'play_on.html'
     model = Exercise
     context_object_name = 'exercise_detail'
+
+
+class LudicJourneyMemoryTemplateView(LoginRequiredMixin, TemplateView):
+    template_name = 'exercise_memory.html'
+
+    def get(self, request, *args, **kwargs):
+        data = {
+            {
+                'phrase': 'La vie est belle',
+            },
+        }
+        return JsonResponse(data)
 
 
 class LudicJourneyUpdateView(LoginRequiredMixin, UpdateView):

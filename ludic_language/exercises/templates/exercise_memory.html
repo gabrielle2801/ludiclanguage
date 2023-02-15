@@ -22,7 +22,10 @@
     </div>
 </section>
 <div id="div1"></div>
-<script src="{% static 'exercises/js/scripts.js'%}"></script>
+{{ data|json_script:"data" }}
+
+<script src="{% static 'exercises/js/scripts.js'%}" defer></script>
+
 {% endblock content %}
 
 
