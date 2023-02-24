@@ -28,6 +28,9 @@ whitenoise = "*"
 django-storages = "*"
 boto3 = "*"
 django-extensions = "*"
+djangorestframework = "*"
+django-cors-headers = "*"
+django-create-react-app = "*"
 
 [dev-packages]
 

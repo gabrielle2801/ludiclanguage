@@ -44,6 +44,9 @@ INSTALLED_APPS = [
     'ludic_language.exercises.apps.ExercisesConfig',
     'ludic_language.profiles.apps.ProfilesConfig',
     'ludic_language.workshops.apps.WorkshopsConfig',
+    'rest_framework',
+    'corsheaders',
+    'create_react_app',
 ]
 
 MIDDLEWARE = [
@@ -54,6 +57,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'ludic_language.urls'
@@ -126,11 +131,20 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+REACT_BUILD_DIRECTORY = os.path.join(BASE_DIR, 'frontend', 'build')
+CREATE_REACT_APP = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': REACT_BUILD_DIRECTORY,
+        'FRONT_END_SERVER': "http://localhost:3000/",
+        'IS_DEV': False,
+    }
+}
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'base/static'),
     os.path.join(BASE_DIR, 'profiles/static'),
     os.path.join(BASE_DIR, 'exercises/static'),
     os.path.join(BASE_DIR, 'workshops/static'),
+    os.path.join(REACT_BUILD_DIRECTORY, 'static'),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 

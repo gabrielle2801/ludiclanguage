@@ -4,10 +4,7 @@ from django.views.generic.edit import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import reverse
 from django.urls import reverse_lazy
-from django.http import JsonResponse
-from django.http import HttpResponse
-# from django.shortcuts import render
-# from collections import defaultdict
+import json
 
 from ludic_language.exercises.models import Pathology, LudicJourney, Exercise
 from ludic_language.exercises.forms import LudicJourneyCreateForm, LudicJourneyAssessementForm
@@ -83,16 +80,21 @@ class LudicJourneyDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'exercise_detail'
 
 
-class LudicJourneyMemoryTemplateView(LoginRequiredMixin, TemplateView):
+class MemoryGameTemplateView(TemplateView):
+    title = 'Memory_Game'
     template_name = 'exercise_memory.html'
+    component = 'exercises/js/scripts.js'
 
-    def get(self, request, *args, **kwargs):
-        data = {
-            {
-                'phrase': 'La vie est belle',
-            },
-        }
-        return JsonResponse(data)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['data'] = json.dumps(
+            [
+                {
+                    'phrase': 'La vie est belle',
+                }
+            ]
+        )
+        return context
 
 
 class LudicJourneyUpdateView(LoginRequiredMixin, UpdateView):

@@ -21,8 +21,11 @@
         <img class="back-face" src="{% static 'exercises/assets/img/memory_game/ludic_langage.svg' %}" alt="Logo">
     </div>
 </section>
-<div id="div1"></div>
-{{ data|json_script:"data" }}
+
+ {{ data|json_script:'data' }}
+ <script id="phrases" type="application/json">
+
+</script>
 
 <script src="{% static 'exercises/js/scripts.js'%}" defer></script>
 

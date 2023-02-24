@@ -6,6 +6,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView
 from django.urls import path
+
 from ludic_language.profiles import views
 from ludic_language.base.views import BaseView, LegalNoticeView, AboutUsView
 from ludic_language.profiles.views import LoginView, IndexSpeechView, \
@@ -18,7 +19,8 @@ from ludic_language.workshops.views import WorkshopAddView, WorkshopListView,\
 from ludic_language.exercises.views import ExerciseListView, \
     PathologyDetailView, LudicJourneyAddView, LudicJouneyListView, \
     LudicJourneyDetailView, LudicJourneyUpdateView,\
-    LudicJouneyListTherapistView, AssessementDetailView, LudicJourneyMemoryTemplateView
+    LudicJouneyListTherapistView, AssessementDetailView
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -56,8 +58,6 @@ urlpatterns = [
          LudicJouneyListTherapistView.as_view(), name='exercise_therapist'),
     path('play_on/<int:pk>',
          LudicJourneyDetailView.as_view(), name='play_on'),
-    path('exercise_memory/<int:pk>',
-         LudicJourneyMemoryTemplateView.as_view(), name='exercise_memory'),
     path('form_assessement/<int:pk>', LudicJourneyUpdateView.as_view(),
          name='form_assessement'),
     path('assessement/<int:pk>', AssessementDetailView.as_view(),
