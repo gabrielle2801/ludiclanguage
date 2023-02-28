@@ -131,7 +131,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-REACT_BUILD_DIRECTORY = os.path.join(BASE_DIR, 'frontend', 'build')
+REACT_BUILD_DIRECTORY = os.path.join(BASE_DIR, 'frontend/build/static')
 CREATE_REACT_APP = {
     'DEFAULT': {
         'BUNDLE_DIR_NAME': REACT_BUILD_DIRECTORY,
@@ -144,7 +144,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'profiles/static'),
     os.path.join(BASE_DIR, 'exercises/static'),
     os.path.join(BASE_DIR, 'workshops/static'),
-    os.path.join(REACT_BUILD_DIRECTORY, 'static'),
+    os.path.join(REACT_BUILD_DIRECTORY),
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
