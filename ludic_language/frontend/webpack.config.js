@@ -22,18 +22,33 @@ module.exports = {
                     loader: 'babel-loader',
                     options: {
                         presets: ['@babel/preset-env']
-                    }
+                    },
+                    
                 }
             },
             {
                 test: /\.css$/i,
                 exclude: /node_modules/,
                 use: ['style-loader','css-loader']
+            },
+            {
+                test: /\.(gif|png|jpe?g)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: '[name].[ext]',
+                            outputPath:'../assets/img',
+                            type:'assets/img'
+                        }
+                    },
+                ]
             }
         ]
     },
     resolve: {
-        extensions: ['.js', '.json']
+        extensions: ['.js', '.json', 'css', 'jsx'],
+        modules: ['src', 'node_modules']
     }
     
 }

@@ -1,6 +1,14 @@
 {
   "status": "done",
   "assets": {
+    "../assets/img/Loup.jpg": {
+      "name": "../assets/img/Loup.jpg",
+      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/assets/img/Loup.jpg"
+    },
+    "../assets/img/Renard.jpg": {
+      "name": "../assets/img/Renard.jpg",
+      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/assets/img/Renard.jpg"
+    },
     "app.bundle.js": {
       "name": "app.bundle.js",
       "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/dist/app.bundle.js"
