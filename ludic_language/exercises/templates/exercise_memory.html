@@ -1,28 +1,10 @@
 
 {% load static %}
+{% load render_bundle from webpack_loader %}
 <link href="{% static 'exercises/css/styles.css' %}" type="text/css" rel="stylesheet">
 {% block content %}
-
-<section class="memory-game">
-    <div class="memory-card" data-framework="loup">
-        <img class= "front-face" src="{% static 'exercises/assets/img/memory_game/Loup.jpg' %}" alt="Loup">
-        <img class="back-face" src="{% static 'exercises/assets/img/memory_game/ludic_langage.svg' %}" alt="Logo">
-    </div>
-    <div class="memory-card" data-framework="loup">
-        <img class= "front-face" src="{% static 'exercises/assets/img/memory_game/Loup.jpg' %}" alt="Loup">
-        <img class="back-face" src="{% static 'exercises/assets/img/memory_game/ludic_langage.svg' %}" alt="Logo">
-    </div>
-    <div class="memory-card" data-framework="renard">
-        <img class= "front-face" src="{% static 'exercises/assets/img/memory_game/Renard.jpg' %}" alt="Loup">
-        <img class="back-face" src="{% static 'exercises/assets/img/memory_game/ludic_langage.svg' %}" alt="Logo">
-    </div>
-    <div class="memory-card" data-framework="renard">
-        <img class= "front-face" src="{% static 'exercises/assets/img/memory_game/Renard.jpg' %}" alt="Loup">
-        <img class="back-face" src="{% static 'exercises/assets/img/memory_game/ludic_langage.svg' %}" alt="Logo">
-    </div>
-</section>
-
-<script src="{% static 'game.js'%}" ></script>
+<div id="root"></div>
+<script src="{% static 'dist/app.bundle.js' %}"></script>
 
 {% endblock content %}
 

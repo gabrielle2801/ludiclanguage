@@ -31,6 +31,7 @@ django-extensions = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
 django-create-react-app = "*"
+django-webpack-loader = "*"
 
 [dev-packages]
 

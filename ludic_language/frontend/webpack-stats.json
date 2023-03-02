@@ -1,0 +1,18 @@
+{
+  "status": "done",
+  "assets": {
+    "app.bundle.js": {
+      "name": "app.bundle.js",
+      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/dist/app.bundle.js"
+    },
+    "app.bundle.js.map": {
+      "name": "app.bundle.js.map",
+      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/dist/app.bundle.js.map"
+    }
+  },
+  "chunks": {
+    "app": [
+      "app.bundle.js"
+    ]
+  }
+}
