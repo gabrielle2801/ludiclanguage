@@ -1,13 +1,17 @@
 {
   "status": "done",
   "assets": {
-    "../assets/img/Loup.jpg": {
-      "name": "../assets/img/Loup.jpg",
-      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/assets/img/Loup.jpg"
+    "../assets/img/cover.png": {
+      "name": "../assets/img/cover.png",
+      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/assets/img/cover.png"
     },
-    "../assets/img/Renard.jpg": {
-      "name": "../assets/img/Renard.jpg",
-      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/assets/img/Renard.jpg"
+    "../assets/img/Loup.png": {
+      "name": "../assets/img/Loup.png",
+      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/assets/img/Loup.png"
+    },
+    "../assets/img/Renard.png": {
+      "name": "../assets/img/Renard.png",
+      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/assets/img/Renard.png"
     },
     "app.bundle.js": {
       "name": "app.bundle.js",
