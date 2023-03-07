@@ -1,6 +1,6 @@
-import './SingleCard.css';
-import React, { Component, PropTypes } from 'react';
-import cover from "/assets/img/cover.png";
+import '../styles/SingleCard.css';
+import React, { Component} from 'react';
+import cover from "../assets/img/cover.png";
 
 export default function SingleCard({card, handleChoice, flipped, disabled }){
     const handleClick = ()=> {
