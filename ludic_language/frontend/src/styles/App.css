@@ -39,4 +39,13 @@ h1,h2,h3,h4,h5,h6 {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 20px;
   }
-  
+  .alert-success{
+    background:   #2e4053;
+    border-radius: 20px 20px 2px 20px;
+    max-width: 300px;
+    color: white;
+    margin-left: auto;
+    padding: 13px;
+    margin-bottom: 15px;
+    margin-top: 75px;
+  }

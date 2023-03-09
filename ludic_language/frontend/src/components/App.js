@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+import Alert from 'react-bootstrap/Alert';
 import '../styles/App.css';
 import loup from "../assets/img/Loup.png";
 import renard from "../assets/img/Renard.png";
 import SingleCard from "./SingleCard";
-import MessageCard from "./MessageCard";
+import RecorderMessage from "./RecorderMessage";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 
 
 
@@ -13,7 +17,7 @@ const cardImages = [
     { "src": renard, matched: false},
 ]
 
-const cardMessage = [
+const cardMessages = [
     {"name":"La vie est belle"},
     {"name":"la cigale et la fourmi"} ,
     {"name":"lggggggg"} ,
@@ -27,6 +31,8 @@ function App() {
     const [choiceTwo, setChoiceTwo] = useState(null)
     const [disabled, setDisabled] = useState(false)
     const[messages, setMessages]=useState("")
+    const [showMessage, setShowMessage] = useState(false)
+    const [showRecoder, setShowRecorder] = useState(false)
 
 
     // shuffle cards
@@ -40,14 +46,16 @@ function App() {
         setCards(shuffleCards)
         setTurns(0)
         setMessages("")
+        setShowMessage(false)
+        setShowRecorder(false)
     }
      // shuffle messages
      const shuffleMessages = () => {
-        const index = Math.floor(Math.random()*cardMessage.length)
-        const mess=cardMessage[index]
+        const index = Math.floor(Math.random()*cardMessages.length)
+        const mess=cardMessages[index]
         setMessages(mess.name)
+        
     }
-    
 // handle a choice
 const handleChoice =(card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
@@ -63,6 +71,8 @@ useEffect (() => {
                 return prevCards.map(card => {
                     if (card.src === choiceOne.src){
                         shuffleMessages()
+                        setShowMessage(true)
+                        setShowRecorder(true)
                         return {...card, matched: true}
                     } else {
                         return card
@@ -85,6 +95,8 @@ const resetTurn = () => {
     setTurns(prevTurns => prevTurns + 1)
     setDisabled(false)
     setMessages("")
+    setShowMessage(false)
+    setShowRecorder(false)
 }
 useEffect(()=> {
     shuffleCards()
@@ -105,8 +117,17 @@ useEffect(()=> {
                     />
                 ))}
             </div>
-            <p>MessAGE: {messages}</p>
             <p>Turns: {turns}</p>
+         
+            <Alert 
+                show={showMessage}
+                variant="success">
+                <p>{messages}</p>
+            </Alert>
+            <div>
+                <RecorderMessage
+                show={showRecoder}/>
+            </div>            
         </div>
     )
 }
