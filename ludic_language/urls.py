@@ -1,12 +1,9 @@
 """ludic_language URL Configuration"""
-
-
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView
 from django.urls import path
-
 from ludic_language.profiles import views
 from ludic_language.base.views import BaseView, LegalNoticeView, AboutUsView
 from ludic_language.profiles.views import LoginView, IndexSpeechView, \
@@ -19,7 +16,7 @@ from ludic_language.workshops.views import WorkshopAddView, WorkshopListView,\
 from ludic_language.exercises.views import ExerciseListView, \
     PathologyDetailView, LudicJourneyAddView, LudicJouneyListView, \
     LudicJourneyDetailView, LudicJourneyUpdateView,\
-    LudicJouneyListTherapistView, AssessementDetailView
+    LudicJouneyListTherapistView, AssessementDetailView, RecorderSentenceAPIView
 
 
 urlpatterns = [
@@ -58,6 +55,9 @@ urlpatterns = [
          LudicJouneyListTherapistView.as_view(), name='exercise_therapist'),
     path('play_on/<int:pk>',
          LudicJourneyDetailView.as_view(), name='play_on'),
+    path('api', RecorderSentenceAPIView.as_view()),
+    path('play_on/<int:pk>',
+         RecorderSentenceAPIView.as_view(), name='recorder'),
     path('form_assessement/<int:pk>', LudicJourneyUpdateView.as_view(),
          name='form_assessement'),
     path('assessement/<int:pk>', AssessementDetailView.as_view(),

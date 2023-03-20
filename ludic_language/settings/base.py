@@ -53,14 +53,19 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
+
 ]
+
+CORS_ORIGIN_ALLOW_ALL = False
+CORS_ORIGIN_WHITELIST = (
+    'http://localhost:8081',
+)
 
 ROOT_URLCONF = 'ludic_language.urls'
 
@@ -151,15 +156,16 @@ STATICFILES_DIRS = [
 ]
 
 WEBPACK_LOADER = {
-  "DEFAULT": {
-    'BUNDLE_DIR_NAME': 'dist/', # must end with slash
-    'STATS_FILE': BASE_DIR / 'frontend' / 'webpack-stats.json',
-    'POLL_INTERVAL': 0.1,
-    'TIMEOUT': None,
-    'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
-  }
+    "DEFAULT": {
+        'BUNDLE_DIR_NAME': 'dist/',  # must end with slash
+        'STATS_FILE': BASE_DIR / 'frontend' / 'webpack-stats.json',
+        'POLL_INTERVAL': 0.1,
+        'TIMEOUT': None,
+        'IGNORE': [r'.+\.hot-update.js', r'.+\.map'],
+    }
 }
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

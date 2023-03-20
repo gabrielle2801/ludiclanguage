@@ -5,11 +5,8 @@ import loup from "../assets/img/Loup.png";
 import renard from "../assets/img/Renard.png";
 import SingleCard from "./SingleCard";
 import RecorderMessage from "./RecorderMessage";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-
-
-
+import axios from 'axios';
+import { addmessage } from "../services/ApiService";
 
 
 const cardImages = [
@@ -20,9 +17,9 @@ const cardImages = [
 const cardMessages = [
     {"name":"La vie est belle"},
     {"name":"la cigale et la fourmi"} ,
-    {"name":"lggggggg"} ,
-    {"name":"kkkkkkk"} ,
-    {"name":"dddddddd"} ,
+    {"name":"Ton thé t’a-t-il ôté ta toux ?"} ,
+    {"name":"Tata, ta tarte tatin tenta Tonton ; Tonton tâta ta tarte tatin, Tata."} ,
+    {"name":"Trois tortues trottaient sur un trottoir très étroit."} ,
 ]
 function App() {
     const [cards, setCards] = useState([])
@@ -32,7 +29,7 @@ function App() {
     const [disabled, setDisabled] = useState(false)
     const[messages, setMessages]=useState("")
     const [showMessage, setShowMessage] = useState(false)
-    const [showRecoder, setShowRecorder] = useState(false)
+    // const [showRecorderMessage, setRecorderMessage] = useState(false)
 
 
     // shuffle cards
@@ -47,7 +44,7 @@ function App() {
         setTurns(0)
         setMessages("")
         setShowMessage(false)
-        setShowRecorder(false)
+
     }
      // shuffle messages
      const shuffleMessages = () => {
@@ -56,11 +53,17 @@ function App() {
         setMessages(mess.name)
         
     }
+
 // handle a choice
 const handleChoice =(card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
 }
-
+const handleAddSubmit =(e) => {
+  addmessage(e.target)
+  .then(res => {
+    setMessages(res)
+  })
+}
 
 // compare 2 selected cards
 useEffect (() => {
@@ -72,7 +75,6 @@ useEffect (() => {
                     if (card.src === choiceOne.src){
                         shuffleMessages()
                         setShowMessage(true)
-                        setShowRecorder(true)
                         return {...card, matched: true}
                     } else {
                         return card
@@ -96,7 +98,6 @@ const resetTurn = () => {
     setDisabled(false)
     setMessages("")
     setShowMessage(false)
-    setShowRecorder(false)
 }
 useEffect(()=> {
     shuffleCards()
@@ -123,10 +124,11 @@ useEffect(()=> {
                 show={showMessage}
                 variant="success">
                 <p>{messages}</p>
+                <button onClick={()=>setShowMessage(true)}>Send</button>
+          {<App handleAddSubmit={handleAddSubmit}/>}    
             </Alert>
             <div>
-                <RecorderMessage
-                show={showRecoder}/>
+                <RecorderMessage/>
             </div>            
         </div>
     )

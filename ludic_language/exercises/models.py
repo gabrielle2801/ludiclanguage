@@ -21,7 +21,9 @@ class Exercise(models.Model):
     picture1 = models.ImageField('picture1', blank=True)
     picture2 = models.ImageField('picture2', blank=True)
     therapist = models.ForeignKey(
-        'profiles.Profile', on_delete=models.CASCADE, related_name='therapist_exercice', null=True, blank=True)
+        'profiles.Profile', on_delete=models.CASCADE,
+        related_name='therapist_exercice',
+        null=True, blank=True)
     pathology = models.ForeignKey(
         'Pathology', on_delete=models.CASCADE, null=True)
 
@@ -33,12 +35,15 @@ class LudicJourney(models.Model):
     journey_date = models.DateTimeField(null=True, blank=True)
     assessement = models.CharField(max_length=200, null=True, blank=True)
     patient = models.ForeignKey(
-        'profiles.Profile', on_delete=models.CASCADE, related_name='patient_ludicjourney', null=True)
+        'profiles.Profile', on_delete=models.CASCADE,
+        related_name='patient_ludicjourney', null=True)
     exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE)
 
 
-'''
-L'aider à apprendre et identifier des lettres facilement.
-Les exercices de traitement visuel permettent d'améliorer la capacité de votre enfant à distinguer les différences entre plusieurs objets.
-Puzzle : Assembler les morceaux afin de reproduire l'image.
-'''
+class RecorderMessage(models.Model):
+    audio_file = models.FileField(blank=True)
+    sentence = models.TextField(blank=True)
+    game = models.ForeignKey('Exercise', on_delete=models.CASCADE,
+                             related_name='game_recorder', null=True)
+    patient = models.ForeignKey('profiles.Profile', on_delete=models.CASCADE,
+                                related_name='patient_recorder', null=True)

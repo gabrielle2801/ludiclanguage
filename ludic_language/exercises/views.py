@@ -1,13 +1,21 @@
 from django.views.generic import DetailView, TemplateView
 from django.views.generic import ListView, CreateView
 from django.views.generic.edit import UpdateView
+from .serializers import RecorderSerializer
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from rest_framework import viewsets
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import reverse
 from django.urls import reverse_lazy
-import json
 
-from ludic_language.exercises.models import Pathology, LudicJourney, Exercise
-from ludic_language.exercises.forms import LudicJourneyCreateForm, LudicJourneyAssessementForm
+from ludic_language.exercises.models import (Pathology,
+                                             LudicJourney,
+                                             Exercise,
+                                             RecorderMessage)
+from ludic_language.exercises.forms import (LudicJourneyCreateForm,
+                                            LudicJourneyAssessementForm)
 
 
 class PathologyDetailView(DetailView):
@@ -80,21 +88,23 @@ class LudicJourneyDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'exercise_detail'
 
 
-class MemoryGameTemplateView(TemplateView):
-    title = 'Memory_Game'
-    template_name = 'exercise_memory.html'
-    component = 'exercises/js/scripts.js'
+class RecorderSentenceAPIView(APIView):
+    template_name = 'play_on.html'
+    model = RecorderMessage
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['data'] = json.dumps(
-            [
-                {
-                    'phrase': 'La vie est belle',
-                }
-            ]
-        )
-        return context
+    def post(self, request, *args, **kwargs):
+        data = {
+            'audio_file': request.data.get('audio_file'),
+            'sentence': request.data.get('sentence'),
+            'game': request.exercises.id,
+            'patient': request.user.profile
+        }
+        serializer = RecorderSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            print('test api')
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LudicJourneyUpdateView(LoginRequiredMixin, UpdateView):
