@@ -43,7 +43,7 @@ class LudicJourney(models.Model):
 class RecorderMessage(models.Model):
     audio_file = models.FileField(blank=True)
     sentence = models.TextField(blank=True)
-    game = models.ForeignKey('Exercise', on_delete=models.CASCADE,
-                             related_name='game_recorder', null=True)
+    exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE,
+                             related_name='exercise_recorder', null=True)
     patient = models.ForeignKey('profiles.Profile', on_delete=models.CASCADE,
                                 related_name='patient_recorder', null=True)

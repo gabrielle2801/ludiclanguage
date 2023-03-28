@@ -1,12 +1,17 @@
 import React, { useEffect, useState } from "react";
+import {BrowserRouter, Routes, Route, useParams} from 'react-router-dom';
 import Alert from 'react-bootstrap/Alert';
 import '../styles/App.css';
 import loup from "../assets/img/Loup.png";
 import renard from "../assets/img/Renard.png";
 import SingleCard from "./SingleCard";
 import RecorderMessage from "./RecorderMessage";
-import axios from 'axios';
-import { addmessage } from "../services/ApiService";
+import ExerciseDetail from './ExerciseParams';
+
+
+
+
+
 
 
 const cardImages = [
@@ -29,7 +34,7 @@ function App() {
     const [disabled, setDisabled] = useState(false)
     const[messages, setMessages]=useState("")
     const [showMessage, setShowMessage] = useState(false)
-    // const [showRecorderMessage, setRecorderMessage] = useState(false)
+
 
 
     // shuffle cards
@@ -57,12 +62,6 @@ function App() {
 // handle a choice
 const handleChoice =(card) => {
     choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
-}
-const handleAddSubmit =(e) => {
-  addmessage(e.target)
-  .then(res => {
-    setMessages(res)
-  })
 }
 
 // compare 2 selected cards
@@ -106,7 +105,9 @@ useEffect(()=> {
 
     return (
         <div className='App'>
+           
             <button onClick={shuffleCards}>New Game</button>
+            
             <div className= "memory-game">
                 {cards.map(card => (
                     <SingleCard 
@@ -124,11 +125,12 @@ useEffect(()=> {
                 show={showMessage}
                 variant="success">
                 <p>{messages}</p>
-                <button onClick={()=>setShowMessage(true)}>Send</button>
-          {<App handleAddSubmit={handleAddSubmit}/>}    
             </Alert>
             <div>
-                <RecorderMessage/>
+            <Routes>
+                <Route path="/play_on/:id" element={<RecorderMessage />} /> 
+            </Routes>
+                
             </div>            
         </div>
     )

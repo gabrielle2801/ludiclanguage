@@ -26,7 +26,5 @@
     "app": [
       "app.bundle.js"
     ]
-  },
-  "error": "ModuleNotFoundError",
-  "message": "Module not found: Error: Can't resolve 'App.js' in '/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/src/components'\nDid you mean './App.js'?\nRequests that should resolve in the current directory need to start with './'.\nRequests that start with a name are treated as module requests and resolve within module directories (src, node_modules).\nIf changing the source code is not an option there is also a resolve options called 'preferRelative' which tries to resolve these kind of requests in the current directory too."
+  }
 }

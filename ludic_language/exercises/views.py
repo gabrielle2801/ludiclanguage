@@ -1,11 +1,15 @@
-from django.views.generic import DetailView, TemplateView
+from django.views.generic import DetailView
 from django.views.generic import ListView, CreateView
 from django.views.generic.edit import UpdateView
-from .serializers import RecorderSerializer
+from .serializers import RecorderSerializer, ExerciseSerializer
+# from django.shortcuts import get_object_or_404
+from django.http import Http404
+# from django.http import JsonResponse
+from rest_framework import permissions
+# from rest_framework.generics import CreateAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework import viewsets
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import reverse
 from django.urls import reverse_lazy
@@ -88,21 +92,56 @@ class LudicJourneyDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'exercise_detail'
 
 
-class RecorderSentenceAPIView(APIView):
-    template_name = 'play_on.html'
-    model = RecorderMessage
+class SentenceApiView(APIView):
+    queryset = RecorderMessage.objects.all()
+    serializer_class = RecorderSerializer
+    permission_classes = (permissions.AllowAny,)
 
-    def post(self, request, *args, **kwargs):
+    def get_object(self, pk):
+        try:
+            return Exercise.objects.get(pk=pk)
+        except Exercise.DoesNotExist:
+            return None
+
+    def get(self, request, pk=None, *args, **kwargs):
+        exercise = self.get_object(pk)
+        print(exercise)
+        if exercise is None:
+            return Response({'error': 'Exercise not found'}, status=status.HTTP_404_NOT_FOUND)
+        recorders = Exercise.objects.filter(name=exercise)
+        serializer = ExerciseSerializer(recorders, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request, pk=None, * args, **kwargs):
+        exercise = self.get_object(pk)
+        print(exercise)
         data = {
-            'audio_file': request.data.get('audio_file'),
-            'sentence': request.data.get('sentence'),
-            'game': request.exercises.id,
-            'patient': request.user.profile
+
+            'audio_file': request.FILES.get('audio'),
+            'patient': request.user.profile,
+            # 'exercise': exercise
         }
+
         serializer = RecorderSerializer(data=data)
+        print('data     ', data)
         if serializer.is_valid():
             serializer.save()
-            print('test api')
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def put(self, request, pk, * args, **kwargs):
+        exercise = self.get_object(pk)
+        print(exercise)
+        if exercise is None:
+            return Response({'error': 'Exercise not found'}, status=status.HTTP_404_NOT_FOUND)
+        data = {
+            'exercise': exercise.id
+        }
+
+        serializer = RecorderSerializer(data=data)
+        print('data     ', data)
+        if serializer.is_valid():
+            serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -161,4 +200,32 @@ class ExerciseListView(LoginRequiredMixin, ListView):
         # sorted(pathologies.items())
         context['pathologies'] = path
         return context
+
+test --APi--
+class RecorderSentenceAPIView(APIView):
+    template_name = 'play_on.html'
+    model = RecorderMessage
+
+    def post(self, request, *args, **kwargs):
+        data = {
+            'audio_file': request.data.get('audio_file'),
+            'sentence': request.data.get('sentence'),
+            'game': request.exercises.id,
+            'patient': request.user.profile
+        }
+        serializer = RecorderSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            print('test api')
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+def post(self, request, *args, **kwargs):
+        audio_file = request.FILES.get('audio')
+        recorder = RecorderMessage()
+        recorder.audio = audio_file
+        recorder.save()
+        return JsonResponse({
+            'success': True
+        })
 '''

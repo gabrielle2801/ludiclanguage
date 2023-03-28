@@ -1,9 +1,10 @@
 """ludic_language URL Configuration"""
 from django.contrib import admin
 from django.conf import settings
+from rest_framework import routers
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView
-from django.urls import path
+from django.urls import path, include
 from ludic_language.profiles import views
 from ludic_language.base.views import BaseView, LegalNoticeView, AboutUsView
 from ludic_language.profiles.views import LoginView, IndexSpeechView, \
@@ -16,11 +17,14 @@ from ludic_language.workshops.views import WorkshopAddView, WorkshopListView,\
 from ludic_language.exercises.views import ExerciseListView, \
     PathologyDetailView, LudicJourneyAddView, LudicJouneyListView, \
     LudicJourneyDetailView, LudicJourneyUpdateView,\
-    LudicJouneyListTherapistView, AssessementDetailView, RecorderSentenceAPIView
+    LudicJouneyListTherapistView, AssessementDetailView, SentenceApiView
 
+# router = routers.DefaultRouter()
+# router.register(r'message', MessageViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('api', include(router.urls)),
     path('', BaseView.as_view(), name='index'),
     path('legal_notice', LegalNoticeView.as_view(), name='legal_notice'),
     path('about_us', AboutUsView.as_view(), name='about_us'),
@@ -55,9 +59,7 @@ urlpatterns = [
          LudicJouneyListTherapistView.as_view(), name='exercise_therapist'),
     path('play_on/<int:pk>',
          LudicJourneyDetailView.as_view(), name='play_on'),
-    path('api', RecorderSentenceAPIView.as_view()),
-    path('play_on/<int:pk>',
-         RecorderSentenceAPIView.as_view(), name='recorder'),
+    path('play_on/<int:pk>', SentenceApiView.as_view(), name='exercise_add'),
     path('form_assessement/<int:pk>', LudicJourneyUpdateView.as_view(),
          name='form_assessement'),
     path('assessement/<int:pk>', AssessementDetailView.as_view(),
