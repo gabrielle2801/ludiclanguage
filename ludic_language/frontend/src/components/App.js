@@ -1,17 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useReducer } from "react";
 import {BrowserRouter, Routes, Route, useParams} from 'react-router-dom';
+import { SentencesContext, SentencesDispatchContext } from "./SentenceContext"
 import Alert from 'react-bootstrap/Alert';
 import '../styles/App.css';
 import loup from "../assets/img/Loup.png";
 import renard from "../assets/img/Renard.png";
 import SingleCard from "./SingleCard";
 import RecorderMessage from "./RecorderMessage";
-import ExerciseDetail from './ExerciseParams';
-
-
-
-
-
 
 
 const cardImages = [
@@ -27,6 +22,10 @@ const cardMessages = [
     {"name":"Trois tortues trottaient sur un trottoir très étroit."} ,
 ]
 function App() {
+    const [sentences, dispatch ] = useReducer(
+        sentencesReducer,
+        initialSentences
+    );
     const [cards, setCards] = useState([])
     const [turns, setTurns] = useState(0)
     const [choiceOne, setChoiceOne] = useState(null)
@@ -120,12 +119,16 @@ useEffect(()=> {
                 ))}
             </div>
             <p>Turns: {turns}</p>
-         
-            <Alert 
-                show={showMessage}
-                variant="success">
-                <p>{messages}</p>
-            </Alert>
+            <SentencesContext.Provider value={sentences}>
+            <SentencesDispatchContext.Provider value={dispatch}>
+                <Alert 
+                    show={showMessage}
+                    variant="success">
+                    <p>{messages}</p>
+                </Alert>
+            </SentencesDispatchContext.Provider>
+            </SentencesContext.Provider>
+            
             <div>
             <Routes>
                 <Route path="/play_on/:id" element={<RecorderMessage />} /> 
@@ -137,3 +140,25 @@ useEffect(()=> {
 }
 
 export default App
+
+function sentencesReducer(sentences, action){
+    switch (action.type){
+        case 'changed': {
+            return sentences.map(t => {
+                if (t.id === action.sentence.id) {
+                    return action.sentence;
+                } else {
+                    return t
+                }
+            })
+        }
+        default :{
+            throw Error('Unknown action : ' + action.type)
+        }
+    }
+
+}
+
+const initialSentences = [
+    { id: null, text:''}
+];

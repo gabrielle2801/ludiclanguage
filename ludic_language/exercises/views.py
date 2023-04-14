@@ -103,23 +103,13 @@ class SentenceApiView(APIView):
         except Exercise.DoesNotExist:
             return None
 
-    def get(self, request, pk=None, *args, **kwargs):
-        exercise = self.get_object(pk)
-        print(exercise)
-        if exercise is None:
-            return Response({'error': 'Exercise not found'}, status=status.HTTP_404_NOT_FOUND)
-        recorders = Exercise.objects.filter(name=exercise)
-        serializer = ExerciseSerializer(recorders, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+    def post(self, request, * args, **kwargs):
 
-    def post(self, request, pk=None, * args, **kwargs):
-        exercise = self.get_object(pk)
-        print(exercise)
         data = {
 
             'audio_file': request.FILES.get('audio'),
             'patient': request.user.profile,
-            # 'exercise': exercise
+            'sentence': request.data.get('sentence')
         }
 
         serializer = RecorderSerializer(data=data)

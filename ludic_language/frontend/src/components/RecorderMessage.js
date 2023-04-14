@@ -1,8 +1,8 @@
-import React, {useState } from 'react';
-import { addmessage } from "../services/ApiService";
+import React, {useState, useEffect, useContext } from 'react';
 import MicRecorder from 'mic-recorder-to-mp3';
 import '../styles/RecorderMessage.css'
 import axios from 'axios';
+import {SentenceContext} from './App.js'
 import { useParams } from "react-router-dom";
 import Cookies from 'js-cookie';
 
@@ -15,10 +15,9 @@ class RecorderMessage extends React.Component {
       isRecording: false,
       blobURL: '',
       isBlocked: false,
-      exercise: 0,
     };
   }
-
+  
   start = () => {
     if (this.state.isBlocked) {
       console.log('Permission Denied');
@@ -42,20 +41,21 @@ class RecorderMessage extends React.Component {
         const blobmp3 = new Blob();
         this.setState({ blobURL, isRecording: false });
         this.sendAudioFile(wavfromblob);
-        this.sendSentence()
-        this.sendIdExercise()
       }).catch((e) => console.log(e));
   };
 
-  sendAudioFile = (url) => {
+  sendAudioFile = (url, message) => {
+    // const mess = useContext(SentenceContext)
     //const {id} = useParams();
-   //console.log(id)
+    //console.log(id)
     //const value = parseInt(id);
+
     const data = new FormData();
     data.append("audio", url);
-    //data.append('exercise', value)
+    data.append('sentence', sentence) 
+    console.log(data)
     return axios
-      .post("http://127.0.0.1:8000/play_on/" , data, {
+      .post("http://127.0.0.1:8000/play_on/", data, {
         headers: {
           "content-Type": "multipart/form-data",
           'X-CSRFToken':Cookies.get('csrftoken'),
@@ -85,7 +85,7 @@ class RecorderMessage extends React.Component {
       <div className="RecorderMessage">
         <header className="App-header">
           <button onClick={this.start} disabled={this.state.isRecording}>Record</button>
-          <button onClick={this.stop} disabled={!this.state.isRecording} onChange={this.sendSentence}>Stop</button>
+          <button onClick={this.stop} disabled={!this.state.isRecording}>Stop</button>
           <audio className='recorder' src={this.state.blobURL} controls="controls" />
         </header>
       </div>

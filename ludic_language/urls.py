@@ -59,7 +59,7 @@ urlpatterns = [
          LudicJouneyListTherapistView.as_view(), name='exercise_therapist'),
     path('play_on/<int:pk>',
          LudicJourneyDetailView.as_view(), name='play_on'),
-    path('play_on/<int:pk>', SentenceApiView.as_view(), name='exercise_add'),
+    path('play_on/', SentenceApiView.as_view(), name='exercise_add'),
     path('form_assessement/<int:pk>', LudicJourneyUpdateView.as_view(),
          name='form_assessement'),
     path('assessement/<int:pk>', AssessementDetailView.as_view(),
