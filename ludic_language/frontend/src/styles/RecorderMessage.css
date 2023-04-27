@@ -1,3 +1,24 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.container .button {
+  background: none;
+  border: 2px solid #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  background-color: #ffd300;
+  position: relative;
+
+}
+button:hover {
+  background: #c23866;
+  color: #fff;
+}
 .RecorderMessage {
     text-align: center;
   }
@@ -15,12 +36,13 @@
   }
   .recorder {
     width: 300px;
-    height: 54px;
-    padding: 6px 12px;
+    height: 40px;
     position: relative;
-    top: 22px;
+    border: 1px solid #949292;
+    border-radius: 24px;
+    box-shadow: 0 0 4px 4px #DEDEDE; 
   }
-
+  
   @keyframes RecorderMessage-logo-spin {
     from {
       transform: rotate(0deg);
@@ -31,3 +53,20 @@
   }
   
 
+  .area {
+    border: 1px solid #DEDEDE;
+    padding: 12px;
+    box-shadow: 0 0 4px 4px #DEDEDE; 
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    justify-items: center;
+    align-items: stretch;
+    gap: 1rem;
+    margin: 0 auto;
+    width: 660px;
+    height: 600px;
+    perspective: 100%;
+    max-width: 720px;
+    border-radius: 10px;
+  }

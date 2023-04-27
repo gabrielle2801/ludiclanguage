@@ -1,28 +1,62 @@
-.memory-card {
-    position: relative;
-}
-.memory-card img {
-    width: 100%;
-    display: block;
-    border: 2px solid #fff;
-    border-radius: 6px;
-}
-.memory-card .front {
-    transform: rotateY(90deg);
-    transition: all ease-in 0.2s;
-    position: absolute;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.flipped .front {
+.memory-card {
+  position: relative;
+}
+.memory-card img {
+  width: 100%;
+  display: block;
+  border: 2px solid #fff;
+  border-radius: 10px;
+}
+.tile {
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px 4px #DEDEDE;
+  transition: 0.3s;
+  transform-style: preserve-3d;
+  position: relative;
+  }
+
+  
+  .tile--front,
+  .tile--back {
+    backface-visibility: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    right: 0px;
+    border-radius: 10px;
+  }
+  
+  .tile--front {
+    cursor: pointer;
+  }
+  
+  .tile--back {
+    transform: rotateY(-180deg);
+  }
+  
+  .tile--selected .tile--back {
     transform: rotateY(0deg);
-    transition-delay: 0.2s;
-}
-/* back of card -cover */
-.memory-card .back {
-    transition: all ease-in 0.2s;
-    transition-delay: 0.2s;
-}
-.flipped .back {
-    transform: rotateY(90deg);
-    transition-delay: 0s ;
-}
+  }
+  
+  .tile--selected .tile--front {
+    transform: rotateY(180deg);
+  }
+  
+  .tile--selected.tile--matched .tile--back,
+  .tile--selected.tile--matched .tile--front {
+    animation-name: shake;
+    animation-duration: 0.4s;
+    filter: blur(0.5px);
+  }
+  .hidden {
+    display: none;
+  }
+  

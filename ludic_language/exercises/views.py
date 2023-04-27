@@ -97,19 +97,14 @@ class SentenceApiView(APIView):
     serializer_class = RecorderSerializer
     permission_classes = (permissions.AllowAny,)
 
-    def get_object(self, pk):
-        try:
-            return Exercise.objects.get(pk=pk)
-        except Exercise.DoesNotExist:
-            return None
-
     def post(self, request, * args, **kwargs):
 
         data = {
 
             'audio_file': request.FILES.get('audio'),
             'patient': request.user.profile,
-            'sentence': request.data.get('sentence')
+            'sentence': request.data.get('sentence'),
+            'exercise': request.data.get('exercise')
         }
 
         serializer = RecorderSerializer(data=data)
@@ -119,21 +114,6 @@ class SentenceApiView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def put(self, request, pk, * args, **kwargs):
-        exercise = self.get_object(pk)
-        print(exercise)
-        if exercise is None:
-            return Response({'error': 'Exercise not found'}, status=status.HTTP_404_NOT_FOUND)
-        data = {
-            'exercise': exercise.id
-        }
-
-        serializer = RecorderSerializer(data=data)
-        print('data     ', data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LudicJourneyUpdateView(LoginRequiredMixin, UpdateView):

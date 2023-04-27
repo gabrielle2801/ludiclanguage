@@ -1,9 +1,37 @@
 {
   "status": "done",
   "assets": {
+    "../assets/img/apple.png": {
+      "name": "../assets/img/apple.png",
+      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/assets/img/apple.png"
+    },
+    "../assets/img/bird.png": {
+      "name": "../assets/img/bird.png",
+      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/assets/img/bird.png"
+    },
+    "../assets/img/bird2.png": {
+      "name": "../assets/img/bird2.png",
+      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/assets/img/bird2.png"
+    },
     "../assets/img/cover.png": {
       "name": "../assets/img/cover.png",
       "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/assets/img/cover.png"
+    },
+    "../assets/img/flower.png": {
+      "name": "../assets/img/flower.png",
+      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/assets/img/flower.png"
+    },
+    "../assets/img/flower2.png": {
+      "name": "../assets/img/flower2.png",
+      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/assets/img/flower2.png"
+    },
+    "../assets/img/flower3.png": {
+      "name": "../assets/img/flower3.png",
+      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/assets/img/flower3.png"
+    },
+    "../assets/img/fox.png": {
+      "name": "../assets/img/fox.png",
+      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/assets/img/fox.png"
     },
     "../assets/img/Loup.png": {
       "name": "../assets/img/Loup.png",
@@ -12,6 +40,10 @@
     "../assets/img/Renard.png": {
       "name": "../assets/img/Renard.png",
       "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/assets/img/Renard.png"
+    },
+    "../assets/img/wolf.png": {
+      "name": "../assets/img/wolf.png",
+      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/assets/img/wolf.png"
     },
     "app.bundle.js": {
       "name": "app.bundle.js",
