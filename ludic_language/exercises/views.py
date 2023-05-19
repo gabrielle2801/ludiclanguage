@@ -2,6 +2,7 @@ from django.views.generic import DetailView
 from django.views.generic import ListView, CreateView
 from django.views.generic.edit import UpdateView
 from .serializers import RecorderSerializer, ExerciseSerializer
+from django.http import HttpResponse
 # from django.shortcuts import get_object_or_404
 from django.http import Http404
 # from django.http import JsonResponse
@@ -114,6 +115,21 @@ class SentenceApiView(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class RecorderView(LoginRequiredMixin, ListView):
+    template_name = 'recorder_therapist.html'
+    model = RecorderMessage
+    context_object_name = 'recorder_therapist'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['patient'] = self.request.user.profile
+        return kwargs
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        queryset = queryset.select_related('exercise')
+        return queryset
 
 
 class LudicJourneyUpdateView(LoginRequiredMixin, UpdateView):

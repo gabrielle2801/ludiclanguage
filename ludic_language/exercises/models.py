@@ -20,6 +20,7 @@ class Exercise(models.Model):
     description_game = models.TextField(blank=True)
     picture1 = models.ImageField('picture1', blank=True)
     picture2 = models.ImageField('picture2', blank=True)
+    pdf = models.FileField(upload_to='pdf', blank=True)
     therapist = models.ForeignKey(
         'profiles.Profile', on_delete=models.CASCADE,
         related_name='therapist_exercice',
@@ -44,6 +45,6 @@ class RecorderMessage(models.Model):
     audio_file = models.FileField(blank=True)
     sentence = models.TextField(blank=True)
     exercise = models.ForeignKey('Exercise', on_delete=models.CASCADE,
-                             related_name='exercise_recorder', null=True)
+                                 related_name='exercise_recorder', null=True)
     patient = models.ForeignKey('profiles.Profile', on_delete=models.CASCADE,
                                 related_name='patient_recorder', null=True)

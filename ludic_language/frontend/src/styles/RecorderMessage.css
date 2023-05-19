@@ -1,10 +1,21 @@
-.container {
+.recorder {
   display: flex;
   justify-content: center;
   align-items: center;
 
 }
-.container .button {
+.recorder .button {
+  background: none;
+  border: 2px solid #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  background-color: #ffd300;
+  position: relative;
+
+}
+.button {
   background: none;
   border: 2px solid #fff;
   padding: 6px 12px;

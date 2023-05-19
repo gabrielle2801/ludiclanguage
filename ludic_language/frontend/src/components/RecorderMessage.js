@@ -113,7 +113,6 @@ class RecorderMessage extends React.Component {
     return tiles;
   }
   multiplyTiles(tiles) {
-    console.log("multiply")
     return tiles
       .map(item => {
         // Use Object.assign to create a new object rather than passing the same reference twice
@@ -124,7 +123,6 @@ class RecorderMessage extends React.Component {
       });
   }
   shuffleCards = () =>  {
-    console.log("nextprops")
     const newTiles = this.tiles.map(e => {
       e.status = "unselected";
 
@@ -132,7 +130,8 @@ class RecorderMessage extends React.Component {
     });
 
     this.setState({
-      tiles: this.shuffleTiles(this.multiplyTiles(newTiles))
+      tiles: this.shuffleTiles(this.multiplyTiles(newTiles)),
+      turns:0
     });
     
   }
@@ -243,7 +242,6 @@ class RecorderMessage extends React.Component {
 
   sendAudioFile = (url) => {
     const data = new FormData();
-    console.log(this.props.params.id)
     data.append('sentence', this.state.messages)
     data.append("audio", url);
     data.append('exercise', this.props.params.id)
@@ -283,6 +281,7 @@ class RecorderMessage extends React.Component {
     let cindex = 0
     return (
       <div className="RecorderMessage">
+        <button onClick={this.shuffleCards}>New Game</button>
         <p>Turns: {this.state.turns}</p>
         <div className="area">
           {this.state.tiles.map(e => (
@@ -301,7 +300,7 @@ class RecorderMessage extends React.Component {
             variant="success">
             <p>{this.state.messages}</p>
           </Alert>
-        <header className="container">
+        <header className="recorder">
           <button onClick={this.start} disabled={this.state.isRecording}>Record</button>
           <button onClick={this.stop} disabled={!this.state.isRecording}>Stop</button>
           <audio className='recorder' src={this.state.blobURL} controls="controls" />

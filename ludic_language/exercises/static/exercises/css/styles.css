@@ -27,6 +27,8 @@
 }
 
 .exercise-card {
+    display: flex;
+    flex-direction: column;
     position: relative;
     width: 65%;
     margin-bottom: 3.5rem;

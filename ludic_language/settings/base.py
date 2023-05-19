@@ -177,6 +177,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 AUTH_PROFILE_MODULE = 'profiles.Profile'
 # AUTH_USER_MODEL = 'profiles.User'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 # Directory where uploaded media is saved.
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = 'media/'  # Public URL at the browser

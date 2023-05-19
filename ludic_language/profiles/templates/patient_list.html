@@ -19,12 +19,18 @@
                                      <a  class="d-flex justify-content-center align-items-center btn btn-detail"   type="button" href="{% url 'detail_patient' patient.user.id %}"
                                              data-toggle="tooltip" data-placement="bottom">
                                     <span>Afficher les détails du patient </span>
-                                    <i class="bi bi-info-circle"></i>
+                                    <i class="bi bi-info-circle icon"></i>
                                     </a>
                                     <a  class="d-flex justify-content-center align-items-center btn btn-workshop"   type="button" href="{% url 'form_workshop' patient.user.id %}"
                                              data-toggle="tooltip" data-placement="bottom">
                                     <span>planifier une session</span>
-                                    <i class="bi bi-calendar-date-fill"></i>
+                                    <i class="bi bi-calendar-date-fill icon"></i>
+                                    </a>
+                                    </a>
+                                    <a  class="d-flex justify-content-center align-items-center btn btn-workshop"   type="button" href="{% url 'recorder_therapist' patient.user.id %}"
+                                             data-toggle="tooltip" data-placement="bottom">
+                                    <span>Ecouter</span>
+                                     <i class="bi bi-mic-fill icon"></i>
                                     </a>
 
                                     <div class="d-flex me-auto">
@@ -34,7 +40,7 @@
                                             <a  class="d-flex justify-content-center align-items-center btn btn-delete" name="delete_patient" type="button"
                                                  data-toggle="tooltip" data-placement="bottom" href="{% url 'delete_patient' patient.user.id %}">
                                             <span>supprimer le favoris</span>
-                                            <i class="fas fa-trash"></i>
+                                            <i class="fas fa-trash icon"></i>
                                            </a>
                                         </form>
                                     </div>

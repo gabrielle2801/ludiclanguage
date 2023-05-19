@@ -26,6 +26,8 @@
                     <img src="{{exercise_detail.picture2.url}}" class="img_game">
                     {% elif exercise_detail.title_game == 'Memory Game' %}
                     {% include 'exercise_memory.html' %}
+                     {% elif exercise_detail.pdf %}
+                      <embed src="{{ exercise_detail.pdf.url }}" type="application/epub" width="800px" height="800px"/>
                     {% else %}
                     <p>Exercice en cours de préparation ... </p>
                     {% endif %}

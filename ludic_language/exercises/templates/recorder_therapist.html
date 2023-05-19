@@ -1,0 +1,40 @@
+{% extends 'index_speech.html' %}
+{% block content%}
+<div class="content-container">
+    <div class="container-fluid">
+        <section class="jumbotron">
+             <div class="table-responsive">
+                    <table class="wk-table">
+                        <thead>
+
+                            <tr>
+                                <th scope="col">Patient</th>
+                                <th scope="col"> Exercice</th>
+                                <th scope="col">Pathologie</th>
+                                <th scope="col">Recorder</th>
+                           </tr>
+                        </thead>
+                        {% for recorder in recorder_therapist %}
+                        <tbody>
+                            {% if recorder %}
+                            <tr>
+                              <td>{{recorder.patient.user.username}}</td>
+                              <td>{{recorder.exercise}}</td>
+                              <td>{{recorder.exercise.pathology.name}}</td>
+                              <td> <audio controls >
+                                <source src=" {% if recorder.audio_file %} {{ recorder.audio_file.url }} {% endif %}" type="audio/wav">
+                                </audio>
+                              </td>
+
+                            </tr>
+
+                             {% endif %}
+                            </tbody>
+                            {% endfor %}
+
+                    </table>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock content %}

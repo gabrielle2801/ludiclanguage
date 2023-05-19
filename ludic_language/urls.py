@@ -1,10 +1,9 @@
 """ludic_language URL Configuration"""
 from django.contrib import admin
 from django.conf import settings
-from rest_framework import routers
 from django.conf.urls.static import static
 from django.contrib.auth.views import LoginView
-from django.urls import path, include
+from django.urls import path
 from ludic_language.profiles import views
 from ludic_language.base.views import BaseView, LegalNoticeView, AboutUsView
 from ludic_language.profiles.views import LoginView, IndexSpeechView, \
@@ -17,7 +16,8 @@ from ludic_language.workshops.views import WorkshopAddView, WorkshopListView,\
 from ludic_language.exercises.views import ExerciseListView, \
     PathologyDetailView, LudicJourneyAddView, LudicJouneyListView, \
     LudicJourneyDetailView, LudicJourneyUpdateView,\
-    LudicJouneyListTherapistView, AssessementDetailView, SentenceApiView
+    LudicJouneyListTherapistView, AssessementDetailView,\
+    SentenceApiView, RecorderView
 
 # router = routers.DefaultRouter()
 # router.register(r'message', MessageViewSet)
@@ -60,6 +60,8 @@ urlpatterns = [
     path('play_on/<int:pk>',
          LudicJourneyDetailView.as_view(), name='play_on'),
     path('play_on/', SentenceApiView.as_view(), name='exercise_add'),
+    path('recorder_therapist/<int:pk>',
+         RecorderView.as_view(), name='recorder_therapist'),
     path('form_assessement/<int:pk>', LudicJourneyUpdateView.as_view(),
          name='form_assessement'),
     path('assessement/<int:pk>', AssessementDetailView.as_view(),
