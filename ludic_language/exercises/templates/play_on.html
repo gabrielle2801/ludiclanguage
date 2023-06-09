@@ -27,10 +27,13 @@
                     {% elif exercise_detail.title_game == 'Memory Game' %}
                     {% include 'exercise_memory.html' %}
                      {% elif exercise_detail.pdf %}
-                      <embed src="{{ exercise_detail.pdf.url }}" type="application/epub" width="800px" height="800px"/>
+                      <embed src="{{ exercise_detail.pdf.url }}" type="application/pdf" width="800px" height="800px"/>
                     {% else %}
                     <p>Exercice en cours de préparation ... </p>
-                    {% endif %}
+                    {% endif  %}
+                    {% if exercise_detail.title_game == '7_differences' %}
+                    {% include 'exercise_7.html' %}
+                    {% endif  %}
                 </div>
             </div>
         </section>

@@ -131,8 +131,10 @@ class RecorderMessage extends React.Component {
 
     this.setState({
       tiles: this.shuffleTiles(this.multiplyTiles(newTiles)),
-      turns:0
+      turns:0,
     });
+    this.setState({messages:""})
+    this.setState({showMessage:false})
     
   }
   shuffleMessages () {

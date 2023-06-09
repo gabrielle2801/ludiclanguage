@@ -146,6 +146,9 @@ pythonenv*
 .dmypy.json
 dmypy.json
 
+#json
+*.json
+
 # Pyre type checker
 .pyre/
 
