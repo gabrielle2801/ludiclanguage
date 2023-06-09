@@ -2,22 +2,28 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
+  
 }
-
-.button:hover {
-  background: #c23866;
-  color: #fff;
+.audio_recorder {
+  width: 300px;
+  height: 40px;
+  border: 1px solid #949292;
+  border-radius: 24px;
+  box-shadow: 0 0 4px 4px #DEDEDE; 
 }
-.button {
+.btn_memory {
   background: none;
   border: 2px solid #fff;
   padding: 6px 12px;
   border-radius: 4px;
   cursor: pointer;
   font-size: 1em;
-  background-color: #ffd300;
+  background-color: #ffd300 !important;
   position: relative;
+
+}
+.btn_memory:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 
 }
 .RecorderMessage {
@@ -35,14 +41,7 @@
   .RecorderMessage-link {
     color: #61dafb;
   }
-  .recorder {
-    width: 300px;
-    height: 40px;
-    position: relative;
-    border: 1px solid #949292;
-    border-radius: 24px;
-    box-shadow: 0 0 4px 4px #DEDEDE; 
-  }
+
 
   @keyframes RecorderMessage-logo-spin {
     from {

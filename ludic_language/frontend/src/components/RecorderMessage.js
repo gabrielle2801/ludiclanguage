@@ -132,9 +132,11 @@ class RecorderMessage extends React.Component {
     this.setState({
       tiles: this.shuffleTiles(this.multiplyTiles(newTiles)),
       turns:0,
+      messages:"",
+      showMessage:false,
+
     });
-    this.setState({messages:""})
-    this.setState({showMessage:false})
+    
     
   }
   shuffleMessages () {
@@ -283,7 +285,7 @@ class RecorderMessage extends React.Component {
     let cindex = 0
     return (
       <div className="RecorderMessage">
-        <button onClick={this.shuffleCards}>New Game</button>
+        <button  onClick={this.shuffleCards} className='btn_memory' >New Game</button>
         <p>Turns: {this.state.turns}</p>
         <div className="area">
           {this.state.tiles.map(e => (
@@ -301,11 +303,11 @@ class RecorderMessage extends React.Component {
             show={this.state.showMessage}
             variant="success">
             <p>{this.state.messages}</p>
-          </Alert>
+        </Alert>
         <header className="recorder">
-          <button onClick={this.start} disabled={this.state.isRecording}>Record</button>
-          <button onClick={this.stop} disabled={!this.state.isRecording}>Stop</button>
-          <audio className='recorder' src={this.state.blobURL} controls="controls" />
+          <button  onClick={this.start} disabled={this.state.isRecording}className='btn_memory' >Record</button>
+          <button  onClick={this.stop} disabled={!this.state.isRecording} className='btn_memory'>Stop</button>
+          <audio className='audio_recorder' src={this.state.blobURL} controls="controls" />
         </header>
         
       </div>
