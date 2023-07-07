@@ -52,11 +52,24 @@
     "app.bundle.js.map": {
       "name": "app.bundle.js.map",
       "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/dist/app.bundle.js.map"
+    },
+    "app2.bundle.js": {
+      "name": "app2.bundle.js",
+      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/dist/app2.bundle.js"
+    },
+    "app2.bundle.js.map": {
+      "name": "app2.bundle.js.map",
+      "path": "/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/dist/app2.bundle.js.map"
     }
   },
   "chunks": {
     "app": [
       "app.bundle.js"
+    ],
+    "app2": [
+      "app2.bundle.js"
     ]
-  }
+  },
+  "error": "ModuleNotFoundError",
+  "message": "Module not found: Error: Can't resolve '../styles/App2.css' in '/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/src/components'"
 }

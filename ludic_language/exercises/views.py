@@ -103,8 +103,31 @@ class SentenceApiView(APIView):
         data = {
 
             'audio_file': request.FILES.get('audio'),
-            'patient': request.user.profile,
+            'patient': request.user.profile.user_id,
             'sentence': request.data.get('sentence'),
+            'exercise': request.data.get('exercise')
+        }
+
+        serializer = RecorderSerializer(data=data)
+        print('data     ', data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class TalesApiView(APIView):
+    queryset = RecorderMessage.objects.all()
+    serializer_class = RecorderSerializer
+    permission_classes = (permissions.AllowAny,)
+    pattern_name = "exercise_tales"
+
+    def post(self, request, * args, **kwargs):
+
+        data = {
+
+            'audio_file': request.FILES.get('audio'),
+            'patient': request.user.profile.user_id,
             'exercise': request.data.get('exercise')
         }
 
@@ -121,14 +144,10 @@ class RecorderView(LoginRequiredMixin, ListView):
     model = RecorderMessage
     context_object_name = 'recorder_therapist'
 
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['patient'] = self.request.user.profile
-        return kwargs
-
     def get_queryset(self):
         queryset = super().get_queryset()
-        queryset = queryset.select_related('exercise')
+        queryset = RecorderMessage.objects.filter(
+            patient_id=self.kwargs['patient_id'])
         return queryset
 
 

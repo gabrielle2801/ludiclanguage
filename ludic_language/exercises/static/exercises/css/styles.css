@@ -73,11 +73,17 @@ h3 .title_name{
   .img_game{
     width: 100%;
   }
+  .img_riddles{
+    width: 100%;
+  }
 
 }
 
 @media (min-width: 1200px) {
   .img_game{
+    width: 100%;
+  }
+  .img_riddles{
     width: 100%;
   }
 }
@@ -87,53 +93,51 @@ h3 .title_name{
     .img_game{
     width: 100%;
   }
+    .img_riddles{
+      width: 100%;
+    }
 
 }
 p.pathology {
     text-align: justify;
 }
 
-.flip-card{
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  width: 248px;
-  height: 373px;
-  float: left;
-  perspective: 500px;
+.container-flip {
+  position: relative;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-
-.content {
+.thecard{
   position: absolute;
   width: 100%;
   height: 100%;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
-
-  transition: transform 1s;
   transform-style: preserve-3d;
+  transition: all 0.5s ease;
 }
-
-.flip-card:hover .content {
-  transform: rotateY( 180deg ) ;
-  transition: transform 0.5s;
+.thecard:hover{
+  transform: rotateY(180deg);
 }
-
-.front,
-.back {
+.thefront {
   position: absolute;
-  height: 100%;
   width: 100%;
-  background: white;
-  line-height: 300px;
-  color: #03446A;
-  text-align: center;
-  font-size: 60px;
-  border-radius: 5px;
+  height: 100%;
   backface-visibility: hidden;
+  background-color:  #ffffff ;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
 }
 
-.back {
-  background: #03446A;
-  color: white;
-  transform: rotateY( 180deg );
+.theback {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  transform: rotateY(180deg);
+  text-align: center;
+  border-radius: 20px;
 }
+

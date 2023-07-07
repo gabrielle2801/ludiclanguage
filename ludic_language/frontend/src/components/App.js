@@ -6,34 +6,6 @@ import RecorderMessage from "./RecorderMessage";
 
 
 class App extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      score: 0,
-      gameOver: true
-      
-    };
-
-    this.initCards = this.initCards.bind(this);
-    this.restartGame = this.restartGame.bind(this);
-  }
-
-  initCards() {
-    this.setState({
-      score: 0,
-      gameOver: false
-    });
-  }
-
-  restartGame(turns) {
-    const score = Math.round(120 / turns * 100);
-
-    this.setState({
-      score: score,
-      gameOver: true
-    });
-  }
 
   render() {
     return (

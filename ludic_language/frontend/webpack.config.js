@@ -3,7 +3,8 @@ const BundleTracker = require('webpack-bundle-tracker');
 
 module.exports = {
     entry: {
-        app: '/src/index.js'
+        app: '/src/index.js',
+        app2: '/src/index2.js'
     },
     devtool: 'source-map',
     output: {

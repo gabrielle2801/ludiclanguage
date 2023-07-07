@@ -17,7 +17,7 @@ from ludic_language.exercises.views import ExerciseListView, \
     PathologyDetailView, LudicJourneyAddView, LudicJouneyListView, \
     LudicJourneyDetailView, LudicJourneyUpdateView,\
     LudicJouneyListTherapistView, AssessementDetailView,\
-    SentenceApiView, RecorderView
+    SentenceApiView, RecorderView, TalesApiView
 
 # router = routers.DefaultRouter()
 # router.register(r'message', MessageViewSet)
@@ -60,7 +60,8 @@ urlpatterns = [
     path('play_on/<int:pk>',
          LudicJourneyDetailView.as_view(), name='play_on'),
     path('play_on/', SentenceApiView.as_view(), name='exercise_add'),
-    path('recorder_therapist/<int:pk>',
+    path('play_on/', TalesApiView.as_view(), name='exercise_tales'),
+    path('recorder_therapist/<int:patient_id>',
          RecorderView.as_view(), name='recorder_therapist'),
     path('form_assessement/<int:pk>', LudicJourneyUpdateView.as_view(),
          name='form_assessement'),

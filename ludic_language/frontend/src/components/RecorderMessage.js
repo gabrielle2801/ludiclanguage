@@ -134,7 +134,6 @@ class RecorderMessage extends React.Component {
       turns:0,
       messages:"",
       showMessage:false,
-
     });
     
     

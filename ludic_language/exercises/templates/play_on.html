@@ -1,4 +1,5 @@
 {% extends 'ludic_journey.html' %}
+{% load static %}
 {% block content %}
 <div class="content-container">
     <div class="container-fluid">
@@ -34,10 +35,19 @@
                     {% if exercise_detail.title_game == '7_differences' %}
                     {% include 'exercise_7.html' %}
                     {% endif  %}
+                    {% if exercise_detail.title_game == 'Riddles' %}
+                    {% include 'Riddles.html' %}
+                    {% endif  %}
+                    {% if exercise_detail.title_game == 'Histoire sans fin...' %}
+                    {% load render_bundle from webpack_loader %}
+                    {% block scripts %}
+                    <div id="root2"></div>
+                    <script src="{% static 'dist/app2.bundle.js' %}"></script>
+                    {% endblock %}
+                    {% endif  %}
                 </div>
             </div>
         </section>
     </div>
 </div>
-
 {% endblock content %}
