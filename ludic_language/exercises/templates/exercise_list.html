@@ -26,7 +26,12 @@
                                              data-toggle="tooltip" data-placement="bottom">
                                         <span>Liste des exercices</span>
                                         <i class="bi bi-check-lg"></i>
-                                </a>
+                                        </a>
+                                        <a  class="d-flex justify-content-center align-items-center btn btn-detail"   type="button" href="{% url 'play_on' exercise.id %}"
+                                             data-toggle="tooltip" data-placement="bottom">
+                                        <span>Visualier l'exercise</span>
+                                        <i class="bi bi-search"></i>
+                                        </a>
                                     </div>
                             </div>
                     </div>

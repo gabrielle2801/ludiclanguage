@@ -177,6 +177,20 @@ class AssessementDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'assessement'
 
 
+class ExerciseAddView(LoginRequiredMixin, CreateView):
+    form_class = ExerciseForm
+    model = Exercise
+    template_name = 'form_exercise.html'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['therapist'] = self.request.user.profile
+        return kwargs
+
+    def get_success_url(self):
+        return reverse('index_speech')
+
+
 '''
 -- Django version --
  class ExerciseListView(LoginRequiredMixin, ListView):
