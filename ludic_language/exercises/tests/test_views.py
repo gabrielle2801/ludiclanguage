@@ -64,7 +64,8 @@ class ExerciseListTest(BaseTest):
         view = ExerciseListView()
         view.request = request
         qs = view.get_queryset()
-        self.assertQuerysetEqual(qs, Pathology.objects.all())
+        self.assertQuerysetEqual(
+            qs, Pathology.objects.all(), ordered=False)
 
 
 class LudicJourneyAddTest(BaseTest):

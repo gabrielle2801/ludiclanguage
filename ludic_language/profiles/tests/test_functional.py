@@ -5,6 +5,7 @@ from selenium.webdriver.common.keys import Keys
 from ludic_language.profiles.models import Profile, Address, User
 from ludic_language.exercises.models import Pathology
 from django.contrib.auth import get_user_model
+from selenium.webdriver.common.by import By
 
 firefox_options = webdriver.FirefoxOptions()
 firefox_options.headless = True
@@ -37,43 +38,43 @@ class LudicLanguageProfileTest(StaticLiveServerTestCase):
         driver = self.driver
         driver.implicitly_wait(10)
         driver.get('%s%s' % (self.live_server_url, '/login/'))
-        driver.find_element_by_id('id_username').send_keys('Marieaumont')
-        driver.find_element_by_name('password').send_keys('12test12')
-        driver.find_element_by_css_selector('.submit').click()
-        driver.find_element_by_name('patient').click()
+        driver.find_element(By.ID, 'id_username').send_keys('Marieaumont')
+        driver.find_element(By.NAME, 'password').send_keys('12test12')
+        driver.find_element(By.CSS_SELECTOR, '.submit').click()
+        driver.find_element(By.NAME, 'patient').click()
 
     def test_form(self):
         driver = self.driver
         driver.implicitly_wait(10)
         driver.get('%s%s' % (self.live_server_url, '/login/'))
-        driver.find_element_by_id('id_username').send_keys('Marieaumont')
-        driver.find_element_by_name('password').send_keys('12test12')
-        driver.find_element_by_css_selector('.submit').click()
-        driver.find_element_by_css_selector('.btn').click()
+        driver.find_element(By.ID, 'id_username').send_keys('Marieaumont')
+        driver.find_element(By.NAME, 'password').send_keys('12test12')
+        driver.find_element(By.CSS_SELECTOR, '.submit').click()
+        driver.find_element(By.CSS_SELECTOR, '.btn').click()
         driver.get('%s%s' % (self.live_server_url, '/form_patient/'))
-        driver.find_element_by_name('first_name').send_keys('Clarence')
-        driver.find_element_by_name('last_name').send_keys('Grey')
-        driver.find_element_by_name('email').send_keys('helenegrey@email.com')
-        driver.find_element_by_name('username').send_keys('ClarenceGr')
-        driver.find_element_by_name('password1').send_keys('12test12')
-        driver.find_element_by_name('password2').send_keys('12test12')
-        driver.find_element_by_name('birth_date').send_keys('12/05/2015')
-        driver.find_element_by_name('bio').send_keys('Clarence est un ....')
-        driver.find_element_by_name('review').send_keys(
+        driver.find_element(By.NAME, 'first_name').send_keys('Clarence')
+        driver.find_element(By.NAME, 'last_name').send_keys('Grey')
+        driver.find_element(By.NAME, 'email').send_keys('helenegrey@email.com')
+        driver.find_element(By.NAME, 'username').send_keys('ClarenceGr')
+        driver.find_element(By.NAME, 'password1').send_keys('12test12')
+        driver.find_element(By.NAME, 'password2').send_keys('12test12')
+        driver.find_element(By.NAME, 'birth_date').send_keys('12/05/2015')
+        driver.find_element(By.NAME, 'bio').send_keys('Clarence est un ....')
+        driver.find_element(By.NAME, 'review').send_keys(
             'Clarence a besoin de  ....')
-        driver.find_element_by_name('pathology').send_keys('Dyslexie')
-        driver.find_element_by_name('num').send_keys('10')
-        driver.find_element_by_name('street').send_keys('rue de ....')
-        driver.find_element_by_name('zip_code').send_keys(92140)
-        driver.find_element_by_name('city').send_keys('Clamart')
-        driver.find_element_by_css_selector('.submit').click()
-        driver.find_element_by_name('patient').click()
+        driver.find_element(By.NAME, 'pathology').send_keys('Dyslexie')
+        driver.find_element(By.NAME, 'num').send_keys('10')
+        driver.find_element(By.NAME, 'street').send_keys('rue de ....')
+        driver.find_element(By.NAME, 'zip_code').send_keys(92140)
+        driver.find_element(By.NAME, 'city').send_keys('Clamart')
+        driver.find_element(By.CSS_SELECTOR, '.submit').click()
+        driver.find_element(By.NAME, 'patient').click()
 
     def test_search_therapist(self):
         driver = self.driver
         driver.implicitly_wait(10)
         driver.get(self.live_server_url)
-        search_bar = driver.find_element_by_name("search_therapist")
+        search_bar = driver.find_element(By.NAME, "search_therapist")
         search_bar.clear()
         search_bar.send_keys("Paris")
         search_bar.send_keys(Keys.RETURN)

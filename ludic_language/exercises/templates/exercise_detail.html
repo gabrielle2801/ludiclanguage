@@ -1,4 +1,4 @@
-{% extends 'ludic_journey.html' %}
+{% extends 'index_speech.html' %}
 {% load static %}
 {% block content %}
 <div class="content-container">
@@ -46,8 +46,17 @@
                     {% endblock %}
                     {% endif  %}
                 </div>
+                <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
+
+                    <a  class="d-flex justify-content-center align-items-center btn btn-exercise_detail" name="ludic_journey"  type="button" href="{% url 'exercise_list' %}"
+                                         data-toggle="tooltip" data-placement="bottom">
+                    <span>Listes des exercices </span>
+                    <i class="bi bi-arrow-return-left"></i>
+                    </a>
+                </div>
             </div>
         </section>
     </div>
 </div>
 {% endblock content %}
+

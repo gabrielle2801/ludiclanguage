@@ -42,7 +42,15 @@
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
-
+.btn .btn-exercise_detail {
+  width: 20rem !important;
+  height: 5rem !important;
+  margin: 0 0.5rem 0 0;
+  color: white;
+  background-color: #fec155;
+  border-radius: 0.5rem !important;
+  text-align: center;
+}
 .card-title{
     font-family: "Helvetica Neue";
     color: #1f1e21;

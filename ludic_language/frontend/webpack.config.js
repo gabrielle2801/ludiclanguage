@@ -4,13 +4,17 @@ const BundleTracker = require('webpack-bundle-tracker');
 module.exports = {
     entry: {
         app: '/src/index.js',
-        app2: '/src/index2.js'
+        app2: '/src/index2.js',
     },
     devtool: 'source-map',
     output: {
         filename: '[name].bundle.js',
         path: path.resolve(__dirname, 'dist')
     },
+    performance: {
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000
+   },
     plugins: [
         new BundleTracker({filename: './webpack-stats.json'}),
     ],

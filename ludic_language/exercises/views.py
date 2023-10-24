@@ -87,10 +87,16 @@ class LudicJouneyListTherapistView(LoginRequiredMixin, ListView):
         return queryset
 
 
+class ExerciseDetailView(LoginRequiredMixin, DetailView):
+    template_name = 'exercise_detail.html'
+    model = Exercise
+    context_object_name = 'exercise_detail'
+
+
 class LudicJourneyDetailView(LoginRequiredMixin, DetailView):
     template_name = 'play_on.html'
     model = Exercise
-    context_object_name = 'exercise_detail'
+    context_object_name = 'ludic_journey'
 
 
 class SentenceApiView(APIView):
@@ -177,6 +183,7 @@ class AssessementDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'assessement'
 
 
+'''
 class ExerciseAddView(LoginRequiredMixin, CreateView):
     form_class = ExerciseForm
     model = Exercise
@@ -189,7 +196,7 @@ class ExerciseAddView(LoginRequiredMixin, CreateView):
 
     def get_success_url(self):
         return reverse('index_speech')
-
+'''
 
 '''
 -- Django version --

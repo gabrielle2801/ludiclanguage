@@ -1,8 +1,9 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+from selenium.webdriver.common.by import By
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
-from ludic_language.profiles.models import Profile, User
+from ludic_language.profiles.models import Profile
 from ludic_language.exercises.models import Pathology, Exercise
 from django.contrib.auth import get_user_model
 
@@ -33,7 +34,7 @@ class LudicLanguageExerciseTest(StaticLiveServerTestCase):
         driver = self.driver
         driver.implicitly_wait(10)
         driver.get('%s%s' % (self.live_server_url, '/login/'))
-        driver.find_element_by_id('id_username').send_keys('Marieaumont')
-        driver.find_element_by_name('password').send_keys('12test12')
-        driver.find_element_by_css_selector('.submit').click()
-        driver.find_element_by_name('ludic_journey').click()
+        driver.find_element(By.ID, 'id_username').send_keys('Marieaumont')
+        driver.find_element(By.NAME, 'password').send_keys('12test12')
+        driver.find_element(By.CSS_SELECTOR, '.submit').click()
+        driver.find_element(By.NAME, 'ludic_journey').click()

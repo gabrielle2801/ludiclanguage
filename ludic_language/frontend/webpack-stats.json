@@ -69,7 +69,5 @@
     "app2": [
       "app2.bundle.js"
     ]
-  },
-  "error": "ModuleNotFoundError",
-  "message": "Module not found: Error: Can't resolve '../styles/App2.css' in '/Users/xavgab/Worksplace/13_Projet 13/language_project/ludic_language/frontend/src/components'"
+  }
 }

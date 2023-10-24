@@ -1,4 +1,4 @@
-{% extends 'ludic_journey.html' %}
+{% extends 'index_patient.html' %}
 {% load static %}
 {% block content %}
 <div class="content-container">
@@ -7,38 +7,38 @@
              <div class="row">
                     <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
                         <div class="card exercise-card d-flex flex-column">
-                                <img src="{{exercise_detail.picture1.url}}" class="card-img-top exercise-img  rounded d-block align-m">
-                            <p class="card-title">{{exercise_detail.title_game}}</p>
+                                <img src="{{ludic_journey.picture1.url}}" class="card-img-top exercise-img  rounded d-block align-m">
+                            <p class="card-title">{{ludic_journey.title_game}}</p>
                         </div>
                     </div>
                         <article class="col-lg-8 col-md-6 col-sm-12 d-flex flex-column">
-                            <h3 class="title_name">{{exercise_detail.name}}</h3>
-                            <p class="description">{{exercise_detail.description}}</p>
+                            <h3 class="title_name">{{ludic_journey.name}}</h3>
+                            <p class="description">{{ludic_journey.description}}</p>
                         </article>
                 </div>
             <div class="row">
                 <hr>
                 <article class="col-lg-12 col-md-6 col-sm-12 d-flex flex-column">
                     <h3 class="title_name">S'entrainer</h3>
-                    <p class="description">{{exercise_detail.description_game}}</p>
+                    <p class="description">{{ludic_journey.description_game}}</p>
                 </article>
                 <div>
-                     {% if exercise_detail.picture2 %}
-                    <img src="{{exercise_detail.picture2.url}}" class="img_game">
-                    {% elif exercise_detail.title_game == 'Memory Game' %}
+                     {% if ludic_journey.picture2 %}
+                    <img src="{{ludic_journey.picture2.url}}" class="img_game">
+                    {% elif ludic_journey.title_game == 'Memory Game' %}
                     {% include 'exercise_memory.html' %}
-                     {% elif exercise_detail.pdf %}
-                      <embed src="{{ exercise_detail.pdf.url }}" type="application/pdf" width="800px" height="800px"/>
+                     {% elif ludic_journey.pdf %}
+                      <embed src="{{ ludic_journey.pdf.url }}" type="application/pdf" width="800px" height="800px"/>
                     {% else %}
                     <p>Exercice en cours de préparation ... </p>
                     {% endif  %}
-                    {% if exercise_detail.title_game == '7_differences' %}
+                    {% if ludic_journey.title_game == '7_differences' %}
                     {% include 'exercise_7.html' %}
                     {% endif  %}
-                    {% if exercise_detail.title_game == 'Riddles' %}
+                    {% if ludic_journey.title_game == 'Riddles' %}
                     {% include 'Riddles.html' %}
                     {% endif  %}
-                    {% if exercise_detail.title_game == 'Histoire sans fin...' %}
+                    {% if ludic_journey.title_game == 'Histoire sans fin...' %}
                     {% load render_bundle from webpack_loader %}
                     {% block scripts %}
                     <div id="root2"></div>

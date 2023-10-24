@@ -39,7 +39,7 @@
                                             <input type="hidden" name="patient_id" value="{{ patient.id }}">
                                             <a  class="d-flex justify-content-center align-items-center btn btn-delete" name="delete_patient" type="button"
                                                  data-toggle="tooltip" data-placement="bottom" href="{% url 'delete_patient' patient.user.id %}">
-                                            <span>supprimer le favoris</span>
+                                            <span>supprimer le profil</span>
                                             <i class="fas fa-trash icon"></i>
                                            </a>
                                         </form>
@@ -51,7 +51,7 @@
                         <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
                             <a class="d-flex justify-content-center align-items-center btn btn-patient" name="patient"  type="button" href="{% url 'form_patient' %}"
                                          data-toggle="tooltip" data-placement="bottom">
-                            <span>Formumaire de création de profil patient</span>
+                            <span>Formulaire de création de profil patient</span>
                             <i class="bi bi-people"> Créer un profil patient</i>
                             </a>
                         </div>
@@ -69,7 +69,7 @@
                         <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
                             <a  class="d-flex justify-content-center align-items-center btn btn-patient" name="patient"  type="button" href="{% url 'form_patient' %}"
                                                  data-toggle="tooltip" data-placement="bottom">
-                            <span>Formumaire de création de profil patient</span>
+                            <span>Formulaire de création de profil patient</span>
                             <i class="bi bi-people"> Créer un profil patient</i>
                             </a>
                         </div>
