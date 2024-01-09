@@ -28,7 +28,6 @@ ludic_language/staticfiles/
 .Python
 build/
 develop-eggs/
-dist/
 downloads/
 eggs/
 .eggs/
