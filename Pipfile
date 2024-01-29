@@ -32,6 +32,11 @@ djangorestframework = "*"
 django-cors-headers = "*"
 django-create-react-app = "*"
 django-webpack-loader = "*"
+certifi = "*"
+celery = "*"
+django-celery-email = "*"
+django-celery-results = "*"
+pip-system-certs = "*"
 
 [dev-packages]
 

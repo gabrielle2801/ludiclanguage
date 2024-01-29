@@ -1,8 +1,9 @@
 from django import forms
 # from django.core.mail import send_mail
+
+import os
 from ludic_language.workshops.models import Workshop
 from ludic_language.profiles.models import Profile
-
 
 class WorkshopForm(forms.ModelForm):
 
@@ -35,3 +36,5 @@ class ReportForm(forms.ModelForm):
     def save(self, *args, **kwargs):
         self.instance.therapist = self.therapist
         return super().save(*args, **kwargs)
+    
+    

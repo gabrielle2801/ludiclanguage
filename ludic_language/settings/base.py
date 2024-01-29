@@ -11,9 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
-import os
+import os, certifi
 from dotenv import load_dotenv, find_dotenv
-
 load_dotenv(find_dotenv())
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -48,6 +47,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'create_react_app',
     'webpack_loader',
+    "djcelery_email",
+    
 ]
 
 MIDDLEWARE = [
@@ -93,10 +94,10 @@ WSGI_APPLICATION = 'ludic_language.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'ludiclanguage_db',
-        'USER': 'xavgab',
-        'PASSWORD': 'ludiclanguage',
-        'HOST': 'localhost',
+        'NAME': os.getenv("DB_NAME"),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
         'PORT': '5432',
     }
 }
@@ -184,3 +185,12 @@ MEDIA_URL = 'media/'  # Public URL at the browser
 INTERNAL_IPS = [
     '127.0.0.1',
 ]
+# Email configuration 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'ludic-language.com'
+EMAIL_HOST_USER = "info@ludic-language.com"
+EMAIL_HOST_PASSWORD = "Azerty@01"
+EMAIL_PORT=465
+EMAIL_USE_SSL=True
+EMAIL_USE_TLS=False
+DEFAULT_FROM_EMAIL='ludic_language@outlook.com'
