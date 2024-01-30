@@ -1,8 +1,9 @@
 from django.shortcuts import reverse
 from django.urls import reverse_lazy
-from django.core.mail import send_mail
+from django.core.mail import EmailMultiAlternatives
 from django.template.loader import  render_to_string
-from django.template import Context
+from django.utils.html import strip_tags
+
 import os
 from dotenv import load_dotenv, find_dotenv
 
@@ -77,26 +78,27 @@ class WorkshopUpdateView(LoginRequiredMixin, UpdateView):
 
 
     def form_valid(self, form, **kwargs):
-        first_name = self.request.user.first_name
-        last_name = self.request.user.last_name
+        first_therapist = self.request.user.first_name
+        last_therapist = self.request.user.last_name
         context_data = self.get_context_data(form=form, **kwargs)
         first_name = context_data['first_name']
         last_name = context_data['last_name']
+        subject, from_email = 'Mise à jour', os.getenv('EMAIL_HOST_USER')
         recievers = []
         for user in User.objects.exclude(email=self.request.user.email):
             recievers.append(user.email)
             recipient_list = recievers
-        send_mail(
-            'mise à jour',
-                render_to_string('../templates/email.html',{
-                    'first_name': first_name,
-                    'last_name':last_name,
+        html_content = render_to_string(
+            '../templates/email.html',{
+                    'first_therapist': first_therapist,
+                    'last_therapist':last_therapist,
                     'patient': first_name,
-                    'patient_name' : last_name
-                }),
-            self.request.user.email,
-            recipient_list
-        )
+                    'patient_name' : last_name }
+                    )
+        text_content = strip_tags(html_content)
+        msg = EmailMultiAlternatives(subject, text_content, from_email, recipient_list)
+        msg.attach_alternative(html_content, 'text/html')
+        msg.send()
         return super().form_valid(form)
     
     
@@ -121,4 +123,30 @@ class ReportDetailView(DetailView):
     model = Workshop
     template_name = 'report_patient.html'
     context_object_name = 'report'
+
+"""
+ def form_valid(self, form, **kwargs):
+        first_name = self.request.user.first_name
+        last_name = self.request.user.last_name
+        context_data = self.get_context_data(form=form, **kwargs)
+        first_name = context_data['first_name']
+        last_name = context_data['last_name']
+        recievers = []
+        for user in User.objects.exclude(email=self.request.user.email):
+            recievers.append(user.email)
+            recipient_list = recievers
+        html_content = ren
+        send_mail(
+            'mise à jour',
+                render_to_string('../templates/email.html',{
+                    'first_name': first_name,
+                    'last_name':last_name,
+                    'patient': first_name,
+                    'patient_name' : last_name
+                }),
+            self.request.user.email,
+            recipient_list
+        )
+        return super().form_valid(form)
+"""
 
