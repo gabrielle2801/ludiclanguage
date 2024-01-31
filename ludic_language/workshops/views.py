@@ -3,6 +3,7 @@ from django.urls import reverse_lazy
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import  render_to_string
 from django.utils.html import strip_tags
+from email.mime.image import MIMEImage
 
 import os
 from dotenv import load_dotenv, find_dotenv
@@ -83,8 +84,9 @@ class WorkshopUpdateView(LoginRequiredMixin, UpdateView):
         context_data = self.get_context_data(form=form, **kwargs)
         first_name = context_data['first_name']
         last_name = context_data['last_name']
-        subject, from_email = 'Mise à jour', os.getenv('EMAIL_HOST_USER')
+        subject, from_email = 'Notification', os.getenv('EMAIL_HOST_USER')
         recievers = []
+
         for user in User.objects.exclude(email=self.request.user.email):
             recievers.append(user.email)
             recipient_list = recievers
@@ -97,7 +99,14 @@ class WorkshopUpdateView(LoginRequiredMixin, UpdateView):
                     )
         text_content = strip_tags(html_content)
         msg = EmailMultiAlternatives(subject, text_content, from_email, recipient_list)
+        msg.mixed_subtype = 'related'
         msg.attach_alternative(html_content, 'text/html')
+    
+        fp = open('ludic_language/workshops/static/workshops/assets/logo.png', 'rb')
+        msg_img = MIMEImage(fp.read())
+        fp.close()
+        msg_img.add_header('Content-ID', '<logo.png>')
+        msg.attach(msg_img)
         msg.send()
         return super().form_valid(form)
     
@@ -148,5 +157,14 @@ class ReportDetailView(DetailView):
             recipient_list
         )
         return super().form_valid(form)
+
+img_dir = 'static'
+        image = 'logo.png'
+        file_path = os.path.join(img_dir, image)
+        with open(file_path, 'r') as f :
+            img = MIMEImage(f.read())
+            img.add_header('Content-ID', '<{name}>'.format(name=image))
+            img.add_header('Content-Disposition', 'inline', filename=image)
+        msg.attach(img)
 """
 

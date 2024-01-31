@@ -1,14 +1,23 @@
-
-<!doctype html>
+{% load static %}
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mise à jour </title>
+    <link href="{% static 'css/styles.css' %}" type="text/css" rel="stylesheet">
+    <title>Notification</title>
   </head>
   <body>
-    <h2>Mise à Jour du compte rendu</h2>
-    <p>{{first_therapist}} {{last_therapist}} a mis à jour la fiche de {{patient}} {{patient_name}}</p>
+    {% block nav %}
+    <nav class="header">
+      <a class="logo" href="{% url 'index' %}" style="color: #f3c155;font-size: 2em; font-family: Helvetica;">Ludic<strong>Language PRO</strong> </a>
+      <img src="cid:logo.png" width="60" height="50" />
+    </nav>
+    {% endblock nav %}
+    {% block content %}
+    <h3 style="font-family: Helvetica;">Mise à Jour</h3>
+    <p style="font-family: Helvetica;">{{first_therapist}} {{last_therapist}} a mis à jour la fiche de {{patient}} {{patient_name}}</p>
+    {% endblock content %}
   </body>
 </html>
