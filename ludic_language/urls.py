@@ -47,7 +47,7 @@ urlpatterns = [
     path('form_report/<int:pk>',
          WorkshopUpdateView.as_view(), name='form_report'),
     path('report_list/', ReportListView.as_view(), name='report_list'),
-    path('report/<int:pk>', ReportDetailView.as_view(), name='report_patient'),
+    path('report_patient/<int:pk>', ReportDetailView.as_view(), name='report_patient'),
     path('pathology/<int:pk>', PathologyDetailView.as_view(), name='pathology'),
     path('exercise_list/',
          ExerciseListView.as_view(), name='exercise_list'),

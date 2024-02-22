@@ -26,7 +26,7 @@ class ProfileTest(TestCase):
     def test_age_valid(self):
         my_age = 6
         response = self.user.profile.age
-        self.assertEquals(response, my_age)
+        self.assertEqual(response, my_age)
 
     @freeze_time("2020-01-14")
     def test_age_invalid(self):

@@ -43,14 +43,14 @@ class UserProfileViewTest(TestCase):
             username='Marieaumont', password='Therapist@25')
         self.assertTrue(login)
         response = self.client.get(self.form_url)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_form_ok(self):
         login = self.client.login(
             username='Marieaumont', password='Therapist@25')
         self.assertTrue(login)
         response = self.client.post(self.form_url, self.patient)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         patient = User.objects.get(email='test@email.com')
         patient.pathology_id = self.pathology_id
         patient.first_name = 'Clarence'
@@ -65,9 +65,13 @@ class PatientDetailTest(TestCase):
             self.therapist = User.objects.create_user(
                 username='test', password='12test12').pk
             self.pathology_id = Pathology.objects.create(name='Dyslexie').pk
-            self.profile = Profile.objects.create(user_id=self.user, birth_date='2013-05-12', state=1,
-                                                  bio='Lucas est atteint de ......', profile_pic='lucasdesmarais.png',
-                                                  pathology_id=self.pathology_id, therapist_id=self.therapist)
+            self.profile = Profile.objects.create(user_id=self.user, 
+                                                  birth_date='2013-05-12',
+                                                  state=1,
+                                                  bio='Lucas est atteint de .', 
+                                                  profile_pic='lucasdesmarais.png',
+                                                  pathology_id=self.pathology_id, 
+                                                  therapist_id=self.therapist)
             self.profile.save()
             return super().setUp()
 
@@ -82,7 +86,8 @@ class PatientDetailTest(TestCase):
 class PatientDeleteTest(TestCase):
     def setUp(self):
         self.user = get_user_model().objects.create_user(
-            username='LucasD', first_name='Lucas', password='12test12', email='test@email.com')
+            username='LucasD', first_name='Lucas', password='12test12',
+            email='test@email.com')
         self.user_id = self.user.pk
         self.user.save()
         self.therapist = User.objects.create_user(
@@ -90,8 +95,10 @@ class PatientDeleteTest(TestCase):
 
         self.pathology_id = Pathology.objects.create(name='Dyslexie').pk
         Profile(user=self.user, birth_date='2013-05-12', state=1,
-                bio='Lucas est atteint de ......', profile_pic='lucasdesmarais.png',
-                pathology_id=self.pathology_id, therapist_id=self.therapist).save()
+                bio='Lucas est atteint de ......',
+                profile_pic='lucasdesmarais.png',
+                pathology_id=self.pathology_id, 
+                therapist_id=self.therapist).save()
         return super().setUp()
 
     def test_delete_valid(self):
@@ -102,7 +109,7 @@ class PatientDeleteTest(TestCase):
             'pk': self.user_id})
 
         response = self.client.get(delete_url)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'patient_confirm_delete.html')
 
 
@@ -111,14 +118,18 @@ class TherapistListTest(TestCase):
         self.therapist_list_url = reverse('therapist_list')
         self.factory = RequestFactory()
         self.user = get_user_model().objects.create_user(
-            username='Marieaumont', first_name='Marie', password='12test12', email='test@email.com')
+            username='Marieaumont', first_name='Marie', password='12test12',
+            email='test@email.com')
         self.user_id = self.user.pk
         self.user.save()
-        self.therapist = Profile(user=self.user, birth_date='1975-05-12', state=2,
-                                 bio='Marie est spécialisée ......', profile_pic='marieaumont.png'
+        self.therapist = Profile(user=self.user, birth_date='1975-05-12',
+                                 state=2,
+                                 bio='Marie est spécialisée ......', 
+                                 profile_pic='marieaumont.png'
                                  ).save()
         self.address = Address.objects.create(
-            num=6, street='rue de ...', zip_code=92500, city='Paris', profile_id=self.user_id)
+            num=6, street='rue de ...', zip_code=92500, city='Paris',
+            profile_id=self.user_id)
         return super().setUp()
 
     def test_view_ok(self):

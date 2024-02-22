@@ -1,24 +1,23 @@
+from email.mime.image import MIMEImage
+import os
+from django.utils.html import strip_tags
 from django.shortcuts import reverse
 from django.urls import reverse_lazy
 from django.core.mail import EmailMultiAlternatives
-from django.template.loader import  render_to_string
-from django.utils.html import strip_tags
-from email.mime.image import MIMEImage
-
-import os
+from django.template.loader import render_to_string
 from dotenv import load_dotenv, find_dotenv
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
 from django.views.generic import ListView, DetailView
-
-
 from django.views.generic.edit import UpdateView
-import datetime
+
 from ludic_language.profiles.models import User
 from ludic_language.workshops.models import Workshop
 from ludic_language.workshops.forms import WorkshopForm, ReportForm
+
 load_dotenv(find_dotenv())
+
 
 class WorkshopAddView(LoginRequiredMixin, CreateView):
     form_class = WorkshopForm
@@ -77,7 +76,6 @@ class WorkshopUpdateView(LoginRequiredMixin, UpdateView):
         context_data['last_name'] = user_obj.last_name
         return context_data
 
-
     def form_valid(self, form, **kwargs):
         first_therapist = self.request.user.first_name
         last_therapist = self.request.user.last_name
@@ -98,7 +96,8 @@ class WorkshopUpdateView(LoginRequiredMixin, UpdateView):
                     'patient_name' : last_name }
                     )
         text_content = strip_tags(html_content)
-        msg = EmailMultiAlternatives(subject, text_content, from_email, recipient_list)
+        msg = EmailMultiAlternatives(subject, text_content, from_email,
+                                     recipient_list)
         msg.mixed_subtype = 'related'
         msg.attach_alternative(html_content, 'text/html')
     
@@ -110,9 +109,7 @@ class WorkshopUpdateView(LoginRequiredMixin, UpdateView):
         msg.send()
         return super().form_valid(form)
     
-    
-        
-   
+
 class ReportListView(ListView):
     template_name = 'report_list.html'
     model = Workshop
@@ -124,14 +121,12 @@ class ReportListView(ListView):
             patient_id=self.request.user.profile)\
             .order_by('-date')
         return queryset
-    
-
 
 
 class ReportDetailView(DetailView):
     model = Workshop
     template_name = 'report_patient.html'
-    context_object_name = 'report'
+    context_object_name = 'report_patient'
 
 """
  def form_valid(self, form, **kwargs):

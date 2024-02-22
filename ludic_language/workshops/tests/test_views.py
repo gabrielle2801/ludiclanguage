@@ -13,7 +13,8 @@ class WorkshopAddViewTest(TestCase):
         self.therapist = get_user_model().objects.create_user(
             username='Marieaumont', password='Therapist@25').pk
         self.patient = User.objects.create_user(
-            username='ClarenceBr', password='12test12', email='test@email.com').pk
+            username='ClarenceBr', password='12test12', 
+            email='test@email.com').pk
         self.form_url = reverse('form_workshop')
         self.client = Client()
         self.workshop = {
@@ -30,14 +31,14 @@ class WorkshopAddViewTest(TestCase):
             username='Marieaumont', password='Therapist@25')
         self.assertTrue(login)
         response = self.client.get(self.form_url)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_form_ok(self):
         login = self.client.login(
             username='Marieaumont', password='Therapist@25')
         self.assertTrue(login)
         response = self.client.post(self.form_url, self.workshop)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
         workshop = Workshop.objects.filter(
             shedule_online='https://meet.google.com/njy-iipe-rkp')
         workshop.patient_id = self.patient
@@ -49,13 +50,15 @@ class WorkshopListViewTest(TestCase):
         self.therapist = get_user_model().objects.create_user(
             username='Marieaumont', password='Therapist@25').pk
         self.patient = User.objects.create_user(
-            username='ClarenceBr', password='12test12', email='test@email.com').pk
+            username='ClarenceBr', password='12test12',
+            email='test@email.com').pk
         self.form_url = reverse('list_workshop')
         self.client = Client()
         self.workshop = Workshop.objects.filter(date='2022-02-12 15:00',
                                                 report='Lorem ipsum dolor sit amet, consectetur adipiscing elit',
                                                 shedule_online='https://meet.google.com/njy-iipe-rkp',
-                                                patient_id=self.patient, therapist_id=self.therapist)
+                                                patient_id=self.patient, 
+                                                therapist_id=self.therapist)
 
         return super().setUp()
 
@@ -64,13 +67,13 @@ class WorkshopListViewTest(TestCase):
                 username='Marieaumont', password='Therapist@25')
             self.assertTrue(login)
             response = self.client.post(self.form_url)
-            self.assertEquals(response.status_code, 200)
+            self.assertEqual(response.status_code, 200)
 
         def test_user_list_worshop(self):
             request = self.factory.get(self.form_url)
             request.user = self.therapist
             response = WorkshopListView.as_view()(request)
-            self.assertEquals(response.status_code, 200)
+            self.assertEqual(response.status_code, 200)
 
 
 class ReportUpdateTest(TestCase):
@@ -79,10 +82,12 @@ class ReportUpdateTest(TestCase):
         self.therapist = get_user_model().objects.create_user(
             username='Marieaumont', password='Therapist@25').pk
         self.patient = User.objects.create_user(
-            username='ClarenceBr', password='12test12', email='test@email.com').pk
+            username='ClarenceBr', password='12test12', 
+            email='test@email.com').pk
         self.workshop = Workshop.objects.create(date='2022-02-12 15:00',
                                                 shedule_online='https://meet.google.com/njy-iipe-rkp',
-                                                patient_id=self.patient, therapist_id=self.therapist)
+                                                patient_id=self.patient, 
+                                                therapist_id=self.therapist)
         self.workshop_id = self.workshop.pk
         self.form_url = reverse('form_report', kwargs={
             'pk': self.workshop_id})
@@ -96,7 +101,7 @@ class ReportUpdateTest(TestCase):
             username='Marieaumont', password='Therapist@25')
         self.assertTrue(login)
         response = self.client.post(self.form_url, self.report_update)
-        self.assertEquals(response.status_code, 302)
+        self.assertEqual(response.status_code, 302)
         workshop = Workshop.objects.filter(date='2022-02-12 15:00')
         workshop.report = self.report_update
 
@@ -113,7 +118,8 @@ class ReportListViewTest(TestCase):
         self.workshop = Workshop.objects.create(date='2022-02-12 15:00',
                                                 shedule_online='https://meet.google.com/njy-iipe-rkp',
                                                 report='Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                                                patient_id=self.patient_id, therapist_id=self.therapist).pk
+                                                patient_id=self.patient_id, 
+                                                therapist_id=self.therapist).pk
         self.form_url = reverse('report_list')
         return super().setUp()
 
@@ -121,13 +127,13 @@ class ReportListViewTest(TestCase):
         login = self.client.login(username='ClarenceBr', password='12test12')
         self.assertTrue(login)
         response = self.client.get(self.form_url)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_user_list_report(self):
         request = self.factory.get(self.form_url)
         request.user = self.patient
         response = ReportListView.as_view()(request)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
 
 class ReportDetailViewTest(TestCase):
@@ -135,12 +141,14 @@ class ReportDetailViewTest(TestCase):
         self.therapist = get_user_model().objects.create_user(
             username='Marieaumont', password='Therapist@25').pk
         self.patient = User.objects.create_user(
-            username='ClarenceBr', password='12test12', email='test@email.com').pk
+            username='ClarenceBr', password='12test12', 
+            email='test@email.com').pk
         self.client = Client()
         self.workshop = Workshop.objects.create(date='2022-02-12 15:00',
                                                 shedule_online='https://meet.google.com/njy-iipe-rkp',
                                                 report='Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-                                                patient_id=self.patient, therapist_id=self.therapist).pk
+                                                patient_id=self.patient, 
+                                                therapist_id=self.therapist).pk
         self.form_url = reverse('report_patient', kwargs={'pk': self.workshop})
         return super().setUp()
 
@@ -148,4 +156,4 @@ class ReportDetailViewTest(TestCase):
         login = self.client.login(username='ClarenceBr', password='12test12')
         self.assertTrue(login)
         response = self.client.get(self.form_url)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)

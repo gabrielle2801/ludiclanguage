@@ -22,7 +22,13 @@
                       <td>{{workshop.patient.user.username}}</td>
                       <td>{{workshop.date|date:"l j F Y"}}</td>
                       <td>{{workshop.date|date:"H:i"}}</td>
-                      <td>Compte rendu réalisé</td>
+                      <td>Compte rendu réalisé
+                        <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="{% url 'report_patient' workshop.id%}"
+                             data-toggle="tooltip" data-placement="bottom">
+                        <span>Créer un compte rendu </span>
+                        <i class="bi bi-info-circle icon"></i>
+                        </a>
+                    </td>
                     </tr>
                     {% else %}
                     <tr class="wk-todo">

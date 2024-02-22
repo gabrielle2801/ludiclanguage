@@ -48,7 +48,6 @@ INSTALLED_APPS = [
     'create_react_app',
     'webpack_loader',
     "djcelery_email",
-    
 ]
 
 MIDDLEWARE = [
@@ -171,6 +170,7 @@ WEBPACK_LOADER = {
     }
 }
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# Use nose to run all tests
 
 
 # Default primary key field type
@@ -189,8 +189,8 @@ INTERNAL_IPS = [
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'ludic-language.com'
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD =os.getenv('EMAIL_HOST_PASSWORD')
-EMAIL_PORT=465
-EMAIL_USE_SSL=True
-EMAIL_USE_TLS=False
-DEFAULT_FROM_EMAIL='ludic_language@outlook.com'
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'ludic_language@outlook.com'

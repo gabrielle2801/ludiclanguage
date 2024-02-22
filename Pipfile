@@ -37,6 +37,11 @@ celery = "*"
 django-celery-email = "*"
 django-celery-results = "*"
 pip-system-certs = "*"
+flake8 = "*"
+setuptools = "*"
+pipenv = "*"
+pytest-django = "*"
+pytest-cov = "*"
 
 [dev-packages]
 
