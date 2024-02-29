@@ -7,16 +7,16 @@ from django.urls import path
 from ludic_language.profiles import views
 from ludic_language.base.views import BaseView, LegalNoticeView, AboutUsView
 from ludic_language.profiles.views import LoginView, IndexSpeechView, \
-    IndexPatientView, PatientListView,\
-    PatientAddView, PatientDetailView, PatientDeleteView,\
+    IndexPatientView, PatientListView, \
+    PatientAddView, PatientDetailView, PatientDeleteView, \
     TherapistListView, TherapistDetailView
-from ludic_language.workshops.views import WorkshopAddView, WorkshopListView,\
-    WorkshopUpdateView,\
-    ReportListView, ReportDetailView
+from ludic_language.workshops.views import WorkshopAddView, WorkshopListView, \
+    WorkshopUpdateView, \
+    ReportListView, ReportDetailView, ReportDeleteView
 from ludic_language.exercises.views import ExerciseListView, \
     PathologyDetailView, LudicJourneyAddView, LudicJouneyListView, \
-    LudicJourneyDetailView, LudicJourneyUpdateView,\
-    LudicJouneyListTherapistView, AssessementDetailView,\
+    LudicJourneyDetailView, LudicJourneyUpdateView, \
+    LudicJouneyListTherapistView, AssessementDetailView, \
     SentenceApiView, RecorderView, TalesApiView, ExerciseDetailView
 
 # router = routers.DefaultRouter()
@@ -47,7 +47,10 @@ urlpatterns = [
     path('form_report/<int:pk>',
          WorkshopUpdateView.as_view(), name='form_report'),
     path('report_list/', ReportListView.as_view(), name='report_list'),
-    path('report_patient/<int:pk>', ReportDetailView.as_view(), name='report_patient'),
+    path('report_patient/<int:pk>', 
+         ReportDetailView.as_view(), name='report_patient'),
+    path('delete_report/<int:pk>',
+         ReportDeleteView.as_view(), name='delete_report'),
     path('pathology/<int:pk>', PathologyDetailView.as_view(), name='pathology'),
     path('exercise_list/',
          ExerciseListView.as_view(), name='exercise_list'),

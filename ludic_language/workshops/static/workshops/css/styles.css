@@ -130,3 +130,10 @@ body{
 p.report{
   text-align: justify;
 }
+.list_workshop {
+  background-color: #eee;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  margin-bottom: 30px;
+  color: inherit;
+}

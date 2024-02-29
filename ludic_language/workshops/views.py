@@ -1,7 +1,8 @@
 from email.mime.image import MIMEImage
 import os
 from django.utils.html import strip_tags
-from django.shortcuts import reverse
+from django.shortcuts import reverse, render
+from django.contrib import messages
 from django.urls import reverse_lazy
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
@@ -10,7 +11,8 @@ from dotenv import load_dotenv, find_dotenv
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import CreateView
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import UpdateView
+from django.views.generic.edit import UpdateView,  DeleteView
+from django.db.models import Q
 
 from ludic_language.profiles.models import User
 from ludic_language.workshops.models import Workshop
@@ -70,8 +72,8 @@ class WorkshopUpdateView(LoginRequiredMixin, UpdateView):
     def get_context_data(self, **kwargs):
         context_data = super(WorkshopUpdateView, self).get_context_data(**kwargs)
         workshop_obj = Workshop.objects.get(id=self.kwargs.get('pk'))
-        user_id=workshop_obj.patient_id
-        user_obj=User.objects.get(id=user_id)
+        user_id = workshop_obj.patient_id
+        user_obj = User.objects.get(id=user_id)
         context_data['first_name'] = user_obj.first_name
         context_data['last_name'] = user_obj.last_name
         return context_data
@@ -83,30 +85,37 @@ class WorkshopUpdateView(LoginRequiredMixin, UpdateView):
         first_name = context_data['first_name']
         last_name = context_data['last_name']
         subject, from_email = 'Notification', os.getenv('EMAIL_HOST_USER')
-        recievers = []
 
-        for user in User.objects.exclude(email=self.request.user.email):
-            recievers.append(user.email)
-            recipient_list = recievers
-        html_content = render_to_string(
-            '../templates/email.html',{
+        recievers = {}
+        list_users = []
+        for user in User.objects.exclude(Q(email=self.request.user.email) |
+                                                            Q(username="adlanguage") ):
+            recievers["email"] = user.email
+            recievers["first_name"] = user.first_name
+            list_users.append(recievers)
+            recievers = {}
+
+        for user_name in list_users:
+            html_content = render_to_string(
+            '../templates/email.html', {
+                    'name': user_name.get("first_name"),
                     'first_therapist': first_therapist,
-                    'last_therapist':last_therapist,
+                    'last_therapist': last_therapist,
                     'patient': first_name,
-                    'patient_name' : last_name }
+                    'patient_name': last_name, }
                     )
-        text_content = strip_tags(html_content)
-        msg = EmailMultiAlternatives(subject, text_content, from_email,
-                                     recipient_list)
-        msg.mixed_subtype = 'related'
-        msg.attach_alternative(html_content, 'text/html')
-    
-        fp = open('ludic_language/workshops/static/workshops/assets/logo.png', 'rb')
-        msg_img = MIMEImage(fp.read())
-        fp.close()
-        msg_img.add_header('Content-ID', '<logo.png>')
-        msg.attach(msg_img)
-        msg.send()
+            text_content = strip_tags(html_content)
+            msg = EmailMultiAlternatives(subject, text_content, from_email,
+                                        [user_name.get("email")])
+            msg.mixed_subtype = 'related'
+            msg.attach_alternative(html_content, 'text/html')
+            fp = open('ludic_language/workshops/static/workshops/assets/logo.png', 'rb')
+            msg_img = MIMEImage(fp.read())
+            fp.close()
+            msg_img.add_header('Content-ID', '<logo.png>')
+            msg.attach(msg_img)
+            msg.send()
+ 
         return super().form_valid(form)
     
 
@@ -127,6 +136,26 @@ class ReportDetailView(DetailView):
     model = Workshop
     template_name = 'report_patient.html'
     context_object_name = 'report_patient'
+
+
+class ReportDeleteView(LoginRequiredMixin, DeleteView):
+    """
+    Delete Report
+    Attributes:
+        model (TYPE): Workshop model
+       
+    """
+    model = Workshop
+    context_object_name = 'list_workshop'
+    template_name = 'report_confirm_delete.html'
+
+    def get_success_url(self):
+        messages.success(self.request, 'Le compte rendu a bien été supprimé')
+        return reverse_lazy('list_workshop')
+
+    def page_not_found_view(request):
+        return render(request, 'workshops/404.html')
+
 
 """
  def form_valid(self, form, **kwargs):

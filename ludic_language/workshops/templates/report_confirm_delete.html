@@ -1,0 +1,26 @@
+{% extends 'authentication/login.html' %}
+
+{% block header %}
+    <header class="simple-header d-flex align-items-center">
+    <div class="container px-4 px-lg-5">
+        <div class="row gx-4 gx-lg-5  justify-content-center align-items-between text-center">
+            <div class="col">
+                <h1 class="fs-1 text-center">Suppression du compte rendu !</h1>
+            </div>
+        </div>
+    </div>
+    </header>
+    {% endblock header %}
+{% block content%}
+<div class="container h-100">
+    {% if list_workshop %}
+    <form action="{% url 'delete_report' list_workshop.id %}" method="post">
+        {% csrf_token %}
+        <p>Êtes-vous sûr de vouloir supprimer le conpte rendu du patient {{ list_workshop.patient }} ?</p>
+        <p> Ce compte rendu a été réalisé suite au workshop du {{list_workshop.date}}</p>
+        <p> Contenu du compte rendu : {{list_workshop.report}}</p>
+        <input class="btn" type="submit" name="Confirm_btn"  value="Confirmation" />
+    </form>
+    {% endif %}
+</div>
+{% endblock%}

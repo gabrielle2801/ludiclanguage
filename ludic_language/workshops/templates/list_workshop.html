@@ -3,7 +3,15 @@
 {% block content%}
 <div class="content-container">
   <div class="container-fluid">
-    <section class="jumbotron main-section-patient">
+    <section class="jumbotron">
+        {% if messages %}
+            {% for msg in messages %}
+                <div class="alert alert-success alert-dismissable">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                {{msg.message}}
+                </div>
+            {% endfor %}
+            {% endif %}
         <div class="table-responsive">
         <table class="wk-table">
                 <thead>
@@ -25,9 +33,23 @@
                       <td>Compte rendu réalisé
                         <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="{% url 'report_patient' workshop.id%}"
                              data-toggle="tooltip" data-placement="bottom">
-                        <span>Créer un compte rendu </span>
+                        <span>visualiser le compte rendu</span>
                         <i class="bi bi-info-circle icon"></i>
                         </a>
+                    </td>
+                    <td> 
+                    <div class="d-flex me-auto">
+                        <form method="post", action="{% url 'delete_report' workshop.id %}">
+                                {% csrf_token %}
+                            <input type="hidden" name="report_id" value="{{ workshop.id }}">
+                            <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="{% url 'delete_report' workshop.id%}"
+                                data-toggle="tooltip" data-placement="bottom">
+                            <span>supprimer le compte rendu</span>
+                            <i class="fas fa-trash icon"></i>
+                            </a>
+                        </form>
+                            
+                    </div>
                     </td>
                     </tr>
                     {% else %}
