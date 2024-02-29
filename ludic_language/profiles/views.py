@@ -49,7 +49,14 @@ def logout_request(request):
 
 
 class IndexSpeechView(TemplateView):
+    model = User
     template_name = "index_speech.html"
+    
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(*args, **kwargs)
+        context['workshop_date'] = Workshop.objects.filter(therapist_id=self.request.user.profile,
+                                                           date__date=datetime.date.today())
+        return context
 
 
 class IndexPatientView(TemplateView):
@@ -57,9 +64,8 @@ class IndexPatientView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['workshop_date'] = Workshop.objects\
-            .filter(patient_id=self.request.user.profile)\
-            .filter(date=datetime.date.today())
+        context['workshop_date'] = Workshop.objects.filter(patient_id=self.request.user.profile,
+                                                           date__date=datetime.date.today())
         return context
 
 

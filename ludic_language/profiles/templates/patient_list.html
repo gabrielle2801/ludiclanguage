@@ -5,6 +5,14 @@
         <div class="container-fluid">
                 <section class="jumbotron main-section-speech">
                     <div class="row">
+                        {% if messages %}
+                            {% for msg in messages %}
+                                <div class="alert alert-success alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                {{msg.message}}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                         {% if patient_list %}
                         {% for patient in patient_list  %}
                         <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">

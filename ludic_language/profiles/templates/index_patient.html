@@ -35,32 +35,28 @@
                 <img src={{user.profile.profile_pic.url}} class="img-raised rounded-circle avatar">
                     <li class="nav-link link link-theme link-arrow">
                       <a href="{% url 'index_patient' %}">
-                        <i class="fa fa-home" aria-hidden="true"></i> Homepage
+                        <i class="bi bi-house"></i> Homepage
                       </a>
                     </li>
             <li class="nav-link link link-theme link-arrow">
               <a href="#">
-                <i class="fa fa-tachometer" aria-hidden="true"></i> About
+                <i class="bi bi-info-circle"></i> About 
               </a>
             </li>
             <li class="nav-link link link-theme link-arrow">
               <a href="{% url 'logout' %}">
-                <i class="fa fa-tachometer" aria-hidden="true"></i> LOG OUT
+                <i class="bi bi-box-arrow-right"></i> LOG OUT
               </a>
             </li>
                 {% if workshop_date %}
                         {% for workshop in workshop_date %}
                         <li class="nav-link link link-theme link-arrow">
-                              <a href="{% url 'list_workshop' %}">
-                                <i class="bi bi-calendar-date"></i> Prochaine session : {{workshop.date}}
-                              </a>
+                            <i class="bi bi-calendar-date"></i> Prochaine session : {{workshop.date}} 
                         </li>
                         {% endfor %}
                         {% else %}
                         <li class="nav-link link link-theme link-arrow">
-                              <a href="{% url 'list_workshop' %}">
-                                <i class="bi bi-calendar-date"></i> Pas de Session aujourd'hui !
-                              </a>
+                              <i class="bi bi-calendar-date"></i> Pas de Session aujourd'hui !
                         </li>
                         {% endif %}
                 {% endif %}

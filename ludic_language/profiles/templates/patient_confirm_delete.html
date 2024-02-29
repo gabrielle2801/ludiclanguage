@@ -17,7 +17,7 @@
     <form action="{% url 'delete_patient' patient_list.id %}" method="post">
         {% csrf_token %}
         <p>Êtes-vous sûr de vouloir supprimer "{{ patient_list.username  }}"?</p>
-        <input type="submit" name="Confirm_btn"  value="Confirm" />
+        <input class="btn" type="submit" name="Confirm_btn"  value="Confirmer" />
     </form>
 
     {% endif %}

@@ -13,6 +13,7 @@ django-extended-choices = "*"
 django-multi-form-view = "*"
 django-betterforms = "*"
 django-webpack-loader = "*"
+<<<<<<< HEAD
 django-create-react-app = "*"
 django-cors-headers = "*"
 djangorestframework = "*"
@@ -34,6 +35,18 @@ django-utils-six = "*"
 six = "*"
 pillow = "*"
 setuptools = "*"
+=======
+certifi = "*"
+celery = "*"
+django-celery-email = "*"
+django-celery-results = "*"
+pip-system-certs = "*"
+flake8 = "*"
+setuptools = "*"
+pipenv = "*"
+pytest-django = "*"
+pytest-cov = "*"
+>>>>>>> send_email
 
 [dev-packages]
 

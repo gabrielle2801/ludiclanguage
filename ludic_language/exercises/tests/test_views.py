@@ -5,7 +5,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.models import User
 from ludic_language.profiles.models import Profile
 from ludic_language.exercises.models import Pathology, Exercise, LudicJourney
-from ludic_language.exercises.views import ExerciseListView, LudicJouneyListView
+from ludic_language.exercises.views import ExerciseListView, \
+     LudicJouneyListView
 # from ludic_language.exercises.views import PathologyDetailView
 
 
@@ -14,7 +15,8 @@ class BaseTest(TestCase):
         self.client = Client()
         self.factory = RequestFactory()
         self.user = get_user_model().objects.create_user(
-            username='LucasD', first_name='Lucas', password='12test12', email='test@email.com')
+            username='LucasD', first_name='Lucas', password='12test12', 
+            email='test@email.com')
         self.user_id = self.user.pk
         self.user.save()
         self.therapist = User.objects.create_user(
@@ -22,13 +24,21 @@ class BaseTest(TestCase):
 
         self.pathology_id = Pathology.objects.create(
             name='Dyslexie', description="la pathologie ..... ").pk
-        self.profile = Profile(user=self.user, birth_date='2013-05-12', state=1,
-                               bio='Lucas est atteint de ......', profile_pic='lucasdesmarais.png',
-                               pathology_id=self.pathology_id, therapist_id=self.therapist).save()
+        self.profile = Profile(user=self.user, birth_date='2013-05-12',
+                               state=1,
+                               bio='Lucas est atteint de ......',
+                               profile_pic='lucasdesmarais.png',
+                               pathology_id=self.pathology_id,
+                               therapist_id=self.therapist).save()
 
-        self.exercise = Exercise.objects.create(name='Améliorer ....', description="L'aider ...", picture1='Winter.png',
-                                                picture2="puzzle.png", pathology_id=self.pathology_id, therapist_id=self.therapist,
-                                                description_game="Rassemble ...", title_game='Puzzle').pk
+        self.exercise = Exercise.objects.create(name='Améliorer ....',
+                                                description="L'aider ...",
+                                                picture1='Winter.png',
+                                                picture2="puzzle.png",
+                                                pathology_id=self.pathology_id,
+                                                therapist_id=self.therapist,
+                                                description_game="Rassemble.",
+                                                title_game='Puzzle').pk
         return super().setUp()
 
 
@@ -77,7 +87,7 @@ class LudicJourneyAddTest(BaseTest):
             username='Marieaumont', password='Therapist@25')
         self.assertTrue(login)
         response = self.client.get(form_url)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_form_ok(self):
         form_url = reverse('form_ludicjourney', args=[
@@ -91,7 +101,7 @@ class LudicJourneyAddTest(BaseTest):
             username='Marieaumont', password='Therapist@25')
         self.assertTrue(login)
         response = self.client.post(form_url, ludic_journey)
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
 
 class LudicJourneyListTest(BaseTest):
@@ -100,7 +110,7 @@ class LudicJourneyListTest(BaseTest):
             username='LucasD', password='12test12')
         self.assertTrue(login)
         response = self.client.get(reverse('ludic_journey'))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
     def test_queryset(self):
         request = self.factory.get(reverse('ludic_journey'))
@@ -119,7 +129,7 @@ class LudicJourneyDetailTest(BaseTest):
         self.assertTrue(login)
         response = self.client.get(
             reverse('play_on', kwargs={'pk': self.exercise}))
-        self.assertEquals(response.status_code, 200)
+        self.assertEqual(response.status_code, 200)
 
 
 '''

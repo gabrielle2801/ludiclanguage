@@ -9,7 +9,8 @@ class WorkshopFormTest(TestCase):
         self.therapist = User.objects.create_user(
             username='Marieaumont', password='Therapist@25').pk
         self.patient = User.objects.create_user(
-            username='LucasDes', email='test@email.com', password='12test12').pk
+            username='LucasDes', 
+            email='test@email.com', password='12test12').pk
         return super().setUp()
 
     def test_workshop_valid(self):
@@ -47,9 +48,11 @@ class ReformFormTest(TestCase):
         self.therapist = User.objects.create_user(
             username='Marieaumont', password='Therapist@25').pk
         self.patient = User.objects.create_user(
-            username='LucasDes', email='test@email.com', password='12test12').pk
+            username='LucasDes', 
+            email='test@email.com', password='12test12').pk
         self.workshop = Workshop.objects.create(
-            date='2022-02-12 15:00', shedule_online='https://meet.google.com/njy-iipe-rkp',
+            date='2022-02-12 15:00', 
+            shedule_online='https://meet.google.com/njy-iipe-rkp',
             patient_id=self.patient, therapist_id=self.therapist).pk
         return super().setUp()
 
