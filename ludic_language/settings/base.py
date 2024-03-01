@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'ludic_language.exercises.apps.ExercisesConfig',
     'ludic_language.profiles.apps.ProfilesConfig',
     'ludic_language.workshops.apps.WorkshopsConfig',
+    'ludic_language.todo.apps.TodoConfig',
     'rest_framework',
     'corsheaders',
     'create_react_app',

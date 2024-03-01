@@ -25,7 +25,8 @@ class LudicJourneyAssessementForm(forms.ModelForm):
         model = LudicJourney
         fields = ['assessement']
 
-    def __init__(self, *args, therapist=None, patient=None, exercise=None, **kwargs):
+    def __init__(self, *args, therapist=None, patient=None,
+                 exercise=None, **kwargs):
         super().__init__(*args, **kwargs)
         self.therapist = therapist
         self.exercise = exercise

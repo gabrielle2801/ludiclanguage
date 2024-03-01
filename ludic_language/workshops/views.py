@@ -70,7 +70,8 @@ class WorkshopUpdateView(LoginRequiredMixin, UpdateView):
         return initial
     
     def get_context_data(self, **kwargs):
-        context_data = super(WorkshopUpdateView, self).get_context_data(**kwargs)
+        context_data = super(WorkshopUpdateView, 
+                             self).get_context_data(**kwargs)
         workshop_obj = Workshop.objects.get(id=self.kwargs.get('pk'))
         user_id = workshop_obj.patient_id
         user_obj = User.objects.get(id=user_id)
@@ -89,7 +90,7 @@ class WorkshopUpdateView(LoginRequiredMixin, UpdateView):
         recievers = {}
         list_users = []
         for user in User.objects.exclude(Q(email=self.request.user.email) |
-                                                            Q(username="adlanguage") ):
+                                                Q(username="adlanguage")):
             recievers["email"] = user.email
             recievers["first_name"] = user.first_name
             list_users.append(recievers)
@@ -106,10 +107,11 @@ class WorkshopUpdateView(LoginRequiredMixin, UpdateView):
                     )
             text_content = strip_tags(html_content)
             msg = EmailMultiAlternatives(subject, text_content, from_email,
-                                        [user_name.get("email")])
+                                         [user_name.get("email")])
             msg.mixed_subtype = 'related'
             msg.attach_alternative(html_content, 'text/html')
-            fp = open('ludic_language/workshops/static/workshops/assets/logo.png', 'rb')
+            fp = open('ludic_language/workshops/static/workshops/assets/logo.png',
+                      'rb')
             msg_img = MIMEImage(fp.read())
             fp.close()
             msg_img.add_header('Content-ID', '<logo.png>')

@@ -1,0 +1,48 @@
+.nav_task {
+	display:flex;
+	gap:1rem;
+	align-items: center;
+	justify-content: center;
+	flex-basis: 100%;
+}
+
+
+
+.nav_task a:nth-last-child(2) {
+	margin-left: auto;
+	font-weight: bold;
+} 
+
+.tasks {
+  list-style: none;
+  width: 100%;
+  max-width: 450px;
+}
+
+.tasks li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  border-bottom: solid 1px var(--color-dark);
+  padding: 0.5rem 0;
+}
+.tasks li:last-of-type {
+  border-bottom: none;
+}
+
+.task-controls {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.task-controls a {
+  color: var(--color-dark);
+}
+
+/* task detail */
+
+.task {
+  margin-bottom: auto;
+}

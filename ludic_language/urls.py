@@ -18,6 +18,7 @@ from ludic_language.exercises.views import ExerciseListView, \
     LudicJourneyDetailView, LudicJourneyUpdateView, \
     LudicJouneyListTherapistView, AssessementDetailView, \
     SentenceApiView, RecorderView, TalesApiView, ExerciseDetailView
+from ludic_language.todo.views import TodoListAddView, TodoListView
 
 # router = routers.DefaultRouter()
 # router.register(r'message', MessageViewSet)
@@ -72,6 +73,10 @@ urlpatterns = [
          name='form_assessement'),
     path('assessement/<int:pk>', AssessementDetailView.as_view(),
          name='assessement'),
+    path('task_create/', TodoListAddView.as_view(),
+         name='task_form'),
+    path('task_list/', TodoListView.as_view(),
+         name='task_list'),
     path('logout/', views.logout_request, name='logout'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 handler500 = "ludic_language.profiles.views.handle_server_error"

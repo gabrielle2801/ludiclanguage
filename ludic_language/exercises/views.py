@@ -2,12 +2,7 @@ from django.views.generic import DetailView
 from django.views.generic import ListView, CreateView
 from django.views.generic.edit import UpdateView
 from .serializers import RecorderSerializer
-# from django.http import HttpResponse
-# from django.shortcuts import get_object_or_404
-# from django.http import Http404
-# from django.http import JsonResponse
 from rest_framework import permissions
-# from rest_framework.generics import CreateAPIView
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status

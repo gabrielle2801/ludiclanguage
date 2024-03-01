@@ -100,7 +100,22 @@
                             <i class="bi bi-music-note-list"> Parcours Linguistique</i>
                             </a>
                         </div>
-
+                       
+                        {% if task_date %}
+                          {% for task in task_date %}
+                          <li>{{ task.title }}
+                            <div  class="task-controls">
+                                <a href="#"><i class="bi bi-trash"></i> </a>
+                                <a href="#"><i class="bi bi-pencil-square"></i></a>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    {% else %}
+                      <p>🎉 Yay, you have no pending tasks!</p>
+                    {% endif %}
+                 
+              </ul>
+              {% include 'todo/task_list.html'%}
                     </div>
                 </section>
         </div>

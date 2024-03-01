@@ -13,6 +13,7 @@ from django.db.models import Q
 from ludic_language.profiles.models import User, Profile
 from ludic_language.exercises.models import Pathology
 from ludic_language.workshops.models import Workshop
+from ludic_language.todo.models import Task
 from ludic_language.profiles.forms import UserProfileForm
 
 
@@ -51,11 +52,13 @@ def logout_request(request):
 class IndexSpeechView(TemplateView):
     model = User
     template_name = "index_speech.html"
-    
+   
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['workshop_date'] = Workshop.objects.filter(therapist_id=self.request.user.profile,
-                                                           date__date=datetime.date.today())
+        context['workshop_date'] = Workshop.objects.filter(
+            therapist_id=self.request.user.profile,
+            date__date=datetime.date.today())
+        context['task_date'] = Task.objects.all()
         return context
 
 
@@ -64,8 +67,9 @@ class IndexPatientView(TemplateView):
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(*args, **kwargs)
-        context['workshop_date'] = Workshop.objects.filter(patient_id=self.request.user.profile,
-                                                           date__date=datetime.date.today())
+        context['workshop_date'] = Workshop.objects.filter(
+            patient_id=self.request.user.profile,
+            date__date=datetime.date.today())
         return context
 
 
@@ -78,8 +82,9 @@ class TherapistListView(ListView):
         search = self.request.GET.get('search_therapist', '').strip()
         queryset = super().get_queryset()
         if search:
-            return queryset.filter(Q(address__city__icontains=search)
-                                   | Q(address__zip_code__icontains=search), state=2)
+            return queryset.filter(
+                Q(address__city__icontains=search)
+                | Q(address__zip_code__icontains=search), state=2)
         else:
             queryset
 
