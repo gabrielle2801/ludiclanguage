@@ -3,11 +3,10 @@ from ludic_language.todo.models import Task
 
 
 class TaskCreateForm(forms.ModelForm):
-
     class Meta:
         model = Task
         fields = ['title', 'description', 'priority',
-                  'completed', 'created_at']
+                  'completed',]
 
     def __init__(self, *args, therapist=None, ** kwargs):
         super().__init__(*args, **kwargs)

@@ -39,8 +39,10 @@ class UserProfileForm(UserCreationForm):
     def save(self, *args, **kwargs):
         user = super().save(*args, **kwargs)
         address = Address.objects.create(
-            profile=user.profile, num=self.cleaned_data['num'], street=self.cleaned_data['street'],
-            zip_code=self.cleaned_data['zip_code'], city=self.cleaned_data['city'])
+            profile=user.profile, num=self.cleaned_data['num'], 
+            street=self.cleaned_data['street'],
+            zip_code=self.cleaned_data['zip_code'],
+            city=self.cleaned_data['city'])
         user.profile.birth_date = self.cleaned_data['birth_date']
         user.profile.therapist = self.therapist
         user.profile.bio = self.cleaned_data['bio']

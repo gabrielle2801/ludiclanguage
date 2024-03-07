@@ -1,9 +1,10 @@
 from django import forms
 # from django.core.mail import send_mail
 
-import os
+# import os
 from ludic_language.workshops.models import Workshop
 from ludic_language.profiles.models import Profile
+
 
 class WorkshopForm(forms.ModelForm):
 

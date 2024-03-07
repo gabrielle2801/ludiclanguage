@@ -5,7 +5,12 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'task/css/style.css' %}" />
+        <script
+            src="https://unpkg.com/htmx.org@1.9.6"
+            integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
+            crossorigin="anonymous">
+        </script>
         <title>Todo List</title>
     </head>
 
@@ -13,27 +18,28 @@
         <main>
             <div class="container">
             	{% if messages %}
-				{% for message in messages %}
-					<div class="alert alert-{{message.tags}}">
-					       {{message}}
-					     </div>
-					   {% endfor %}
-				{% endif %}
+                    {% for msg in messages %}
+                        <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        {{msg.message}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
             
    
     {%block content%}
-    <div class="center">
+    <div class="todo-app">
         <a href="{% url 'task_form' %}"><i class="bi bi-plus-circle"></i> Create Task</a>
         
         <ul class="tasks">
-            {% for task in object_list %}
-                <li>{{ task.title }}
+            {% for task in task_list%}
+            <li>{{ task.title }}
                     <div  class="task-controls">
                         <a href="#"><i class="bi bi-trash"></i> </a>
-                        <a href="#"><i class="bi bi-pencil-square"></i></a>
+                        <a href="{%url 'task_update' task.id %}"><i class="bi bi-pencil-square"></i></a>
                     </div>
                 </li>
-                {% empty %}
+            {% empty %}
             <p>🎉 Yay, you have no pending tasks!</p>
             {% endfor %}
         </ul>

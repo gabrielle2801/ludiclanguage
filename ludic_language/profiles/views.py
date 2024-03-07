@@ -1,5 +1,6 @@
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic.list import MultipleObjectMixin
 from django.contrib.auth.views import LoginView as BaseLoginView
 from django.contrib import messages
 from django.views.generic import ListView
@@ -49,7 +50,7 @@ def logout_request(request):
     return redirect('index')
 
 
-class IndexSpeechView(TemplateView):
+class IndexSpeechView(MultipleObjectMixin, TemplateView):
     model = User
     template_name = "index_speech.html"
    
@@ -58,7 +59,7 @@ class IndexSpeechView(TemplateView):
         context['workshop_date'] = Workshop.objects.filter(
             therapist_id=self.request.user.profile,
             date__date=datetime.date.today())
-        context['task_date'] = Task.objects.all()
+        # context['task_list'] = Task.objects.all()
         return context
 
 

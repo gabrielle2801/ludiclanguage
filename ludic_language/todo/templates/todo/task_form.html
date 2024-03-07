@@ -7,7 +7,11 @@
                   <form method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form.as_p }}
+                    {% if '/task_create/'  in request.path %}
                     <button class="submit">CREER UNE TACHE</button>
+                    {% else %}
+                    <button class="submit">MODIFIEE</button>
+                    {% endif %}
                   </form>
             </section>
       </div>

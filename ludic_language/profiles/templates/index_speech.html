@@ -14,6 +14,11 @@
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.css">
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"></script>
+    <script
+            src="https://unpkg.com/htmx.org@1.9.6"
+            integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
+            crossorigin="anonymous">
+    </script>
 
     <!-- SimpleLightbox plugin CSS-->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/SimpleLightbox/2.1.0/simpleLightbox.min.css" rel="stylesheet" />
@@ -101,21 +106,10 @@
                             </a>
                         </div>
                        
-                        {% if task_date %}
-                          {% for task in task_date %}
-                          <li>{{ task.title }}
-                            <div  class="task-controls">
-                                <a href="#"><i class="bi bi-trash"></i> </a>
-                                <a href="#"><i class="bi bi-pencil-square"></i></a>
-                            </div>
-                        </li>
-                        {% endfor %}
-                    {% else %}
-                      <p>🎉 Yay, you have no pending tasks!</p>
-                    {% endif %}
+                       
                  
               </ul>
-              {% include 'todo/task_list.html'%}
+              {% include 'todo/task_list.html' %}
                     </div>
                 </section>
         </div>
