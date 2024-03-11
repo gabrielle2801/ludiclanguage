@@ -19,7 +19,7 @@ from ludic_language.exercises.views import ExerciseListView, \
     LudicJouneyListTherapistView, AssessementDetailView, \
     SentenceApiView, RecorderView, TalesApiView, ExerciseDetailView
 from ludic_language.todo.views import TodoListAddView, TodoListView, \
-     TodoUpdate
+     TodoUpdate, TodoDetail, TodoDelete
 
 # router = routers.DefaultRouter()
 # router.register(r'message', MessageViewSet)
@@ -78,6 +78,10 @@ urlpatterns = [
          name='task_form'),
     path('task_update/<int:pk>', TodoUpdate.as_view(),
          name='task_update'),
+    path('task_detail/<int:pk>', TodoDetail.as_view(),
+         name='task_detail'),
+    path('delete/<int:pk>', TodoDelete.as_view(),
+         name='task_delete'),
     path('index_speech/', TodoListView.as_view(),
          name='index_speech'),
     path('logout/', views.logout_request, name='logout'),

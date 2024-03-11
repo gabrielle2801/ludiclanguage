@@ -59,7 +59,7 @@ class IndexSpeechView(MultipleObjectMixin, TemplateView):
         context['workshop_date'] = Workshop.objects.filter(
             therapist_id=self.request.user.profile,
             date__date=datetime.date.today())
-        # context['task_list'] = Task.objects.all()
+        context['task_list'] = Task.objects.all()
         return context
 
 
@@ -135,10 +135,10 @@ class PathologyDetailView(ListView):
 
 class PatientDeleteView(LoginRequiredMixin, DeleteView):
     """
-    Delete favorite product of the list
+    Delete patient
     Attributes:
-        model (TYPE): Substitute model
-        success_url (TYPE): url of favorite template if is ok
+        model (TYPE): Profile
+        success_url (TYPE): url of patient
     """
 
     model = User

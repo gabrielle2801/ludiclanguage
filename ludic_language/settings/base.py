@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'create_react_app',
     'webpack_loader',
     "djcelery_email",
+    'crispy_forms',
+    'crispy_bootstrap5'
 ]
 
 MIDDLEWARE = [
@@ -62,7 +64,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
 ]
-
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:8081',
@@ -127,7 +128,7 @@ LANGUAGE_CODE = 'fr'
 
 TIME_ZONE = 'Europe/Paris'
 
-# USE_I18N = True
+USE_I18N = True
 
 USE_TZ = True
 
@@ -173,7 +174,9 @@ WEBPACK_LOADER = {
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 # Use nose to run all tests
 
-
+# Configuration de Django Crispy Forms
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 AUTH_PROFILE_MODULE = 'profiles.Profile'

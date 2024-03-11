@@ -1,0 +1,21 @@
+
+{% block content%}
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title">{{ task.title }}</h5>
+        </div>
+        <div class="modal-body">
+            <div class="task-priority-detail task-priority-detail-color-{{ task.priority}}" data-bs-toggle="tooltip" data-bs-placement="right">
+            </div>
+            <p>{{ task.description }}.</p>
+            {% if task.completed == False %}
+            <p>Echéance {{ task.due_datetime|date:"j F Y" }}</p>
+            
+            {% else %}
+            <p>Well done !</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

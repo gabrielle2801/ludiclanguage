@@ -133,7 +133,6 @@ class TalesApiView(APIView):
         }
 
         serializer = RecorderSerializer(data=data)
-        print('data     ', data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)

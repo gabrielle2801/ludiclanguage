@@ -28,25 +28,34 @@
             
    
     {%block content%}
-    <div class="todo-app">
-        <a href="{% url 'task_form' %}"><i class="bi bi-plus-circle"></i> Create Task</a>
-        
-        <ul class="tasks">
-            {% for task in task_list%}
-            <li>{{ task.title }}
-                    <div  class="task-controls">
-                        <a href="#"><i class="bi bi-trash"></i> </a>
-                        <a href="{%url 'task_update' task.id %}"><i class="bi bi-pencil-square"></i></a>
-                    </div>
-                </li>
-            {% empty %}
-            <p>🎉 Yay, you have no pending tasks!</p>
-            {% endfor %}
-        </ul>
+    <div class="row">
+        <div class="col-lg-12 col-md-12 col-sm-12 d-flex  justify-content-center">
+            <div class="todo-app">
+                <a href="{% url 'task_form' %}" class="d-flex justify-content-center align-items-center btn-task"> + Add a Task</a>
+                <ul class="tasks">
+                    {% for task in task_list%}
+                    <li><a href="{% url 'task_update' task.id %}" class="{% if task.completed%}completed{%endif%}">{{ task.title }}, due le {{ task.due_datetime|date:"j F Y" }} à {{task.due_datetime|time:"H\hi"}}</a> 
+                            
+                            <div  class="task-controls">
+                                <div class="task-priority task-priority-color-{{ task.priority}}" data-bs-toggle="tooltip" data-bs-placement="right">
+                                </div>
+                                <a  hx-get="{% url 'task_detail' task.id %}" hx-target="#dialog">
+                                    <i class="bi bi-info-circle"></i></a>
+                                <a href="{%url 'task_update' task.id %}"><i class="bi bi-pencil-square"></i></a>
+                                {% include 'task_delete.html' %}
+                            </div>
+                        </li>
+                    {% empty %}
+                    <p>🎉 Yay, you have no pending tasks!</p>
+                    {% endfor %}
+                </ul>
+                </div>
+            {%endblock content%}
+            </div>
+        </div>
     </div>
-    {%endblock content%}
-</div>
 </main>
+
 </body>
 
 </html>

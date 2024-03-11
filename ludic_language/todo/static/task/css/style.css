@@ -12,6 +12,12 @@
   --color-input: #00d1b2;
    --border-radius: 5px;
 }
+h5.modal-title {
+  font-family: Helvetica;
+  font-weight: 200;
+  color: #363535;
+  line-height: 1.3;
+}
 .nav_task {
 	display:flex;
 	gap:1rem;
@@ -30,7 +36,9 @@
   align-items: left;
   gap: 2rem;
 }
-
+.modal {
+  border-radius: 10px;
+}
 
 .nav_task a:nth-last-child(2) {
 	margin-left: auto;
@@ -78,4 +86,51 @@
 
 .task {
   margin-bottom: auto;
+}
+
+.btn-task{
+  height: 2rem !important;
+  margin: 0 0.5rem 0 0;
+  color: white;
+  background-color: #fec155;
+  border-radius: 0.5rem !important;
+  margin-top: 1px;
+  text-align: center;
+}
+.task-priority-detail {
+  height: 10px;
+  border-radius: 28px;
+  padding-top: 0.1rem;
+  cursor: pointer;
+  position: relative;
+}
+.task-priority-detail-color-2{
+  background  : #eb5e4b;
+}
+.task-priority-detail-color-3{
+  background: #ed0c22 ;
+}
+.task-priority-detail-color-1{
+  background: #1ba345;
+}
+
+.task-priority {
+  width: 5px !important;
+  border-radius: 28px;
+  padding-top: 0.1rem;
+  cursor: pointer;
+  position: relative;
+}
+.task-priority-color-2{
+  background  : #eb5e4b;
+}
+.task-priority-color-3{
+  background: #ed0c22 ;
+}
+.task-priority-color-1{
+  background: #1ba345;
+}
+
+.completed {
+  text-decoration: line-through;
 }
