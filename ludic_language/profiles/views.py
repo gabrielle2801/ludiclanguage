@@ -50,7 +50,7 @@ def logout_request(request):
     return redirect('index')
 
 
-class IndexSpeechView(MultipleObjectMixin, TemplateView):
+class IndexSpeechView(TemplateView):
     model = User
     template_name = "index_speech.html"
    
@@ -59,7 +59,9 @@ class IndexSpeechView(MultipleObjectMixin, TemplateView):
         context['workshop_date'] = Workshop.objects.filter(
             therapist_id=self.request.user.profile,
             date__date=datetime.date.today())
-        context['task_list'] = Task.objects.all()
+        context['task_list'] = Task.objects.filter(
+            therapist_id=self.request.user.profile)\
+            .order_by('-priority')
         return context
 
 

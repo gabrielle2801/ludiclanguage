@@ -131,5 +131,10 @@
       </script>
     <script src="{% static 'profiles/js/scripts.js'%}"></script>
     <script src="{% static 'task/js/scripts.js'%}"></script>
+    <script>
+      document.body.addEventListener('htmx:configRequest', (event) => {
+          event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+      })
+      </script>
 </body>
 </html>

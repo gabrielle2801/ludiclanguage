@@ -1,11 +1,11 @@
-from django.views.generic import ListView, CreateView, UpdateView, DetailView
+from django.views.generic import CreateView, UpdateView, DetailView
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 # from django.views.decorators.http import require_http_methods
-# from django.http import HttpResponse
+from django.http import HttpResponse
 from django.urls import reverse_lazy, reverse
-from django.shortcuts import render
+# from django.shortcuts import render
 from ludic_language.todo.models import Task
 from ludic_language.todo.forms import TaskCreateForm
 
@@ -27,18 +27,6 @@ class TodoListAddView(LoginRequiredMixin, CreateView):
         form.instance.user = self.request.user
         messages.success(self.request, 'the task was created successfully')
         return super(TodoListAddView, self).form_valid(form)
-
-
-class TodoListView(ListView):
-    model = Task
-    template_name = "index_speech.html"
-
-    def get_context_data(self, *args, **kwargs):
-        context = super().get_context_data(*args, **kwargs)
-        context['task_list'] = Task.objects.filter(
-            therapist_id=self.request.user.profile)\
-            .order_by('-priority')
-        return context
 
 
 class TodoUpdate(LoginRequiredMixin, UpdateView):
@@ -63,32 +51,13 @@ class TodoDetail(LoginRequiredMixin, DetailView):
 
 
 class TodoDelete(LoginRequiredMixin, DeleteView):
-    template_name = "task_delete.html"
     model = Task
-    success_url = reverse_lazy('index_speech')
 
-    def form_valid(self, form):
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        result = HttpResponse(status=204)
+        result["HX-Redirect"] = reverse_lazy('task_list')
         messages.success(self.request, 'The Task was deleted successfully.')
-        return super(TodoDelete, self).form_valid(form)
-
-
-'''
-def deleteTask(request, pk):
-    Task.objects.get(id=pk).delete()
-    tasks = Task.objects.filter(therapist_id=request.user.id)
-    context = {'task': tasks}
-    return render(request, "todo/task_list.html", context)
-
-class TodoDelete(LoginRequiredMixin, DeleteView):
-    template_name = 'tasks_list.html'
-    model = Task
-    success_url = reverse_lazy('index_speech')
-    context_object_name = 'task'
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['therapist'] = self.request.user.profile
-        return kwargs
-
-'''
+        return result
 
