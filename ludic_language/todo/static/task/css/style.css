@@ -28,7 +28,7 @@ h5.modal-title {
 .todo-app{
   width: 100%;
   max-width: 540px;
-  background-color: #ffffffad;
+  background-color: #fdfdfdba;
   padding: 40px 30px 70px;
   border-radius: 10px;
   display: flex;
@@ -59,6 +59,12 @@ h5.modal-title {
   left: 0;
   border: 2px solid #ff5945;
 
+}
+#task_icon {
+  color: #BF6F53
+}
+#task_list {
+  color: #BF6F53
 }
 .tasks li {
   display: flex;
@@ -92,7 +98,7 @@ h5.modal-title {
   height: 2rem !important;
   margin: 0 0.5rem 0 0;
   color: white;
-  background-color: #fec155;
+  background-color: #E9A787;
   border-radius: 0.5rem !important;
   margin-top: 1px;
   text-align: center;

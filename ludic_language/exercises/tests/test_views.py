@@ -1,5 +1,5 @@
 from django.test import TestCase, Client, RequestFactory
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.contrib.auth import get_user_model
 
 from django.contrib.auth.models import User
@@ -74,12 +74,11 @@ class ExerciseListTest(BaseTest):
         view = ExerciseListView()
         view.request = request
         qs = view.get_queryset()
-        self.assertQuerysetEqual(
+        self.assertQuerySetEqual(
             qs, Pathology.objects.all(), ordered=False)
 
 
 class LudicJourneyAddTest(BaseTest):
-
     def test_view_ok(self):
         form_url = reverse('form_ludicjourney', args=[
             self.exercise])
@@ -90,19 +89,19 @@ class LudicJourneyAddTest(BaseTest):
         self.assertEqual(response.status_code, 200)
 
     def test_form_ok(self):
-        form_url = reverse('form_ludicjourney', args=[
-            self.exercise])
         ludic_journey = {
             'date': '03/03/2022',
             'patient_id': self.user,
             'exercise_id': self.exercise
         }
+        form_url = reverse('form_ludicjourney', args=[
+            self.exercise])
         login = self.client.login(
             username='Marieaumont', password='Therapist@25')
         self.assertTrue(login)
         response = self.client.post(form_url, ludic_journey)
         self.assertEqual(response.status_code, 200)
-
+    
 
 class LudicJourneyListTest(BaseTest):
     def test_view_ok(self):
@@ -118,7 +117,7 @@ class LudicJourneyListTest(BaseTest):
         request.user = self.user
         view.request = request
         qs = view.get_queryset()
-        self.assertQuerysetEqual(
+        self.assertQuerySetEqual(
             qs, LudicJourney.objects.filter(patient_id=self.user.profile))
 
 

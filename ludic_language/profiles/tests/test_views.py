@@ -57,30 +57,30 @@ class UserProfileViewTest(TestCase):
 
 
 class PatientDetailTest(TestCase):
+    def setUp(self):
+        self.user = get_user_model().objects.create_user(
+            username='LucasD', first_name='Lucas', password='12test12',
+            email='test@email.com')
+        self.user_id = self.user.pk
+        self.user.save()
+        self.therapist = User.objects.create_user(
+            username='test', password='12test12').pk
 
-    def test_status_code_200(self):
-        def setUp(self):
-            self.user = get_user_model().objects.create_user(
-                username='LucasD', password='12test12', email='test@email.com').pk
-            self.therapist = User.objects.create_user(
-                username='test', password='12test12').pk
-            self.pathology_id = Pathology.objects.create(name='Dyslexie').pk
-            self.profile = Profile.objects.create(user_id=self.user, 
-                                                  birth_date='2013-05-12',
-                                                  state=1,
-                                                  bio='Lucas est atteint de .', 
-                                                  profile_pic='lucasdesmarais.png',
-                                                  pathology_id=self.pathology_id, 
-                                                  therapist_id=self.therapist)
-            self.profile.save()
-            return super().setUp()
+        self.pathology_id = Pathology.objects.create(name='Dyslexie').pk
+        Profile(user=self.user, birth_date='2013-05-12', state=1,
+                bio='Lucas est atteint de ......',
+                profile_pic='lucasdesmarais.png',
+                pathology_id=self.pathology_id, 
+                therapist_id=self.therapist).save()
+        
+        return super().setUp()
 
-        def test_detail(self):
-            detail_url = reverse('detail_patient', kwargs={
-                'pk': self.profile})
-            response = self.client.get(detail_url)
-            assert response.status_code == 200
-            self.assertTemplateUsed(response, 'detail_patient.html')
+    def test_detail(self):
+        detail_url = reverse('detail_patient', kwargs={
+            'pk': self.user_id})
+        response = self.client.get(detail_url)
+        assert response.status_code == 200
+        self.assertTemplateUsed(response, 'detail_patient.html')
 
 
 class PatientDeleteTest(TestCase):
@@ -118,7 +118,9 @@ class TherapistListTest(TestCase):
         self.therapist_list_url = reverse('therapist_list')
         self.factory = RequestFactory()
         self.user = get_user_model().objects.create_user(
-            username='Marieaumont', first_name='Marie', password='12test12',
+            username='Marieaumont',
+            first_name='Marie',
+            password='12test12',
             email='test@email.com')
         self.user_id = self.user.pk
         self.user.save()
@@ -145,5 +147,6 @@ class TherapistListTest(TestCase):
         view.request = request
         qs = view.get_queryset()
         self.assertQuerysetEqual(qs, Profile.objects.filter(
-            Q(address__city__icontains=search) | Q(address__zip_code__icontains=search)))
+            Q(address__city__icontains=search) |
+            Q(address__zip_code__icontains=search)))
 '''

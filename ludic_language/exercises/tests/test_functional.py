@@ -1,7 +1,6 @@
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 from selenium.webdriver.common.by import By
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 
 from ludic_language.profiles.models import Profile
 from ludic_language.exercises.models import Pathology, Exercise
@@ -17,17 +16,28 @@ class LudicLanguageExerciseTest(StaticLiveServerTestCase):
     def setUp(self):
         self.driver = webdriver.Firefox(options=firefox_options)
         self.user = get_user_model().objects.create_user(
-            username='Marieaumont', first_name='Marie', password='12test12', email='test@email.com')
+            username='Marieaumont', 
+            first_name='Marie', 
+            password='12test12', 
+            email='test@email.com')
         self.user_id = self.user.pk
         self.user.save()
-        self.therapist = Profile(user=self.user, birth_date='1975-05-12', state=2,
-                                 bio='Marie est spécialisée ......', profile_pic='marieaumont.png'
+        self.therapist = Profile(user=self.user, 
+                                 birth_date='1975-05-12', 
+                                 state=2,
+                                 bio='Marie est spécialisée ......', 
+                                 profile_pic='marieaumont.png'
                                  ).save()
         self.pathology_id = Pathology.objects.create(name='Dyslexie').pk
 
-        self.exercise = Exercise.objects.create(name='Améliorer ....', description="L'aider ...", picture1='Winter.png',
-                                                picture2="puzzle.png", pathology_id=self.pathology_id, therapist_id=self.therapist,
-                                                description_game="Rassemble ...", title_game='Puzzle').pk
+        self.exercise = Exercise.objects.create(name='Améliorer ....', 
+                                                description="L'aider ...",
+                                                picture1='Winter.png',
+                                                picture2="puzzle.png", 
+                                                pathology_id=self.pathology_id, 
+                                                therapist_id=self.therapist,
+                                                description_game="Rassemble .", 
+                                                title_game='Puzzle').pk
         return super().setUp()
 
     def test_exercise_list(self):

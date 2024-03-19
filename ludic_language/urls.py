@@ -21,12 +21,8 @@ from ludic_language.exercises.views import ExerciseListView, \
 from ludic_language.todo.views import TodoListAddView, \
      TodoUpdate, TodoDetail, TodoDelete
 
-# router = routers.DefaultRouter()
-# router.register(r'message', MessageViewSet)
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # path('api', include(router.urls)),
     path('', BaseView.as_view(), name='index'),
     path('legal_notice', LegalNoticeView.as_view(), name='legal_notice'),
     path('about_us', AboutUsView.as_view(), name='about_us'),
@@ -53,7 +49,8 @@ urlpatterns = [
          ReportDetailView.as_view(), name='report_patient'),
     path('delete_report/<int:pk>',
          ReportDeleteView.as_view(), name='delete_report'),
-    path('pathology/<int:pk>', PathologyDetailView.as_view(), name='pathology'),
+    path('pathology/<int:pk>', PathologyDetailView.as_view(), 
+         name='pathology'),
     path('exercise_list/',
          ExerciseListView.as_view(), name='exercise_list'),
     path('form_ludicjourney/<int:exercise_id>',

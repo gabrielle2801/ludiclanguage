@@ -47,33 +47,35 @@ class WorkshopAddViewTest(TestCase):
 
 class WorkshopListViewTest(TestCase):
     def setUp(self):
+        self.client = Client()
+        self.factory = RequestFactory()
         self.therapist = get_user_model().objects.create_user(
-            username='Marieaumont', password='Therapist@25').pk
+            username='Marieaumont', password='Therapist@25')
+        self.therapist_id = self.therapist.pk
         self.patient = User.objects.create_user(
             username='ClarenceBr', password='12test12',
             email='test@email.com').pk
         self.form_url = reverse('list_workshop')
-        self.client = Client()
         self.workshop = Workshop.objects.filter(date='2022-02-12 15:00',
-                                                report='Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+                                                report='Lorem ipsum dolor',
                                                 shedule_online='https://meet.google.com/njy-iipe-rkp',
                                                 patient_id=self.patient, 
-                                                therapist_id=self.therapist)
+                                                therapist_id=self.therapist_id)
 
         return super().setUp()
+        
+    def test_list_workshop_speech(self):
+        login = self.client.login(
+            username='Marieaumont', password='Therapist@25')
+        self.assertTrue(login)
+        response = self.client.get(self.form_url)
+        self.assertEqual(response.status_code, 200)
 
-        def test_list_workshop_speech(self):
-            login = self.client.login(
-                username='Marieaumont', password='Therapist@25')
-            self.assertTrue(login)
-            response = self.client.post(self.form_url)
-            self.assertEqual(response.status_code, 200)
-
-        def test_user_list_worshop(self):
-            request = self.factory.get(self.form_url)
-            request.user = self.therapist
-            response = WorkshopListView.as_view()(request)
-            self.assertEqual(response.status_code, 200)
+    def test_user_list_worshop(self):
+        request = self.factory.get(self.form_url)
+        request.user = self.therapist
+        response = WorkshopListView.as_view()(request)
+        self.assertEqual(response.status_code, 200)
 
 
 class ReportUpdateTest(TestCase):

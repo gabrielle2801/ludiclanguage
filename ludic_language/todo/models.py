@@ -26,7 +26,7 @@ class Task(models.Model):
         related_name='therapist_todo',  null=True)
 
     def __str__(self):
-        return f"{self.title} (due le {self.due_datetime.strftime('%d/%m/%Y à %H:%M')})"
+        return f"{self.title} (due le {self.due_datetime.strftime('%Y-%m-%d %H:%M:%S')})"
 
     class Meta:
         ordering = ['priority']

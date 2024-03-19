@@ -31,18 +31,19 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 d-flex  justify-content-center">
             <div class="todo-app">
-                <a href="{% url 'task_form' %}" class="d-flex justify-content-center align-items-center btn-task"> + Add a Task</a>
+                <a href="{% url 'task_form' %}"  class="d-flex justify-content-center align-items-center btn-task"> + Add a Task</a>
                 {% csrf_token %}
-                <ul class="tasks">
+                <ul  class="tasks">
                     {% for task in task_list %}
-                    <li><a href="{% url 'task_update' task.id %}" class="{% if task.completed%}completed{%endif%}">{{ task.title }}, due le {{ task.due_datetime|date:"j F Y" }} à {{task.due_datetime|time:"H\hi"}}</a> 
+                    <li><a href="{% url 'task_update' task.id %}" id="task_list" class="{% if task.completed%}completed{%endif%}">{{ task.title }}, due le {{ task.due_datetime|date:"j F Y" }} à {{task.due_datetime|time:"H\hi"}}</a> 
                             <div  class="task-controls">
                                 <div class="task-priority task-priority-color-{{ task.priority}}" data-bs-toggle="tooltip" data-bs-placement="right">
                                 </div>
                                 <a  hx-get="{% url 'task_detail' task.id %}" hx-target="#dialog">
-                                    <i class="bi bi-info-circle"></i></a>
-                                <a href="{%url 'task_update' task.id %}"><i class="bi bi-pencil-square"></i></a>
+                                    <i id="task_icon" class="bi bi-info-circle"></i></a>
+                                <a href="{%url 'task_update' task.id %}"><i id="task_icon" class="bi bi-pencil-square"></i></a>
                                 <button type="button" class="close" 
+                                    id="task_icon"
                                     hx-delete="{% url 'task_delete' task.id %}"
                                     hx-confirm="Are you sure you wish to delete?"
                                     hx-target="closest div"

@@ -56,8 +56,8 @@ class TodoDelete(LoginRequiredMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.object.delete()
+        print(self.object)
         result = HttpResponse(status=204)
         result["HX-Redirect"] = reverse_lazy('task_list')
         messages.success(self.request, 'The Task was deleted successfully.')
         return result
-

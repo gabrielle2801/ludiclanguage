@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
 from pathlib import Path
+from warnings import filterwarnings
 import os
 from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
@@ -133,6 +134,11 @@ USE_I18N = True
 USE_TZ = True
 
 # USE_L10N = True
+# https://adamj.eu/tech/2023/12/07/django-fix-urlfield-assume-scheme-warnings/
+filterwarnings(
+    "ignore", "The FORMS_URLFIELD_ASSUME_HTTPS transitional setting is deprecated."
+)
+FORMS_URLFIELD_ASSUME_HTTPS = True
 
 
 # Static files (CSS, JavaScript, Images)
