@@ -1,6 +1,7 @@
 from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.views.generic.list import MultipleObjectMixin
+# from django.views.generic.list import MultipleObjectMixin
+from django.http import HttpResponse
 from django.contrib.auth.views import LoginView as BaseLoginView
 from django.contrib import messages
 from django.views.generic import ListView
@@ -115,7 +116,7 @@ class PatientAddView(LoginRequiredMixin, CreateView):
         return kwargs
 
     def get_success_url(self):
-        return reverse('index_speech')
+        return reverse('patient_list')
 
 
 class TherapistDetailView(DetailView):
@@ -135,22 +136,25 @@ class PathologyDetailView(ListView):
     template_name = 'pathology.html'
 
 
-class PatientDeleteView(LoginRequiredMixin, DeleteView):
+class PatientDelete(LoginRequiredMixin, DeleteView):
     """
-    Delete patient
+     Delete patient
     Attributes:
         model (TYPE): Profile
         success_url (TYPE): url of patient
     """
-
+    
     model = User
-    context_object_name = 'patient_list'
-    template_name = 'patient_confirm_delete.html'
 
-    def get_success_url(self):
-        messages.success(self.request, 'La fiche patient a bien été supprimé')
-        return reverse_lazy('patient_list')
-
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        print(self.object)
+        result = HttpResponse(status=204)
+        result["HX-Redirect"] = reverse_lazy('patient_list')
+        messages.success(self.request, 'The patient was deleted successfully.')
+        return result
+    
     def page_not_found_view(request):
         return render(request, 'profiles/404.html')
 

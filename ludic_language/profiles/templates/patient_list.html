@@ -3,7 +3,8 @@
 {% block content%}
 <div class="content-container">
         <div class="container-fluid">
-                <section class="jumbotron main-section-speech">
+                <section class="jumbotron">
+                    <div class="container-fluid">
                     <div class="row">
                         {% if messages %}
                             {% for msg in messages %}
@@ -15,46 +16,37 @@
                         {% endif %}
                         {% if patient_list %}
                         {% for patient in patient_list  %}
-                        <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                            <div class="card patient-card d-flex flex-column">
-                                {% if patient.profile_pic %}
-                                <img src="{{patient.profile_pic.url}}" class="card-img-top patient-img  rounded d-block align-m">
-                                {% else %}
-                                 <img src="{% static 'profiles/assets/img/par_defaut.png' %}" class="card-img-top patient-img  rounded d-block align-m">
-                                {% endif %}
-                                <p class="card-title">{{patient.user.username}}</p>
-                                <div class="card-footer d-flex patient align-content-around mt-auto">
-                                     <a  class="d-flex justify-content-center align-items-center btn btn-detail"   type="button" href="{% url 'detail_patient' patient.user.id %}"
-                                             data-toggle="tooltip" data-placement="bottom">
-                                    <span>Afficher les détails du patient </span>
-                                    <i class="bi bi-info-circle icon"></i>
-                                    </a>
-                                    <a  class="d-flex justify-content-center align-items-center btn btn-workshop"   type="button" href="{% url 'form_workshop' patient.user.id %}"
-                                             data-toggle="tooltip" data-placement="bottom">
-                                    <span>planifier une session</span>
-                                    <i class="bi bi-calendar-date-fill icon"></i>
-                                    </a>
-                                    </a>
-                                    <a  class="d-flex justify-content-center align-items-center btn btn-workshop"   type="button" href="{% url 'recorder_therapist' patient.user.id %}"
-                                             data-toggle="tooltip" data-placement="bottom">
-                                    <span>Ecouter</span>
-                                     <i class="bi bi-mic-fill icon"></i>
-                                    </a>
-
-                                    <div class="d-flex me-auto">
-                                        <form method="post", action="{% url 'delete_patient' patient.user.id %}">
-                                             {% csrf_token %}
-                                            <input type="hidden" name="patient_id" value="{{ patient.id }}">
-                                            <a  class="d-flex justify-content-center align-items-center btn btn-delete" name="delete_patient" type="button"
-                                                 data-toggle="tooltip" data-placement="bottom" href="{% url 'delete_patient' patient.user.id %}">
-                                            <span>supprimer le profil</span>
-                                            <i class="fas fa-trash icon"></i>
-                                           </a>
-                                        </form>
-                                    </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
+                              <!-- Card-->
+                                <div class="card patient-card p-0 d-flex flex-column">
+                                    {% if patient.profile_pic %}
+                                    <img  src="{{patient.profile_pic.url}}" alt="" class="w-100 card-img-top">
+                                    {% else %}
+                                    <img src="{% static 'profiles/assets/img/par_defaut.png' %}" alt="" class="w-100 card-img-top">
+                                    {% endif %}
+                                    <div class="p-4">
+                                    <h5 class="mb-0 card-title">{{patient.user.username}}</h5>
+                                    <p class="small text-muted d-flex  justify-content-center">{{ patient.user.profile.pathology }}</p>
+                                    <ul class="social mb-0 list-inline mt-3">
+                                      <li class="list-inline-item m-0"><a href="{% url 'detail_patient' patient.user.id %}" class="social-link"> <i class="bi bi-info-circle icon"></i></a></li>
+                                      <li class="list-inline-item m-0"><a href="{% url 'form_workshop' patient.user.id %}" class="social-link"> <i class="bi bi-calendar-date-fill icon"></i></a></li>
+                                      <li class="list-inline-item m-0"><a href="{% url 'recorder_therapist' patient.user.id %}" class="social-link"><i class="bi bi-mic-fill icon"></i></a></li>
+                                        <li class="list-inline-item m-0">
+                                            <a href="" 
+                                            class="social-link"
+                                            id="task_icon"
+                                            hx-delete="{% url 'delete_patient' patient.user.id %}"
+                                            hx-confirm="Are you sure you wish to delete?"
+                                            hx-target="closest div"
+                                            hx-swap="outerHTML"
+                                            data-dismiss="alert" 
+                                            aria-hidden="true">
+                                            <i class="fas fa-trash icon"></i></a></li>
+                                       
+                                    </ul>
+                                  </div>
                                 </div>
                             </div>
-                        </div>
                         {% endfor %}
                         <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
                             <a class="d-flex justify-content-center align-items-center btn btn-patient" name="patient"  type="button" href="{% url 'form_patient' %}"
@@ -84,6 +76,7 @@
                     </div>
                     {% endif %}
                 </section>
+            </div>
         </div>
 </div>
 {% endblock content %}

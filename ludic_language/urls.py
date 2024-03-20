@@ -8,7 +8,7 @@ from ludic_language.profiles import views
 from ludic_language.base.views import BaseView, LegalNoticeView, AboutUsView
 from ludic_language.profiles.views import LoginView, IndexSpeechView, \
     IndexPatientView, PatientListView, \
-    PatientAddView, PatientDetailView, PatientDeleteView, \
+    PatientAddView, PatientDetailView, PatientDelete, \
     TherapistListView, TherapistDetailView
 from ludic_language.workshops.views import WorkshopAddView, WorkshopListView, \
     WorkshopUpdateView, \
@@ -37,7 +37,7 @@ urlpatterns = [
     path('detail_patient/<int:pk>',
          PatientDetailView.as_view(), name='detail_patient'),
     path('delete_patient/<int:pk>',
-         PatientDeleteView.as_view(), name='delete_patient'),
+         PatientDelete.as_view(), name='delete_patient'),
     path('form_workshop/', WorkshopAddView.as_view(), name='form_workshop'),
     path('form_workshop/<int:patient_id>',
          WorkshopAddView.as_view(), name='form_workshop'),
