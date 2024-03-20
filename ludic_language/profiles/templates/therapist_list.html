@@ -26,9 +26,9 @@
           <input class="menu-btn" type="checkbox" id="menu-btn" />
           <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
           <ul class="menu">
-            <li><a href="#" class="link link-theme link-arrow">HOME</a></li>
-            <li><a href="#" class="link link-theme link-arrow">ABOUT US</a></li>
-            <li><a href="#" class="link link-theme link-arrow">CONTACT</a></li>
+            <li><a href="{% url 'about_us' %}" class="link link-theme link-arrow">ABOUT US</a></li>
+            <li><a href="{% url 'legal_notice' %}" class="link link-theme link-arrow">MENTIONS LEGALES</a></li>
+            <li><a href="mailto:gabrielleazadian@gmail.com" class="link link-theme link-arrow">CONTACT</a></li>
             <li><a href="{% url 'login' %}" class="link link-theme link-arrow" >SIGN IN</a></li>
           </ul>
         </nav>
@@ -38,42 +38,43 @@
     {% endblock header %}
     <!-- About-->
     {% block content%}
-        <div class="content-container">
-                <div class="container-fluid">
-                        <section class="jumbotron main-section-speech">
-                            <div class="row">
-                                {% if therapist_list %}
-                                {% for therapist in therapist_list  %}
-                                <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                                    <div class="card patient-card d-flex flex-column">
-                                        <img src="{{therapist.profile_pic.url}}" class="card-img-top patient-img  rounded d-block align-m">
-                                        <p class="card-title">{{therapist.user}}</p>
-                                        <div class="card-footer d-flex patient align-content-around mt-auto">
-                                             <a  class="d-flex justify-content-center align-items-center btn btn-detail"   type="button" href="{% url 'detail_therapist' therapist.user.id %}"
-                                                     data-toggle="tooltip" data-placement="bottom">
-                                            <span>Afficher les détails</span>
-                                            <i class="bi bi-info-circle"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                            </div>
-
-                            {% else %}
-                            <div class="container h-100">
-                                <div class="row justify-content-center h-100">
-                                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                                        <h2 class="text-center no-patient">Il n'y a pas encore d'orthophoniste  !</h2>
-                                        <i class="bi bi-people"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            {% endif %}
-                        </section>
-                </div>
+    <div id="main" class="main-section-search-speech ">
+        <div class="img-homepage">
+            <img src="{% static 'assets/img/homepage_personn.png' %}" width="927" height="828">
         </div>
-{% endblock content %}
+        <section class="intro">
+            <div class="row">
+                {% if therapist_list %}
+                {% for therapist in therapist_list  %}
+                <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
+                    <div class="card patient-card d-flex flex-column">
+                        <img src="{{therapist.profile_pic.url}}" class="card-img-top patient-img  rounded d-block align-m">
+                        <p class="card-title">{{therapist.user}}</p>
+                        <div class="card-footer d-flex patient align-content-around mt-auto">
+                             <a  class="d-flex justify-content-center align-items-center btn btn-detail"   type="button" href="{% url 'detail_therapist' therapist.user.id %}"
+                                     data-toggle="tooltip" data-placement="bottom">
+                            <span>Afficher les détails</span>
+                            <i class="bi bi-info-circle"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            {% else %}
+            <div class="container h-100">
+                <div class="row justify-content-center h-100">
+                    <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
+                        <h2 class="text-center no-patient">Il n'y a pas encore d'orthophoniste  !</h2>
+                        <i class="bi bi-people"></i>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+        </section>
+      
+    </div>{% endblock content %}
     <!-- Footer-->
     {% block footer %}
     {% endblock footer %}

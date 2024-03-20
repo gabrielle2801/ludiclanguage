@@ -19,7 +19,7 @@ from ludic_language.exercises.views import ExerciseListView, \
     LudicJouneyListTherapistView, AssessementDetailView, \
     SentenceApiView, RecorderView, TalesApiView, ExerciseDetailView
 from ludic_language.todo.views import TodoListAddView, \
-     TodoUpdate, TodoDetail, TodoDelete
+     TodoUpdate, TodoDetail, TodoDelete, WorkshopDateDetailView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -71,7 +71,10 @@ urlpatterns = [
          name='form_assessement'),
     path('assessement/<int:pk>', AssessementDetailView.as_view(),
          name='assessement'),
-    path('index_speech/',IndexSpeechView.as_view(), name='task_list'),
+    path('index_speech/', IndexSpeechView.as_view(), 
+         name='task_list'),
+    path('workshop_detail/<int:pk>', WorkshopDateDetailView.as_view(), 
+         name='workshop_detail'),
     path('task_create/', TodoListAddView.as_view(),
          name='task_form'),
     path('task_update/<int:pk>', TodoUpdate.as_view(),

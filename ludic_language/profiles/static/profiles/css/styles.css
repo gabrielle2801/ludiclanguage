@@ -54,6 +54,18 @@ body {
     box-sizing: border-box;
     padding-left: 200px;
 }
+.main-section-search-speech {
+  width: 100%;
+  height: 1000px;
+  float: left;
+  margin: 70px 10px 50px 0;
+  padding-right: 10px;
+  background: url("/static/profiles/assets/img/homepage_speech.png") no-repeat;
+  background-size: cover;
+  background-position: center;
+  box-sizing: border-box;
+  padding-left: 200px;
+}
 .main-section-patient {
     width: 100%;
     height: 1000px;
@@ -574,7 +586,9 @@ button:hover span, button:focus span{
   font-size: 1.5rem !important;
 
 }
-
+.bi .bi-people-x {
+  font-size: 5rem !important;
+}
 .btn-circle {
     width: 30px;
     height: 30px;

@@ -5,7 +5,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="{% static 'task/css/style.css' %}" />
+        <link rel="stylesheet" href="{% static 'task/css/styles.css' %}" />
         <script
             src="https://unpkg.com/htmx.org@1.9.6"
             integrity="sha384-FhXw7b6AlE/jyjlZH5iHa/tTe9EpJ1Y55RjcgPbjeWMskSxZt1v9qkxLJWNJaGni"
@@ -25,7 +25,9 @@
                         </div>
                     {% endfor %}
                 {% endif %}
-            
+                <div id="modal" class="modal fade" tabindex="-1">
+                    <div id="dialog" class="modal-dialog"></div>
+                  </div> 
    
     {%block content%}
     <div class="row">
@@ -41,6 +43,7 @@
                                 </div>
                                 <a  hx-get="{% url 'task_detail' task.id %}" hx-target="#dialog">
                                     <i id="task_icon" class="bi bi-info-circle"></i></a>
+
                                 <a href="{%url 'task_update' task.id %}"><i id="task_icon" class="bi bi-pencil-square"></i></a>
                                 <button type="button" class="close" 
                                     id="task_icon"
@@ -50,14 +53,29 @@
                                     hx-swap="outerHTML"
                                     data-dismiss="alert" 
                                     aria-hidden="true">&times;</button>
-                            </div>
-                            
+                            </div>                           
                         </li>
-                    {% empty %}
-                    <p>🎉 Yay, you have no pending tasks!</p>
-                    {% endfor %}
-                </ul>
-                </div>
+                        {% empty %}
+                            <p class="d-flex justify-content-center align-items-center">🎉 Yay, you have no pending tasks!</p>
+                        {% endfor %}
+                        </ul> 
+                        <ul class="tasks">
+                        {% if workshop_date %}
+                        {% for workshop in workshop_date %}
+                        <li class="wk_list">  {{workshop.date}}
+                        {{workshop.patient.user.first_name}} {{workshop.patient.user.last_name}}
+                            <a  hx-get="{% url 'workshop_detail' workshop.id %}" hx-target="#dialog">
+                            <i id="task_icon" class="bi bi-info-circle"></i></a>
+                           
+                        </li>
+                        {% endfor %}
+                        {% else %}
+                        <li class="nav-link link link-theme link-arrow d-flex justify-content-center align-items-center">
+                            <i class="bi bi-calendar-date"></i>Pas de Session aujourd'hui !
+                        </li>
+                        {% endif %}
+                    </ul>
+                        
             {%endblock content%}
             </div>
         </div>

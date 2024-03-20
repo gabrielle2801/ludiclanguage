@@ -1,12 +1,11 @@
-from django.views.generic import CreateView, UpdateView, DetailView
+from django.views.generic import CreateView, UpdateView, DetailView, ListView
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
-# from django.views.decorators.http import require_http_methods
 from django.http import HttpResponse
 from django.urls import reverse_lazy, reverse
-# from django.shortcuts import render
 from ludic_language.todo.models import Task
+from ludic_language.workshops.models import Workshop
 from ludic_language.todo.forms import TaskCreateForm
 
 
@@ -61,3 +60,9 @@ class TodoDelete(LoginRequiredMixin, DeleteView):
         result["HX-Redirect"] = reverse_lazy('task_list')
         messages.success(self.request, 'The Task was deleted successfully.')
         return result
+    
+
+class WorkshopDateDetailView(LoginRequiredMixin, DetailView):
+    template_name = 'workshop_detail.html'
+    model = Workshop
+    context_object_name = 'workshop'
