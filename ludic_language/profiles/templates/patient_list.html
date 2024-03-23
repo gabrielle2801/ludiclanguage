@@ -31,7 +31,8 @@
                                       <li class="list-inline-item m-0"><a href="{% url 'detail_patient' patient.user.id %}" class="social-link"> <i class="bi bi-info-circle icon"></i></a></li>
                                       <li class="list-inline-item m-0"><a href="{% url 'form_workshop' patient.user.id %}" class="social-link"> <i class="bi bi-calendar-date-fill icon"></i></a></li>
                                       <li class="list-inline-item m-0"><a href="{% url 'recorder_therapist' patient.user.id %}" class="social-link"><i class="bi bi-mic-fill icon"></i></a></li>
-                                        <li class="list-inline-item m-0">
+                                      <li class="list-inline-item m-0"><a href="mailto:{{ patient.user.email }}" class="social-link"><i class="bi bi-envelope icon"></i></a></li>
+                                      <li class="list-inline-item m-0">
                                             <a href="" 
                                             class="social-link"
                                             id="task_icon"
@@ -42,7 +43,6 @@
                                             data-dismiss="alert" 
                                             aria-hidden="true">
                                             <i class="fas fa-trash icon"></i></a></li>
-                                       
                                     </ul>
                                   </div>
                                 </div>

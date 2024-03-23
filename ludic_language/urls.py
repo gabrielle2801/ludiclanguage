@@ -11,7 +11,7 @@ from ludic_language.profiles.views import LoginView, IndexSpeechView, \
     PatientAddView, PatientDetailView, PatientDelete, \
     TherapistListView, TherapistDetailView
 from ludic_language.workshops.views import WorkshopAddView, WorkshopListView, \
-    WorkshopUpdateView, \
+    WorkshopUpdateView, ReportListDetailView, \
     ReportListView, ReportDetailView, ReportDeleteView
 from ludic_language.exercises.views import ExerciseListView, \
     PathologyDetailView, LudicJourneyAddView, LudicJouneyListView, \
@@ -45,6 +45,8 @@ urlpatterns = [
     path('form_report/<int:pk>',
          WorkshopUpdateView.as_view(), name='form_report'),
     path('report_list/', ReportListView.as_view(), name='report_list'),
+    path('detail_patient/<int:pk>', ReportListDetailView.as_view(),
+         name='report_detail'),
     path('report_patient/<int:pk>', 
          ReportDetailView.as_view(), name='report_patient'),
     path('delete_report/<int:pk>',

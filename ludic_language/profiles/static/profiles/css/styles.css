@@ -288,7 +288,9 @@ img.rounded {
     border-radius: 50%!important;
     border: 6px solid rgba(255, 255, 255, 0.34);
 }
-
+.bio-seperation {
+  border-top: 1px solid rgba(0, 0, 0, 0.748);
+}
 
 /* Style page content */
 .main {
@@ -688,6 +690,7 @@ p .pathology{
     font-family: "Helvetica Neue";
     font-weight: 300;
 }
+
 @media (min-width: 576px) {
   .container-sm, .container {
     max-width: 540px;

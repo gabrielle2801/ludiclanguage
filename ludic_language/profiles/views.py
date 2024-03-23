@@ -17,6 +17,7 @@ from ludic_language.exercises.models import Pathology
 from ludic_language.workshops.models import Workshop
 from ludic_language.todo.models import Task
 from ludic_language.profiles.forms import UserProfileForm
+from ludic_language.exercises.models import LudicJourney
 
 
 class LoginView(BaseLoginView):
@@ -128,9 +129,15 @@ class TherapistDetailView(DetailView):
 class PatientDetailView(DetailView):
     template_name = 'detail_patient.html'
     model = Profile
-    context_object_name = 'patient'
+    # context_object_name = 'patient'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(PatientDetailView, self).get_context_data(*args, **kwargs)
+        context['workshop'] = Workshop.objects.filter(patient=self.kwargs.get('pk'))
+        context['exercise'] = LudicJourney.objects.filter(patient=self.kwargs.get('pk') )
+        return context
 
+    
 class PathologyDetailView(ListView):
     model = Pathology
     template_name = 'pathology.html'
@@ -149,10 +156,9 @@ class PatientDelete(LoginRequiredMixin, DeleteView):
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         self.object.delete()
-        print(self.object)
         result = HttpResponse(status=204)
         result["HX-Redirect"] = reverse_lazy('patient_list')
-        messages.success(self.request, 'The patient was deleted successfully.')
+        messages.success(self.request, 'The patient card was deleted successfully.')
         return result
     
     def page_not_found_view(request):

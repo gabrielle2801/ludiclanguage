@@ -51,6 +51,12 @@ class WorkshopListView(ListView):
             therapist_id=self.request.user.profile)\
             .order_by('-date')
         return queryset
+    
+
+class ReportListDetailView(ListView):
+    template_name = 'report_detail.html'
+    model = Workshop
+    context_object_name = 'report_detail'
 
 
 class WorkshopUpdateView(LoginRequiredMixin, UpdateView):

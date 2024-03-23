@@ -32,25 +32,54 @@
 <!-- Masthead-->
 
 {% block content%}
-<section class="main-section-detail">
-    <div class="col-lg-4 col-md-6 col-sm-12 d-flex col-card justify-content-center">
-         <div class="row patient-detail justify-content-center text-muted">
-             <div class="col-lg-4 col-md-6 col-sm-12 ">
-                        <img src="{{patient.user.profile.profile_pic.url}}" class="patient-detail-img img-fluid d-block align-middle">
-            </div>
+<div class="content-container">
+  <div class="container-fluid">
+    <section class="jumbotron">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-12 ">
+            <img src="{{object.user.profile.profile_pic.url}}" class="img-raised rounded-circle avatar" style="background-color: white; border:1px solid rgba(18, 1, 1, 0.478);">
+          </div>
             <div class="col-lg-7 col-sm-12 product-detail-data">
                 <div class="row">
-                <h2 class="d-inline-flex align-middle font-weight-bold header-title text-capitalize">{{ patient.user.username }}</h2>
-                <h3>{{ patient.user.profile.age }} ans</h3>
-                <p>Prénom : {{ patient.user.first_name }}</p>
-                <p>Nom : {{ patient.user.last_name }}</p>
-                <p>Date de naissance : {{ patient.user.profile.birth_date }}</p>
-                <p>Pathologie : {{ patient.user.profile.pathology }}</p>
-                <a href="mailto:{{ patient.user.email }}">Email : {{ patient.user.email }}</a>
-                <p>Biographie : {{ patient.user.profile.bio }}</p>
+                <h2 class="d-inline-flex align-middle font-weight-bold header-title text-capitalize">{{ object.user.username }}</h2>
+                <h5>{{ object.user.profile.age }} ans</h5>
+                <p>{{ object.user.first_name }} {{ patient.user.last_name }}</p>
+                <p>{{ object.user.profile.birth_date }}</p>
+                <p>{{ object.user.profile.pathology }}</p>
+                <p class="text-justify">{{ object.user.profile.bio }}</p>
+                <li class="list-inline-item m-0"><a href="mailto:{{ patient.user.email }}" class="social-link"><i class="bi bi-envelope icon"></i></a></li>
                 </div>
             </div>
-        </div>
+            <div>
+              <hr class="bio-seperation">
+              <h5>Les comptes Rendus</h5>
+            </div>
+            
+            {% for workshop in workshop %}
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                <div class="accordion-item">
+                  <h2 class="accordion-header">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    {{workshop.date}}
+                    </button>
+                  </h2>
+                  <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                    <div class="accordion-body">{{workshop.report}}</div>
+                  </div>
+                </div>
+                <div>
+                </div>
+                {% endfor %}
+                {% for exercise in exercise %}
+                <div>
+                  {{exercise.exercise.name}}
+                </div>
+                {% endfor %}
+              
+
+    </section>
     </div>
-</section>
+  </div>
+</div>
 {% endblock content %}
