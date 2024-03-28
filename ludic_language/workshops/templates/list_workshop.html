@@ -12,8 +12,8 @@
                 </div>
             {% endfor %}
             {% endif %}
-        <div class="table-responsive">
-        <table class="wk-table">
+       
+        <table class="table table-striped">
                 <thead>
                     {% if list_workshop %}
                     <tr>
@@ -31,26 +31,22 @@
                       <td>{{workshop.date|date:"l j F Y"}}</td>
                       <td>{{workshop.date|date:"H:i"}}</td>
                       <td>Compte rendu réalisé
-                        <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="{% url 'report_patient' workshop.id%}"
-                             data-toggle="tooltip" data-placement="bottom">
-                        <span>visualiser le compte rendu</span>
-                        <i class="bi bi-info-circle icon"></i>
-                        </a>
+                        <ul class="social mb-0 list-inline mt-3">
+                            <li class="list-inline-item m-0"><a href="{% url 'report_patient' workshop.id%}" class="social-link"> <i class="bi bi-info-circle icon"></i></a></li>
+                            <li class="list-inline-item m-0">
+                                <a href="" 
+                                class="social-link"
+                                id="task_icon"
+                                hx-delete="{% url 'delete_report' workshop.id %}"
+                                hx-confirm="Are you sure you wish to delete?"
+                                hx-target="closest div"
+                                hx-swap="outerHTML"
+                                data-dismiss="alert" 
+                                aria-hidden="true">
+                                <i class="fas fa-trash icon"></i></a></li>
+                        </ul>
                     </td>
-                    <td> 
-                    <div class="d-flex me-auto">
-                        <form method="post", action="{% url 'delete_report' workshop.id %}">
-                                {% csrf_token %}
-                            <input type="hidden" name="report_id" value="{{ workshop.id }}">
-                            <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="{% url 'delete_report' workshop.id%}"
-                                data-toggle="tooltip" data-placement="bottom">
-                            <span>supprimer le compte rendu</span>
-                            <i class="fas fa-trash icon"></i>
-                            </a>
-                        </form>
-                            
-                    </div>
-                    </td>
+                    
                     </tr>
                     {% else %}
                     <tr class="wk-todo">
@@ -58,22 +54,17 @@
                       <td>{{workshop.date|date:"l j F Y"}}</td>
                       <td>{{workshop.date|date:"H:i"}}</td>
                         <td>A faire
-                            <a  class="d-flex justify-content-center align-items-center btn btn-workshop" name="workshop"  type="button" href="{% url 'form_report' workshop.id%}"
-                                 data-toggle="tooltip" data-placement="bottom">
-                            <span>Créer un compte rendu </span>
-                            <i class="bi bi-journal-text"></i>
-                            </a>
+                            <li class="list-inline-item m-0"><a href="{% url 'form_report' workshop.id%}" class="social-link"> <i class="bi bi-journal-text icon"></i></a></li>
                         </td>
                     </tr>
                      {% endif %}
                     </tbody>
                     {% endfor %}
             </table>
-            </div>
+           
             <div class="col-lg-4 col-md-6 col-sm-12  justify-content-center">
-                <a  class="d-flex justify-content-center align-items-center btn btn-patient" name="workshop"  type="button" href="{% url 'form_workshop' %}"
+                <a  class="d-flex justify-content-center align-items-center button btn-patient" name="workshop"  type="button" href="{% url 'form_workshop' %}"
                                      data-toggle="tooltip" data-placement="bottom">
-                <span>Plannifier une session </span>
                 <i class="bi bi-calendar-date-fill"> Session</i>
                 </a>
 
@@ -91,7 +82,7 @@
                             </div>
                         </div>
                             <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center text-center">
-                                 <a  class="d-flex justify-content-center  text-center align-items-center btn " name="workshop"  type="button" href="{% url 'form_workshop' %}"
+                                 <a  class="d-flex justify-content-center  text-center align-items-center button " name="workshop"  type="button" href="{% url 'form_workshop' %}"
                                                  data-toggle="tooltip" data-placement="bottom">
                                 <span>Plannifier une session</span>
                                 <i class="bi bi-calendar-plus"> Session</i>

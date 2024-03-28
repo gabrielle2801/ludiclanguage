@@ -48,30 +48,31 @@
                                 </div>
                             </div>
                         {% endfor %}
-                        <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
-                            <a class="d-flex justify-content-center align-items-center btn btn-patient" name="patient"  type="button" href="{% url 'form_patient' %}"
-                                         data-toggle="tooltip" data-placement="bottom">
-                            <span>Formulaire de création de profil patient</span>
+                        <div class="d-grid gap-2 d-md-block">
+
+                            <a class="d-flex justify-content-center align-items-center button-form" 
+                            name="patient"  type="button"
+                            data-toggle="tooltip" 
+                            data-placement="bottom"
+                            href=" {% url 'form_patient' %}" >
+                           
                             <i class="bi bi-people"> Créer un profil patient</i>
-                            </a>
+                        </a>
                         </div>
                     </div>
-
                     {% else %}
                     <div class="container h-100">
                         <div class="row justify-content-center h-100">
                             <div class="d-flex  justify-content-center align-items-center">
                                 <h2 class="text-center no-patient">Vous n'avez pas encore de patient !</h2></div>
                                 <i class="bi bi-person-x" style="font-size: 80px;" ></i>
-                            
-
                         </div>
                         <div class=" d-flex justify-content-center align-items-center ">
-                            <a  class="d-flex justify-content-center align-items-center btn btn-patient" name="patient"  type="button" href="{% url 'form_patient' %}"
+                            <button  class="d-flex justify-content-center align-items-center button" name="patient"  role="button" href="{% url 'form_patient' %}"
                                                  data-toggle="tooltip" data-placement="bottom">
-                            <span>Formulaire de création de profil patient</span>
                             <i class="bi bi-people"> Créer un profil patient</i>
-                            </a>
+                            </button>
+                          
                         </div>
                     </div>
                     {% endif %}

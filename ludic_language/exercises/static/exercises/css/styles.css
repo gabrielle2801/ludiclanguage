@@ -21,7 +21,7 @@
   border-radius: 0.25rem;
 }
 .exercise {
-    background-color:#abb2b9 !important ;
+    background-color:#ffffff !important ;
     position: relative;
     bottom: 0;
 }
@@ -29,6 +29,7 @@
 .exercise-card {
     display: flex;
     flex-direction: column;
+    background-color: white;
     position: relative;
     width: 65%;
     margin-bottom: 3.5rem;
@@ -76,36 +77,6 @@ h3 .title_name{
     text-align: justify;
 }
 
-
-@media (min-width: 992px)  {
-  .img_game{
-    width: 100%;
-  }
-  .img_riddles{
-    width: 100%;
-  }
-
-}
-
-@media (min-width: 1200px) {
-  .img_game{
-    width: 100%;
-  }
-  .img_riddles{
-    width: 100%;
-  }
-}
-
-
-@media (min-width: 576px) {
-    .img_game{
-    width: 100%;
-  }
-    .img_riddles{
-      width: 100%;
-    }
-
-}
 p.pathology {
     text-align: justify;
 }
@@ -148,4 +119,71 @@ p.pathology {
   text-align: center;
   border-radius: 20px;
 }
+.button-52 {
+  font-size: 16px;
+  font-weight: 200;
+  letter-spacing: 1px;
+  padding: 13px 20px 13px;
+  outline: 0;
+  border: 1px solid black;
+  cursor: pointer;
+  position: relative;
+  background-color: rgba(0, 0, 0, 0);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
 
+.button-52:after {
+  content: "";
+  background-color: #ffe54c;
+  width: 100%;
+  z-index: -1;
+  position: absolute;
+  height: 100%;
+  top: 7px;
+  left: 7px;
+  transition: 0.2s;
+}
+
+.button-52:hover:after {
+  top: 0px;
+  left: 0px;
+}
+
+@media (min-width: 768px) {
+  .button-52 {
+    padding: 13px 50px 13px;
+  }
+}
+
+
+@media (min-width: 992px)  {
+  .img_game{
+    width: 100%;
+  }
+  .img_riddles{
+    width: 100%;
+  }
+
+}
+
+@media (min-width: 1200px) {
+  .img_game{
+    width: 100%;
+  }
+  .img_riddles{
+    width: 100%;
+  }
+}
+
+
+@media (min-width: 576px) {
+    .img_game{
+    width: 100%;
+  }
+    .img_riddles{
+      width: 100%;
+    }
+
+}

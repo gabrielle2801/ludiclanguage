@@ -14,28 +14,22 @@
                       <div class="col-lg-4 col-md-6 col-sm-12 d-flex  justify-content-center">
                         <div class='card exercise-card d-flex flex-column'>
                                 {% if exercise.picture1 %}
-                                <img src="{{exercise.picture1.url}}" class="card-img-top exercise-img  rounded d-block align-m">
+                                <img  src="{{exercise.picture1.url}}" alt="" class="w-100 card-img-top">
                                 {% endif %}
-                                <p class="card-title">{{exercise.name}}</p>
+                               
+                                <h5 class="mb-0 card-title">{{exercise.name}}</h5>
                                 <div class="card-footer d-flex exercise align-content-around mt-auto">
-                                     <a  class="list-inline-item m-0" href="{% url 'form_ludicjourney' exercise.id %}"
-                                         data-toggle="tooltip" data-placement="bottom">
-                                    <span>Ajouter l'exercice au parcours ludique </span>
-                                     <i class="bi bi-music-note-list"></i>
-                                    </a>
-                                    <a  class="d-flex justify-content-center align-items-center btn btn-detail"   type="button" href="{% url 'exercise_therapist' %}"
-                                         data-toggle="tooltip" data-placement="bottom" class="social-link">
-                                    <span>Liste des exercices</span>
-                                    <i class="bi bi-check-lg"></i>
-                                    </a>
-                                    <a  class="d-flex justify-content-center align-items-center btn btn-detail"   type="button" href="{% url 'play_on' exercise.id %}"
-                                         data-toggle="tooltip" data-placement="bottom">
-                                    <span>Visualier l'exercise</span>
-                                    <i class="bi bi-search"></i>
-                                    </a>
+                                    <ul class="social mb-0 list-inline mt-3">
+                                        <li class="list-inline-item m-0"><a href="{% url 'form_ludicjourney' exercise.id %}" class="social-link" data-toggle="tooltip" data-placement="bottom"> 
+                                            <i class="bi bi-music-note-list icon"></i></a></li>
+                                        <li class="list-inline-item m-0"><a href="{% url 'exercise_therapist' %}" class="social-link" data-toggle="tooltip" data-placement="bottom"> 
+                                            <i class="bi bi-check-lg icon"></i></a></li>
+                                        <li class="list-inline-item m-0"><a href="{% url 'play_on' exercise.id %}" class="social-link" data-toggle="tooltip" data-placement="bottom"> 
+                                            <i class="bi bi-search icon"></i></a></li>
+                               
                                 </div>
+                            </div>
                         </div>
-                </div>
                         
                     {% endfor %}
             </div>
